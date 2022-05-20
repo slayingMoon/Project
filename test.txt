@@ -7,3 +7,9 @@ zdraveite kotenca
 .ssh test
 testt
 Anika
+
+
+
+
+
+ssh test (fucking bs)
