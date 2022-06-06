@@ -64,5 +64,7 @@ public class ClientManagerClientServiceTests {
 				.thenReturn(Optional.ofNullable(testCient));
 		clientService.clientDeactivation(testPhone);
 		assertEquals(ClientStatus.DEACTIVATED, testCient.getStatus());
+		clientService.clientActivation(testPhone);
+		assertEquals(ClientStatus.ACTIVATED, testCient.getStatus());
 	}
 }
