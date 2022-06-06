@@ -1,5 +1,7 @@
 package com.tsh.clientManager.services.impl;
 
+import com.tsh.clientManager.model.dto.SaleDto;
+import com.tsh.clientManager.model.entities.Sale;
 import com.tsh.clientManager.repository.SaleRepository;
 import com.tsh.clientManager.services.CardService;
 import com.tsh.clientManager.services.ClientService;
@@ -24,8 +26,9 @@ public class SaleServiceImpl implements SaleService {
 
 
     @Override
-    public void createSale() {
-
+    public void createSale(SaleDto saleDto) {
+        Sale sale = new Sale()
+                .setTotalPrice(saleDto.getTotalPrice())
     }
 
 }
