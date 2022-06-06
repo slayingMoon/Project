@@ -23,13 +23,15 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Integer usePoints() {
-		return 0;
+	public void usePoints(Long cardId, Integer amount) {
+		Card card = cardRepository.findById(cardId).get();
+		card.setBalance(card.getBalance() - amount);
 	}
 
 	@Override
-	public Integer receivePoints() {
-		return 0;
+	public void receivePoints(Long cardId, Integer amount) {
+		Card card = cardRepository.findById(cardId).get();
+		card.setBalance(card.getBalance() + amount);
 	}
 
 	@Override
