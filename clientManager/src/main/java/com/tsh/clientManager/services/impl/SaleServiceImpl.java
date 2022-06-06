@@ -24,11 +24,13 @@ public class SaleServiceImpl implements SaleService {
         this.cardService = cardService;
     }
 
-
     @Override
     public void createSale(SaleDto saleDto) {
         Sale sale = new Sale()
                 .setTotalPrice(saleDto.getTotalPrice())
+                .setCard(cardService.findCardById(saleDto.getCard()).orElse(null))
+                .setClient(clientService.findClientByPhoneNumber(saleDto.getClient().getPhoneNumber()));
+
     }
 
 }
