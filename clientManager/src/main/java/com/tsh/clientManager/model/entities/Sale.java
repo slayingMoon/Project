@@ -22,31 +22,35 @@ public class Sale extends BaseEntity{
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
+    public Sale setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+        return this;
     }
 
     public List<SaleItem> getSaleItems() {
         return saleItems;
     }
 
-    public void setSaleItems(List<SaleItem> saleItems) {
+    public Sale setSaleItems(List<SaleItem> saleItems) {
         this.saleItems = saleItems;
+        return this;
     }
 
     public Card getCard() {
         return card;
     }
 
-    public void setCard(Card card) {
+    public Sale setCard(Card card) {
         this.card = card;
+        return this;
     }
 
     public Client getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public Sale setClient(Client client) {
         this.client = client;
+        return this;
     }
 }
