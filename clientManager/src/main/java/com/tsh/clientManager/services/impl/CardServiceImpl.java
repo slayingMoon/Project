@@ -1,0 +1,53 @@
+package com.tsh.clientManager.services.impl;
+
+import com.tsh.clientManager.model.dto.CardDto;
+import com.tsh.clientManager.model.entities.Card;
+import com.tsh.clientManager.repository.CardRepository;
+import com.tsh.clientManager.services.CardService;
+import com.tsh.clientManager.services.ClientService;
+import com.tsh.clientManager.util.ValidationUtil;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CardServiceImpl implements CardService {
+
+	private final CardRepository cardRepository;
+	private final ClientService clientService;
+	private final ValidationUtil validationUtil;
+
+	public CardServiceImpl(CardRepository cardRepository,
+			ClientService clientService, ValidationUtil validationUtil) {
+		this.cardRepository = cardRepository;
+		this.clientService = clientService;
+		this.validationUtil = validationUtil;
+	}
+
+	@Override
+	public Integer usePoints() {
+		return 0;
+	}
+
+	@Override
+	public Integer receivePoints() {
+		return 0;
+	}
+
+	@Override
+	public Card createCard(CardDto cardDto) {
+		if (isCardValid(cardDto)) {
+			Card card = new Card().setBalance(cardDto.getBalance())
+					.setClient(clientService.findClientByPhoneNumber(
+							cardDto.getClient().getPhoneNumber()));
+
+			cardRepository.save(card);
+			return card;
+		}
+		throw new RuntimeException("Error creating card.");
+	}
+
+	@Override
+	public boolean isCardValid(CardDto cardDto) {
+		return validationUtil.isValid(cardDto) && clientService
+				.isClientExisting(cardDto.getClient().getPhoneNumber());
+	}
+}
