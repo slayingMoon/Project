@@ -26,15 +26,31 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public void usePoints(Long cardId, Integer amount) {
-		Card card = cardRepository.findById(cardId).get();
-		card.setBalance(card.getBalance() - amount);
+	public Integer usePoints(Long cardId, Integer amount) {
+		return updatePoints(cardId, Math.negateExact(amount));
 	}
 
 	@Override
-	public void receivePoints(Long cardId, Integer amount) {
+	public Integer receivePoints(Long cardId, Integer amount) {
+		return updatePoints(cardId, amount);
+	}
+
+	private Integer updatePoints(Long cardId, Integer amount) {
 		Card card = cardRepository.findById(cardId).get();
-		card.setBalance(card.getBalance() + amount);
+		if (card == null) {
+			throw new RuntimeException(
+					"Error: Nonexisting card used for points update.");
+		}
+		
+		Integer newBalance = card.getBalance() + amount;
+		if (newBalance < 0) {
+			throw new RuntimeException(
+					"Error: Attempted use of more points than existing.");
+		}
+		
+		card.setBalance(newBalance);
+		cardRepository.save(card);
+		return newBalance;
 	}
 
 	@Override
