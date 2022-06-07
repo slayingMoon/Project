@@ -12,7 +12,8 @@ public class SaleCardDto {
         return id;
     }
 
-    public void setId(Long id) {
+    public SaleCardDto setId(Long id) {
         this.id = id;
+        return this;
     }
 }

@@ -18,15 +18,17 @@ public class SaleItem extends BaseEntity{
         return saleType;
     }
 
-    public void setSaleType(SaleType saleType) {
+    public SaleItem setSaleType(SaleType saleType) {
         this.saleType = saleType;
+        return this;
     }
 
     public Sale getSale() {
         return sale;
     }
 
-    public void setSale(Sale sale) {
+    public SaleItem setSale(Sale sale) {
         this.sale = sale;
+        return this;
     }
 }

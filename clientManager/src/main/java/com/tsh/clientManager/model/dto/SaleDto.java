@@ -23,31 +23,35 @@ public class SaleDto {
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
+    public SaleDto setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+        return this;
     }
 
     public List<SaleSaleItemDto> getSaleItems() {
         return saleItems;
     }
 
-    public void setSaleItems(List<SaleSaleItemDto> saleItems) {
+    public SaleDto setSaleItems(List<SaleSaleItemDto> saleItems) {
         this.saleItems = saleItems;
+        return this;
     }
 
     public SaleCardDto getCard() {
         return card;
     }
 
-    public void setCard(SaleCardDto card) {
+    public SaleDto setCard(SaleCardDto card) {
         this.card = card;
+        return this;
     }
 
     public SaleClientDto getClient() {
         return client;
     }
 
-    public void setClient(SaleClientDto client) {
+    public SaleDto setClient(SaleClientDto client) {
         this.client = client;
+        return this;
     }
 }

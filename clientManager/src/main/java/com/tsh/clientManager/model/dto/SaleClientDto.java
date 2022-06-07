@@ -11,7 +11,8 @@ public class SaleClientDto {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public SaleClientDto setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
     }
 }

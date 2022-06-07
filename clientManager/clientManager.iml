@@ -124,5 +124,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.h2database:h2:2.1.212" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.modelmapper:modelmapper:2.4.2" level="project" />
   </component>
 </module>

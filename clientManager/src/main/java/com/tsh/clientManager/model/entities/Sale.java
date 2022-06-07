@@ -14,7 +14,7 @@ public class Sale extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "card_id")
     private Card card;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
 
