@@ -8,25 +8,25 @@ import javax.persistence.OneToOne;
 public class Direction extends BaseEntity{
     @OneToOne
     @JoinColumn(nullable = false)
-    private ScheduledTransition from;
+    private City from;
 
     @OneToOne
     @JoinColumn(nullable = false)
-    private ScheduledTransition to;
+    private City to;
 
-    public ScheduledTransition getFrom() {
+    public City getFrom() {
         return from;
     }
 
-    public void setFrom(ScheduledTransition from) {
+    public void setFrom(City from) {
         this.from = from;
     }
 
-    public ScheduledTransition getTo() {
+    public City getTo() {
         return to;
     }
 
-    public void setTo(ScheduledTransition to) {
+    public void setTo(City to) {
         this.to = to;
     }
 }
