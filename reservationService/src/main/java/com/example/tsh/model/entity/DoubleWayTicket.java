@@ -4,37 +4,17 @@ import javax.persistence.*;
 
 @Entity
 
-public class DoubleWayTicket extends BaseEntity{
+public class DoubleWayTicket extends OneWayTicket{
 
     @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(nullable = false)
-    private OneWayTicket firstTicket;
+    private Reservation returnReservation;
 
-    @OneToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(nullable = false)
-    private OneWayTicket secondTicket;
-
-    public OneWayTicket getFirstTicket() {
-        return firstTicket;
+    public Reservation getReturnReservation() {
+        return returnReservation;
     }
 
-    public void setFirstTicket(OneWayTicket firstTicket) {
-        this.firstTicket = firstTicket;
-    }
-
-    public OneWayTicket getSecondTicket() {
-        return secondTicket;
-    }
-
-    public void setSecondTicket(OneWayTicket secondTicket) {
-        this.secondTicket = secondTicket;
-    }
-
-    @Override
-    public String toString() {
-        return "DoubleWayTicket{" +
-                "firstTicket=" + firstTicket +
-                ", secondTicket=" + secondTicket +
-                "} " + super.toString();
+    public void setReturnReservation(Reservation returnReservation) {
+        this.returnReservation = returnReservation;
     }
 }

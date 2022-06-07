@@ -28,8 +28,6 @@ public abstract class BaseEntity  {
                 "id=" + id +
                 '}';
     }
-
-
     @Override
     public boolean equals(Object o) {
         return Optional.ofNullable(o).map(Object::hashCode)

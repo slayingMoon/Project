@@ -5,15 +5,17 @@ import com.example.tsh.model.enums.TicketStatus;
 import javax.persistence.*;
 
 @Entity
-public class OneWayTicket extends BaseEntity  {
+@Inheritance(strategy = InheritanceType.JOINED)
 
-    @OneToOne(cascade = {CascadeType.MERGE})
+public class OneWayTicket extends BaseEntity {
+
+    @OneToOne
     @JoinColumn(nullable = false)
-    protected Reservation goToReservation;
+    private Reservation goToReservation;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    protected TicketStatus status;
+    private TicketStatus status;
 
     public Reservation getGoToReservation() {
         return goToReservation;
