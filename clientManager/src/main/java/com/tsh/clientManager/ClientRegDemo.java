@@ -25,11 +25,11 @@ public class ClientRegDemo implements CommandLineRunner {
 //                .setPhoneNumber("+359895878111")
 //                .setEmail("pesho.petkov@gmail.com"));
 
-//                .setFirstName("John")
-//                .setLastName("Doe")
-//                .setAge(69)
-//                .setPhoneNumber("+359888777999")
-//                .setEmail("john.doe@gmail.com"));
+//                .setFirstName("Kaloyan")
+//                .setLastName("Bogoev")
+//                .setAge(33)
+//                .setPhoneNumber("+359888777155")
+//                .setEmail("kala.bo@gmail.com"));
 
     }
 }
