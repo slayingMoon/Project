@@ -15,7 +15,9 @@ import com.example.tsh.service.ReservationService;
 import com.example.tsh.service.ScheduledTransitionService;
 import com.example.tsh.service.ScheduledTripService;
 import com.example.tsh.service.SeatService;
+import com.example.tsh.service.impl.ReservationServiceImpl;
 import com.example.tsh.service.impl.ScheduledTripServiceImpl;
+import com.example.tsh.service.impl.SeatServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,9 +46,15 @@ public class ReservationTests {
     @Autowired
     private ScheduledTripServiceImpl scheduledTripService ;
 
+    @Autowired
+    private ReservationServiceImpl reservationService;
+
+    @Autowired
+    private SeatServiceImpl seatService;
+
 
     @Test
-   public void init(){
+   public void testTripCreation(){
         Seat[] s = new Seat[40];
         List<Seat> seats = new LinkedList<>();
         for (int i = 0; i < 40; i++) {
@@ -74,7 +82,8 @@ public class ReservationTests {
     // ReservationServiceModel r = new ReservationServiceModel(fr, t, scheduledTrip,seatServiceModel,"Has", "Mokarov", PAID, CONFIRMED, LocalDateTime.now(), ReservationDirections.ONE_WAY);
     //reservationService.createOrUpdateEntity( new Reservation(trip.getScheduledTransitions().get(2), trip.getScheduledTransitions().get(4), trip, new Seat(5),"Has", "Mokarov", PAID, ReservationConfirmed.NOT_CONFIRMED, LocalDateTime.now(), ONE_WAY))
     @Test
-    public void testTripCreation(){
-
+    public void reservationCreation(){
+        ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
+        reservationService.createOrUpdateEntity( new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), scheduledTrip, seatService.findEntityById(5L),"Has", "Mokarov", PAID, ReservationConfirmed.NOT_CONFIRMED, LocalDateTime.now(), ONE_WAY));
     }
 }
