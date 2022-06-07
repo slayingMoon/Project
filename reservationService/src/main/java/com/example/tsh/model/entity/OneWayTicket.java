@@ -8,7 +8,9 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 
 public class OneWayTicket extends BaseEntity {
-
+   @OneToOne
+   @JoinColumn(nullable = false,unique = true)
+   private TicketNo ticketNo;
     @OneToOne
     @JoinColumn(nullable = false)
     private Reservation goToReservation;
