@@ -1,12 +1,15 @@
 package com.tsh.clientManager.services.impl;
 
 import com.tsh.clientManager.model.dto.CardDto;
+import com.tsh.clientManager.model.dto.SaleCardDto;
 import com.tsh.clientManager.model.entities.Card;
 import com.tsh.clientManager.repository.CardRepository;
 import com.tsh.clientManager.services.CardService;
 import com.tsh.clientManager.services.ClientService;
 import com.tsh.clientManager.util.ValidationUtil;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CardServiceImpl implements CardService {
@@ -51,5 +54,10 @@ public class CardServiceImpl implements CardService {
 	public boolean isCardValid(CardDto cardDto) {
 		return validationUtil.isValid(cardDto) && clientService
 				.isClientExisting(cardDto.getClient().getPhoneNumber());
+	}
+
+	@Override
+	public Optional<Card> findCardById(SaleCardDto card) {
+		return Optional.empty();
 	}
 }
