@@ -9,8 +9,8 @@ import java.util.Optional;
 public interface CardService {
 
   Card createCard(CardDto cardDto);
-	boolean isCardValid(CardDto cardDto);
+  boolean isCardValid(CardDto cardDto);
   Optional<Card> findCardById(SaleCardDto card);
-	void receivePoints(Long cardId, Integer amount);
-	void usePoints(Long cardId, Integer amount);
+  void receivePoints(Long cardId, Integer amount);
+  void usePoints(Long cardId, Integer amount);
 }
