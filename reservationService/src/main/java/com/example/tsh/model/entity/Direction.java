@@ -29,4 +29,9 @@ public class Direction extends BaseEntity{
     public void setTo(City to) {
         this.to = to;
     }
+
+    public Direction(City from, City to) {
+        this.from = from;
+        this.to = to;
+    }
 }

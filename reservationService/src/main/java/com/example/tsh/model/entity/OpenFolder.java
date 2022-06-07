@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 public class OpenFolder extends BaseEntity{
-    @OneToOne(cascade = { CascadeType.MERGE})
+    @OneToOne(cascade = { CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(nullable = false)
     private Direction direction;
 
@@ -18,6 +18,35 @@ public class OpenFolder extends BaseEntity{
     @Column(nullable = false)
     private LocalDateTime expirationDate;
 
+    public Direction getDirection() {
+        return direction;
+    }
 
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public LocalDateTime getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDateTime expirationDate) {
+        this.expirationDate = expirationDate;
+    }
 }

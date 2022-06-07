@@ -7,6 +7,7 @@ import com.example.tsh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +27,8 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private OpenFolderService openFolderService;
 
     @Override
     public void reserve(Reservation reservation) {
@@ -63,22 +66,27 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
     }
     @Override
-    public Reservation deactivateReservation(Reservation reservation) {
-        reservation.setScheduledTrip(null);
-        reservation.setSeat(null);
-        reservation.setIsConfirmed(NOT_CONFIRMED);
-        createOrUpdateEntity(reservation);
-        return reservation;
+    public OpenFolder deactivateReservation(Reservation reservation) {
+       OpenFolder openFolder=new OpenFolder();
+       openFolder.setFirstName(reservation.getFirstName());
+        openFolder.setLastName(reservation.getLastName());
+        openFolder.setExpirationDate(LocalDateTime.now().plusYears(1));
+        openFolder.setDirection(new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
+
+        deleteReservation(reservation);
+        return openFolderService.createOrUpdateEntity(openFolder);
+
     }
 
     @Override
-    public Reservation activateReservation(Reservation reservation, ScheduledTrip scheduledTrip, Seat seat) {
-
+    public Reservation activateReservation(OpenFolder openFolder, ScheduledTrip scheduledTrip, Seat seat) {
+        Reservation reservation= new Reservation();
         reservation.setSeat(seat);
+        reservation.setIsPaid(PAID);
         reservation.setIsConfirmed(CONFIRMED);
         reservation.setScheduledTrip(scheduledTrip);
-        reservation.setFrom(findTransitionByTrip(scheduledTrip, reservation.getFrom()));
-        reservation.setTo(findTransitionByTrip(scheduledTrip, reservation.getTo()));
+        reservation.setFrom(findTransitionByTrip(scheduledTrip,openFolder.getDirection().getFrom()));
+        reservation.setTo(findTransitionByTrip(scheduledTrip, openFolder.getDirection().getTo()));
         //TODO validation
         createOrUpdateEntity(reservation);
         return reservation;
@@ -90,10 +98,10 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
     }
 
 
-    private ScheduledTransition findTransitionByTrip(ScheduledTrip trip, ScheduledTransition transition) {
+    private ScheduledTransition findTransitionByTrip(ScheduledTrip trip, City transition) {
         return trip.getScheduledTransitions()
                 .stream()
-                .filter(e -> e.getCity().equals(transition.getCity()))
+                .filter(e -> e.getCity().equals(transition))
                 .findFirst()
                 .orElse(null);
     }
