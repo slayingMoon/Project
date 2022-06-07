@@ -6,6 +6,9 @@ import com.tsh.clientManager.repository.CardRepository;
 import com.tsh.clientManager.services.CardService;
 import com.tsh.clientManager.services.ClientService;
 import com.tsh.clientManager.util.ValidationUtil;
+
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,12 +36,12 @@ public class CardServiceImpl implements CardService {
 	}
 
 	private Integer updatePoints(Long cardId, Integer amount) {
-		Card card = cardRepository.findById(cardId).get();
-		if (card == null) {
+		Optional<Card> foundCard = cardRepository.findById(cardId);
+		if (foundCard == null) {
 			throw new RuntimeException(
 					"Error: Nonexisting card used for points update.");
 		}
-		
+		Card card = foundCard.get();
 		Integer newBalance = card.getBalance() + amount;
 		if (newBalance < 0) {
 			throw new RuntimeException(
