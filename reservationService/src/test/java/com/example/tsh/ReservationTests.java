@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import com.example.tsh.dao.ScheduledTripRepository;
 import com.example.tsh.model.entity.*;
 import com.example.tsh.model.enums.Country;
 import com.example.tsh.model.enums.ReservationConfirmed;
@@ -14,33 +15,38 @@ import com.example.tsh.service.ReservationService;
 import com.example.tsh.service.ScheduledTransitionService;
 import com.example.tsh.service.ScheduledTripService;
 import com.example.tsh.service.SeatService;
+import com.example.tsh.service.impl.ScheduledTripServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class ReservationTests {
-    @Mock
-    private ScheduledTripService scheduledTripService = mock(ScheduledTripService.class);
-    @Mock
-    private ScheduledTransitionService scheduledTransitionService = mock(ScheduledTransitionService.class);
-    @Mock
-    private SeatService seatService = mock(SeatService.class);
-    @Mock
-    private ReservationService reservationService = mock(ReservationService.class);
+    @Autowired
+    private ScheduledTripServiceImpl scheduledTripService ;
 
-    @BeforeEach
-    void init(){
+
+    @Test
+   public void init(){
         Seat[] s = new Seat[40];
         List<Seat> seats = new LinkedList<>();
         for (int i = 0; i < 40; i++) {
@@ -61,19 +67,14 @@ public class ReservationTests {
                 new Driver("Shofior2","0895430011","0891200665"),
                 new Driver("Djivko","0895430019","0891200669"),
                 new Driver("Zdravko","0895430111","0891200165")));
-    //    trip = new ScheduledTrip(new Bus(60,drivers), scheduledTransitionList);
+    ScheduledTrip  trip = new ScheduledTrip(new Bus(60,drivers), scheduledTransitionList);
+    scheduledTripService.createOrUpdateEntity(trip);
+
     }
     // ReservationServiceModel r = new ReservationServiceModel(fr, t, scheduledTrip,seatServiceModel,"Has", "Mokarov", PAID, CONFIRMED, LocalDateTime.now(), ReservationDirections.ONE_WAY);
     //reservationService.createOrUpdateEntity( new Reservation(trip.getScheduledTransitions().get(2), trip.getScheduledTransitions().get(4), trip, new Seat(5),"Has", "Mokarov", PAID, ReservationConfirmed.NOT_CONFIRMED, LocalDateTime.now(), ONE_WAY))
     @Test
     public void testTripCreation(){
-         ScheduledTrip trip= new ScheduledTrip();
-         trip.setId(1L);
-        when(scheduledTripService.createOrUpdateEntity(ArgumentMatchers.any(ScheduledTrip.class))).thenReturn(trip);
 
-       ScheduledTrip scheduledTrip = scheduledTripService.createOrUpdateEntity(trip);
-
-       assertSame(scheduledTrip.getId(), trip.getId());
-        verify(scheduledTripService).createOrUpdateEntity(trip);
     }
 }
