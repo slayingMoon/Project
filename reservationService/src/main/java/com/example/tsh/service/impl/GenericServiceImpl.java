@@ -26,4 +26,5 @@ public  class GenericServiceImpl< E extends BaseEntity> implements GenericServic
     }
 
 
+
 }

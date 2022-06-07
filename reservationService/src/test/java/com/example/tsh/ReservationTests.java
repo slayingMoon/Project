@@ -44,13 +44,13 @@ import java.util.List;
 @SpringBootTest
 public class ReservationTests {
     @Autowired
-    private ScheduledTripServiceImpl scheduledTripService ;
+    private ScheduledTripService scheduledTripService ;
 
     @Autowired
-    private ReservationServiceImpl reservationService;
+    private ReservationService reservationService;
 
     @Autowired
-    private SeatServiceImpl seatService;
+    private SeatService seatService;
 
 
     @Test

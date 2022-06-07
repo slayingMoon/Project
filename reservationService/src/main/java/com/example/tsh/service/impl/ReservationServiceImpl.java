@@ -1,5 +1,6 @@
 package com.example.tsh.service.impl;
 
+import com.example.tsh.dao.ReservationRepository;
 import com.example.tsh.model.entity.*;
 import com.example.tsh.model.enums.TicketStatus;
 import com.example.tsh.service.*;
@@ -22,6 +23,8 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
     @Autowired
     private ScheduledTransitionService scheduledTransitionService;
 
+    @Autowired
+    private ReservationRepository reservationRepository;
 
 
     @Override
@@ -79,6 +82,11 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
         //TODO validation
         createOrUpdateEntity(reservation);
         return reservation;
+    }
+
+    @Override
+    public void deleteReservation(Reservation reservation) {
+        reservationRepository.deleteById(reservation.getId());
     }
 
 

@@ -16,4 +16,6 @@ public interface ReservationService extends GenericService<Reservation>{
     Reservation deactivateReservation(Reservation reservation);
 
     Reservation activateReservation(Reservation reservation, ScheduledTrip scheduledTrip, Seat seat);
+
+    void deleteReservation(Reservation reservation);
 }
