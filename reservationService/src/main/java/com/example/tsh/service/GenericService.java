@@ -8,4 +8,5 @@ public interface GenericService <D extends BaseEntity>{
     D createOrUpdateEntity(D dto);
 
 
+    void delete(D entity);
 }

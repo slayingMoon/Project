@@ -25,6 +25,9 @@ public  class GenericServiceImpl< E extends BaseEntity> implements GenericServic
        return repository.save(entity);
     }
 
-
+    @Override
+    public void delete(E entity) {
+        repository.deleteById(entity.getId());
+    }
 
 }

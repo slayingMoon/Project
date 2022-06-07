@@ -73,7 +73,7 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
         openFolder.setExpirationDate(LocalDateTime.now().plusYears(1));
         openFolder.setDirection(new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
 
-        deleteReservation(reservation);
+        delete(reservation);
         return openFolderService.createOrUpdateEntity(openFolder);
 
     }
@@ -88,14 +88,12 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
         reservation.setFrom(findTransitionByTrip(scheduledTrip,openFolder.getDirection().getFrom()));
         reservation.setTo(findTransitionByTrip(scheduledTrip, openFolder.getDirection().getTo()));
         //TODO validation
+        openFolderService.delete(openFolder);
         createOrUpdateEntity(reservation);
         return reservation;
     }
 
-    @Override
-    public void deleteReservation(Reservation reservation) {
-        reservationRepository.deleteById(reservation.getId());
-    }
+
 
 
     private ScheduledTransition findTransitionByTrip(ScheduledTrip trip, City transition) {

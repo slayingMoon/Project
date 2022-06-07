@@ -14,5 +14,4 @@ public interface ReservationService extends GenericService<Reservation>{
 
     Reservation activateReservation(OpenFolder openFolder, ScheduledTrip scheduledTrip, Seat seat);
 
-    void deleteReservation(Reservation reservation);
 }
