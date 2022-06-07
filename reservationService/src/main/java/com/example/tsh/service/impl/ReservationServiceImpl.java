@@ -7,6 +7,7 @@ import com.example.tsh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -66,12 +67,14 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
     }
     @Override
+    @Transactional
     public OpenFolder deactivateReservation(Reservation reservation) {
        OpenFolder openFolder=new OpenFolder();
        openFolder.setFirstName(reservation.getFirstName());
         openFolder.setLastName(reservation.getLastName());
         openFolder.setExpirationDate(LocalDateTime.now().plusYears(1));
         openFolder.setDirection(new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
+        openFolder.setReservationCreationDate(reservation.getReservationDate());
 
         delete(reservation);
         return openFolderService.createOrUpdateEntity(openFolder);
@@ -79,14 +82,19 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
     }
 
     @Override
+    @Transactional
     public Reservation activateReservation(OpenFolder openFolder, ScheduledTrip scheduledTrip, Seat seat) {
         Reservation reservation= new Reservation();
+        reservation.setFirstName(openFolder.getFirstName());
+        reservation.setLastName(openFolder.getLastName());
         reservation.setSeat(seat);
         reservation.setIsPaid(PAID);
         reservation.setIsConfirmed(CONFIRMED);
+        reservation.setReservationDate(LocalDateTime.now());
         reservation.setScheduledTrip(scheduledTrip);
         reservation.setFrom(findTransitionByTrip(scheduledTrip,openFolder.getDirection().getFrom()));
         reservation.setTo(findTransitionByTrip(scheduledTrip, openFolder.getDirection().getTo()));
+        reservation.setReservationDate(openFolder.getReservationCreationDate());
         //TODO validation
         openFolderService.delete(openFolder);
         createOrUpdateEntity(reservation);

@@ -14,6 +14,10 @@ public class Direction extends BaseEntity{
     @JoinColumn(nullable = false)
     private City to;
 
+    public Direction() {
+
+    }
+
     public City getFrom() {
         return from;
     }

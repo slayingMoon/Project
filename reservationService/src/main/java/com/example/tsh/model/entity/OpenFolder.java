@@ -17,6 +17,16 @@ public class OpenFolder extends BaseEntity{
 
     @Column(nullable = false)
     private LocalDateTime expirationDate;
+    @Column(nullable = false)
+    private LocalDateTime reservationCreationDate;
+
+    public LocalDateTime getReservationCreationDate() {
+        return reservationCreationDate;
+    }
+
+    public void setReservationCreationDate(LocalDateTime reservationCreationDate) {
+        this.reservationCreationDate = reservationCreationDate;
+    }
 
     public Direction getDirection() {
         return direction;

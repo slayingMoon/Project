@@ -1,10 +1,8 @@
 package com.example.tsh.model.dto;
 
 import com.example.tsh.model.enums.ReservationConfirmed;
-import com.example.tsh.model.enums.ReservationDirections;
 import com.example.tsh.model.enums.ReservationPaid;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class ReservationServiceModel extends BaseDto {
@@ -27,21 +25,17 @@ public class ReservationServiceModel extends BaseDto {
     private ReservationConfirmed isConfirmed;
 
     private LocalDateTime reservationDate;
-    private ReservationDirections reservationDirections;
+
     public ReservationServiceModel() {
     }
 
 
 
-    public ReservationDirections getReservationDirections() {
-        return reservationDirections;
-    }
 
-    public void setReservationDirections(ReservationDirections reservationDirections) {
-        this.reservationDirections = reservationDirections;
-    }
 
-    public ReservationServiceModel(ScheduledTransitionServiceModel from, ScheduledTransitionServiceModel to, ScheduledTripServiceModel scheduledTrip, SeatServiceModel seat, String firstName, String lastName, ReservationPaid isPaid, ReservationConfirmed isConfirmed, LocalDateTime reservationDate, ReservationDirections reservationDirections) {
+
+
+    public ReservationServiceModel(ScheduledTransitionServiceModel from, ScheduledTransitionServiceModel to, ScheduledTripServiceModel scheduledTrip, SeatServiceModel seat, String firstName, String lastName, ReservationPaid isPaid, ReservationConfirmed isConfirmed, LocalDateTime reservationDate) {
         this.from = from;
         this.to = to;
         this.scheduledTrip = scheduledTrip;
@@ -51,7 +45,6 @@ public class ReservationServiceModel extends BaseDto {
         this.isPaid = isPaid;
         this.isConfirmed = isConfirmed;
         this.reservationDate = reservationDate;
-        this.reservationDirections = reservationDirections;
     }
 
     public ScheduledTransitionServiceModel getFrom() {

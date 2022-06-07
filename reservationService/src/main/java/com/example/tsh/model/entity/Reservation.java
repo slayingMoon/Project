@@ -1,7 +1,6 @@
 package com.example.tsh.model.entity;
 
 import com.example.tsh.model.enums.ReservationConfirmed;
-import com.example.tsh.model.enums.ReservationDirections;
 import com.example.tsh.model.enums.ReservationPaid;
 
 import javax.persistence.*;
@@ -38,19 +37,11 @@ public class Reservation extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ReservationConfirmed isConfirmed;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private ReservationDirections reservationDirections;
+
 
     @Column(nullable = false)
     private LocalDateTime reservationDate;
-    public ReservationDirections getReservationDirections() {
-        return reservationDirections;
-    }
 
-    public void setReservationDirections(ReservationDirections reservationDirections) {
-        this.reservationDirections = reservationDirections;
-    }
 
 
 
@@ -59,7 +50,7 @@ public class Reservation extends BaseEntity {
     }
 
     public Reservation(ScheduledTransition from, ScheduledTransition to, ScheduledTrip scheduledTrip, Seat seat, String firstName,
-                       String lastName, ReservationPaid isPaid, ReservationConfirmed isConfirmed, LocalDateTime reservationDate, ReservationDirections reservationDirections) {
+                       String lastName, ReservationPaid isPaid, ReservationConfirmed isConfirmed, LocalDateTime reservationDate) {
         this.from = from;
         this.to = to;
         this.scheduledTrip = scheduledTrip;
@@ -69,7 +60,7 @@ public class Reservation extends BaseEntity {
         this.isPaid = isPaid;
         this.isConfirmed = isConfirmed;
         this.reservationDate = reservationDate;
-        this.reservationDirections = reservationDirections;
+
     }
 
 
