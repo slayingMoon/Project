@@ -8,6 +8,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
@@ -38,5 +39,11 @@ public class TripServiceTest {
     void findTripsByStartAndDestinationCitiesTest() {
         List<String> filteredTrips = tripService.findTripsByStartAndDestinationCities("Sofia", "Ihtiman");
         filteredTrips.forEach(System.out::println);
+    }
+    
+    @Test
+    void generateTripDatesForNextYear() {
+        List<String> dates = tripService.generateTripDates(2l);
+        System.out.println();
     }
 }
