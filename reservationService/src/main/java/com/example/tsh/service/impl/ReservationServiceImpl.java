@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.IntStream;
 
 import static com.example.tsh.model.enums.ReservationConfirmed.CONFIRMED;
 import static com.example.tsh.model.enums.ReservationConfirmed.NOT_CONFIRMED;
@@ -23,13 +24,13 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
 
     @Autowired
-    private ScheduledTransitionService scheduledTransitionService;
+    private ScheduledTransitionServiceImpl scheduledTransitionService;
 
     @Autowired
     private ReservationRepository reservationRepository;
 
     @Autowired
-    private OpenFolderService openFolderService;
+    private OpenFolderServiceImpl openFolderService;
 
     @Override
     public void reserve(Reservation reservation) {
@@ -114,6 +115,7 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
     private List<Integer> getFreeSeats(List<ScheduledTransition> filteredFromTo, Integer busCapacity) {
 
+        IntStream.rangeClosed(1, busCapacity).toArray();
 
         List<Integer> freeSeats = new LinkedList<>();
         for (int i = 1; i <= busCapacity; i++) {

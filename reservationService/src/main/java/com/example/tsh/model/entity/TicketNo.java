@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import java.util.UUID;
+
 @Entity
 public class TicketNo extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,4 +19,5 @@ public class TicketNo extends BaseEntity {
     public void setTicketNo(String ticketNo) {
         this.ticketNo = ticketNo;
     }
+
 }

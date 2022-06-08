@@ -5,12 +5,12 @@ import static com.example.tsh.model.enums.ReservationPaid.PAID;
 import com.example.tsh.model.entity.*;
 import com.example.tsh.model.enums.Country;
 import com.example.tsh.model.enums.ReservationConfirmed;
-import com.example.tsh.service.OpenFolderService;
 import com.example.tsh.service.ReservationService;
 
-import com.example.tsh.service.ScheduledTripService;
-import com.example.tsh.service.SeatService;
-
+import com.example.tsh.service.impl.OpenFolderServiceImpl;
+import com.example.tsh.service.impl.ReservationServiceImpl;
+import com.example.tsh.service.impl.ScheduledTripServiceImpl;
+import com.example.tsh.service.impl.SeatServiceImpl;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
@@ -30,16 +30,16 @@ import java.util.List;
 @SpringBootTest
 public class ReservationTests {
     @Autowired
-    private ScheduledTripService scheduledTripService;
+    private ScheduledTripServiceImpl scheduledTripService;
 
     @Autowired
-    private ReservationService reservationService;
+    private ReservationServiceImpl reservationService;
 
     @Autowired
-    private SeatService seatService;
+    private SeatServiceImpl seatService;
 
     @Autowired
-    private OpenFolderService openFolderService;
+    private OpenFolderServiceImpl openFolderService;
 
     @Test
     public void testTripCreationTest() {

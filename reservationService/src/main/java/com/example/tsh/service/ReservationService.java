@@ -4,7 +4,7 @@ import com.example.tsh.model.entity.*;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface ReservationService extends GenericService<Reservation>{
+public interface ReservationService {
     void reserve(Reservation reservation);
 
 

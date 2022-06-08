@@ -3,7 +3,6 @@ package com.example.tsh.util.dtoservice;
 import com.example.tsh.dao.GenericRepository;
 import com.example.tsh.model.dto.BaseDto;
 import com.example.tsh.model.entity.BaseEntity;
-import com.example.tsh.service.GenericService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
