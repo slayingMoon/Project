@@ -57,7 +57,8 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Optional<Card> findCardById(SaleCardDto card) {
-		return Optional.empty();
+	public Card findCardById(Long id) {
+		return cardRepository.findById(id)
+				.orElse(null);
 	}
 }

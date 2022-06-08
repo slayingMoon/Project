@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6ecf5ff-ce01-4700-88a5-2f7216ea84da" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../reservationService/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../reservationService/.idea/vcs.xml" afterDir="false" />
-    </list>
+    <list default="true" id="e6ecf5ff-ce01-4700-88a5-2f7216ea84da" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,21 +39,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Ahmed/Desktop/Project/clientManager"
-  }
-}]]></component>
-  <component name="RunManager">
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/test/resources" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User3\Downloads\Project\clientManager\src\test\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User3\Downloads\Project\clientManager\src\test\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.tsh.clientManager.services" />
+      <recent name="com.tsh.clientManager.repository" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.ClientManagerSaleServiceTest">
     <configuration name="ClientManagerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tsh.clientManager.ClientManagerApplication" />
       <module name="clientManager" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.tsh.clientManager.*" />
+          <option name="PATTERN" value="com.tsh.clientManager.repository.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -63,9 +68,58 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ClientManagerSaleServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="clientManager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tsh.clientManager.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.tsh.clientManager.services" />
+      <option name="MAIN_CLASS_NAME" value="com.tsh.clientManager.services.ClientManagerSaleServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientRepositoryIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="clientManager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tsh.clientManager.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.tsh.clientManager.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.tsh.clientManager.repository.ClientRepositoryIntegrationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientRepositoryIntegrationTest.whenFindByPhoneNumberThenReturnClient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="clientManager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tsh.clientManager.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.tsh.clientManager.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.tsh.clientManager.repository.ClientRepositoryIntegrationTest" />
+      <option name="METHOD_NAME" value="whenFindByPhoneNumberThenReturnClient" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ClientManagerSaleServiceTest" />
         <item itemvalue="Application.ClientManagerApplication" />
+        <item itemvalue="JUnit.ClientRepositoryIntegrationTest" />
+        <item itemvalue="JUnit.ClientRepositoryIntegrationTest.whenFindByPhoneNumberThenReturnClient" />
       </list>
     </recent_temporary>
   </component>

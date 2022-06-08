@@ -25,13 +25,13 @@ public class DeactivateClientDemo implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Logger logger = getGlobalLogger();
-		Client newClient = clientService
-				.findClientByPhoneNumber("+359886666666");
-		boolean check = entityManager.contains(newClient);
-		logger.log(Level.INFO, newClient.getStatus().toString());
-		clientService.clientDeactivation(new ClientPhoneNumberDto().setPhoneNumber(newClient.getPhoneNumber()));
-		logger.log(Level.INFO, newClient.getStatus().toString());
+//		Logger logger = getGlobalLogger();
+//		Client newClient = clientService
+//				.findClientByPhoneNumber("+359886666666");
+//		boolean check = entityManager.contains(newClient);
+//		logger.log(Level.INFO, newClient.getStatus().toString());
+//		clientService.clientDeactivation(new ClientPhoneNumberDto().setPhoneNumber(newClient.getPhoneNumber()));
+//		logger.log(Level.INFO, newClient.getStatus().toString());
 	}
 
 	private Logger getGlobalLogger() {
