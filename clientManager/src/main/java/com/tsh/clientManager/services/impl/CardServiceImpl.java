@@ -3,6 +3,7 @@ package com.tsh.clientManager.services.impl;
 import com.tsh.clientManager.model.dto.CardDto;
 import com.tsh.clientManager.model.dto.SaleCardDto;
 import com.tsh.clientManager.model.entities.Card;
+import com.tsh.clientManager.model.enums.CardTiers;
 import com.tsh.clientManager.repository.CardRepository;
 import com.tsh.clientManager.services.CardService;
 import com.tsh.clientManager.services.ClientService;
@@ -39,27 +40,28 @@ public class CardServiceImpl implements CardService {
 	}
 
 	private Integer updatePoints(Long cardId, Integer amount) {
-		Optional<Card> foundCard = cardRepository.findById(cardId);
-		if (foundCard == null) {
-			throw new RuntimeException(
-					"Error: Nonexisting card used for points update.");
-		}
-		Card card = foundCard.get();
-		Integer newBalance = card.getBalance() + amount;
-		if (newBalance < 0) {
-			throw new RuntimeException(
-					"Error: Attempted use of more points than existing.");
-		}
-		
-		card.setBalance(newBalance);
-		cardRepository.save(card);
-		return newBalance;
+//		Optional<Card> foundCard = cardRepository.findById(cardId);
+//		if (foundCard == null) {
+//			throw new RuntimeException(
+//					"Error: Nonexisting card used for points update.");
+//		}
+//		Card card = foundCard.get();
+//		Integer newBalance = card.getTier() + amount;
+//		if (newBalance < 0) {
+//			throw new RuntimeException(
+//					"Error: Attempted use of more points than existing.");
+//		}
+//		
+//		card.setTier(newBalance);
+//		cardRepository.save(card);
+//		return newBalance;
+		return null;
 	}
 
 	@Override
 	public Card createCard(CardDto cardDto) {
 		if (isCardValid(cardDto)) {
-			Card card = new Card().setBalance(cardDto.getBalance())
+			Card card = new Card().setTier(CardTiers.BRONZE)
 					.setClient(clientService.findClientByPhoneNumber(
 							cardDto.getClient().getPhoneNumber()));
 

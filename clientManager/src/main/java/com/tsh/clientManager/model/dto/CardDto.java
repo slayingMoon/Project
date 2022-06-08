@@ -1,25 +1,17 @@
 package com.tsh.clientManager.model.dto;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
+
+import com.tsh.clientManager.model.enums.CardTiers;
 
 public class CardDto {
 
-    @Min(0)
-    private Integer balance;
+    private CardTiers tier;
     private List<SaleDto> sales;
     @NotNull
     private ClientPhoneNumberDto client;
-
-    public Integer getBalance() {
-        return balance;
-    }
-
-    public CardDto setBalance(Integer balance) {
-        this.balance = balance;
-        return this;
-    }
 
     public List<SaleDto> getSales() {
         return sales;
@@ -38,4 +30,13 @@ public class CardDto {
         this.client = client;
         return this;
     }
+
+	public CardTiers getTier() {
+		return tier;
+	}
+
+	public CardDto setTier(CardTiers tier) {
+		this.tier = tier;
+		return this;
+	}
 }
