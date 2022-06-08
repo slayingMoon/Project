@@ -3,14 +3,10 @@ package com.example.tsh.service;
 import com.example.tsh.domain.entity.Trip;
 import com.example.tsh.enumeration.DaysOfWeek;
 import com.example.tsh.enumeration.TransitionProperties;
-import com.example.tsh.repository.EmergencyTripRepository;
 import com.example.tsh.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
@@ -21,8 +17,6 @@ public class TripServiceImpl implements TripService {
 
     @Autowired
     private TripRepository tripRepository;
-    @Autowired
-    private EmergencyTripRepository emergencyTripRepository;
 
 
     @Override
@@ -51,7 +45,8 @@ public class TripServiceImpl implements TripService {
             AtomicBoolean isStartCityPassed = new AtomicBoolean(false);
             trip.getTransitions()
                     .forEach(transition -> {
-                        if (transition.getCity().getName().equals(startCity) && transition.getTransitionDetails().stream()
+                        if (transition.getCity().getName().equals(startCity) &&
+                                transition.getTransitionDetails().stream()
                                 .anyMatch(detail -> detail.getTransitionProperties() ==
                                 TransitionProperties.GET_ON)) {
                             isStartCityPassed.set(true);
