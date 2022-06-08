@@ -5,9 +5,7 @@ import com.tsh.clientManager.model.dto.SaleClientDto;
 import com.tsh.clientManager.model.dto.SaleDto;
 import com.tsh.clientManager.model.dto.SaleSaleItemDto;
 import com.tsh.clientManager.model.entities.Sale;
-import com.tsh.clientManager.model.entities.SaleItem;
 import com.tsh.clientManager.model.enums.SaleType;
-import com.tsh.clientManager.repository.SaleRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +50,7 @@ public class ClientManagerSaleServiceTest {
                 .setSaleItems(saleItems);
 
     }
+
 
     @Test
     public void createSalePersistsSaleInDB() {
