@@ -5,7 +5,7 @@ import static com.example.tsh.model.enums.ReservationPaid.PAID;
 import com.example.tsh.model.entity.*;
 import com.example.tsh.model.enums.Country;
 import com.example.tsh.model.enums.ReservationConfirmed;
-import com.example.tsh.service.ReservationService;
+
 
 import com.example.tsh.service.impl.OpenFolderServiceImpl;
 import com.example.tsh.service.impl.ReservationServiceImpl;
@@ -67,8 +67,6 @@ public class ReservationTests {
 
     }
 
-    // ReservationServiceModel r = new ReservationServiceModel(fr, t, scheduledTrip,seatServiceModel,"Has", "Mokarov", PAID, CONFIRMED, LocalDateTime.now(), ReservationDirections.ONE_WAY);
-    //reservationService.createOrUpdateEntity( new Reservation(trip.getScheduledTransitions().get(2), trip.getScheduledTransitions().get(4), trip, new Seat(5),"Has", "Mokarov", PAID, ReservationConfirmed.NOT_CONFIRMED, LocalDateTime.now(), ONE_WAY))
     @Test
     public void reservationCreationTest() {
         ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
@@ -77,19 +75,5 @@ public class ReservationTests {
         }
         }
 
-    @Test
-    public void deleteReservationPutIntoOpenFolderTest() {
-        Reservation deleteReservation = reservationService.findEntityById(2L);
-     //   reservationService.deactivateReservation(deleteReservation,);
-    }
 
-    @Test
-    public void activateReservationRemoveFromOpenFolderTest() {
-        OpenFolder openFolder = openFolderService.findEntityById(1L);
-        ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
-        Seat seat = seatService.findEntityById(6L);
-
-        System.out.println();
-        reservationService.activateReservation(openFolder, scheduledTrip, seat);
-    }
 }

@@ -8,7 +8,7 @@ import com.example.tsh.model.entity.TicketNo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+
 import java.time.LocalDateTime;
 
 @Service
@@ -18,7 +18,6 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
       @Autowired
       private OpenFolderRepository openFolderRepository;
 
-    @Transactional
     public OpenFolder deactivateReservation(Reservation reservation, TicketNo num) {
         OpenFolder openFolder=new OpenFolder();
         openFolder.setFirstName(reservation.getFirstName());

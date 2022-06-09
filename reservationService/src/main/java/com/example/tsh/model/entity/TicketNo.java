@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class TicketNo  {
@@ -18,7 +19,7 @@ public class TicketNo  {
             strategy = "com.example.tsh.util.StringPrefixedSequenceNumGenerator",
             parameters = {
                     @Parameter(name = StringPrefixedSequenceNumGenerator.INCREMENT_PARAM, value = "50"),
-                    @Parameter(name = StringPrefixedSequenceNumGenerator.VALUE_PREFIX_PARAMETER, value = "C_"),
+                    @Parameter(name = StringPrefixedSequenceNumGenerator.VALUE_PREFIX_PARAMETER, value = "A_"),
                     @Parameter(name = StringPrefixedSequenceNumGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
     private String id;
 
@@ -30,4 +31,16 @@ public class TicketNo  {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TicketNo ticketNo = (TicketNo) o;
+        return Objects.equals(id, ticketNo.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

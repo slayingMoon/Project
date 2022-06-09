@@ -1,22 +1,18 @@
 package com.example.tsh;
 
-import com.example.tsh.model.entity.OneWayTicket;
-import com.example.tsh.model.entity.Reservation;
-import com.example.tsh.model.entity.ScheduledTrip;
-import com.example.tsh.model.enums.ReservationConfirmed;
+import com.example.tsh.model.entity.*;
 import com.example.tsh.model.enums.TicketStatus;
-import com.example.tsh.service.ReservationService;
 import com.example.tsh.service.impl.OneWayTicketService;
 import com.example.tsh.service.impl.ReservationServiceImpl;
+import com.example.tsh.service.impl.ScheduledTripServiceImpl;
+import com.example.tsh.service.impl.SeatServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDateTime;
 
-import static com.example.tsh.model.enums.ReservationPaid.PAID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,10 +23,28 @@ public class TicketTest {
     @Autowired
     private ReservationServiceImpl reservationService;
 
-    @Test
-    public void reservationCreationTest() {
-        Reservation reservation = reservationService.findEntityById(2L);
+    @Autowired
+    private SeatServiceImpl seatService;
 
+    @Autowired
+    private ScheduledTripServiceImpl scheduledTripService;
+    @Test
+    public void ticketCreation() {
+        Reservation reservation = reservationService.findEntityById(1L);
         oneWayTicketService.createOrUpdateEntity(new OneWayTicket(reservation, TicketStatus.CONFIRMED));
+    }
+    @Test
+    public void deleteReservationPutIntoOpenFolderTest() {
+        OneWayTicket oneWayTicket = oneWayTicketService.findEntityById(1L);
+          oneWayTicketService.moveReservationToOpenFolder(oneWayTicket.getGoToReservation(), oneWayTicket);
+    }
+
+    @Test
+    public void activateReservationRemoveFromOpenFolderTest() {
+        OneWayTicket oneWayTicket = oneWayTicketService.findEntityById(1L);
+        ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
+        Seat seat = seatService.findEntityById(6L);
+       oneWayTicketService.removeReservationFromOpenFolder(oneWayTicket,scheduledTrip, seat);
+
     }
 }

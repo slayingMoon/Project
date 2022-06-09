@@ -71,4 +71,5 @@ public class OpenFolder extends BaseEntity{
     public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
+
 }
