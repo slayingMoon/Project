@@ -7,25 +7,27 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-public class TicketNo extends BaseEntity {
+public class TicketNo  {
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_seq")
     @GenericGenerator(
             name = "ticket_seq",
-            strategy = "org.thoughts.on.java.generators.StringPrefixedSequenceIdGenerator",
+            strategy = "com.example.tsh.util.StringPrefixedSequenceNumGenerator",
             parameters = {
                     @Parameter(name = StringPrefixedSequenceNumGenerator.INCREMENT_PARAM, value = "50"),
-                    @Parameter(name = StringPrefixedSequenceNumGenerator.VALUE_PREFIX_PARAMETER, value = "B_"),
+                    @Parameter(name = StringPrefixedSequenceNumGenerator.VALUE_PREFIX_PARAMETER, value = "C_"),
                     @Parameter(name = StringPrefixedSequenceNumGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
-    private String ticketNo;
+    private String id;
 
-    public String getTicketNo() {
-        return ticketNo;
+    public String getId() {
+        return id;
     }
 
-    public void setTicketNo(String ticketNo) {
-        this.ticketNo = ticketNo;
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

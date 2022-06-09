@@ -29,7 +29,7 @@ public class TicketTest {
 
     @Test
     public void reservationCreationTest() {
-        Reservation reservation = reservationService.findEntityById(1L);
+        Reservation reservation = reservationService.findEntityById(2L);
 
         oneWayTicketService.createOrUpdateEntity(new OneWayTicket(reservation, TicketStatus.CONFIRMED));
     }

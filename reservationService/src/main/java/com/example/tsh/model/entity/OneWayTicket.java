@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 
 public class OneWayTicket extends BaseEntity {
-   @OneToOne(cascade = { CascadeType.MERGE})
+   @OneToOne(cascade = CascadeType.PERSIST)
    @JoinColumn(nullable = false,unique = true)
    private TicketNo ticketNo;
     @OneToOne
@@ -54,6 +54,7 @@ public class OneWayTicket extends BaseEntity {
     public OneWayTicket(Reservation goToReservation, TicketStatus status) {
         this.goToReservation = goToReservation;
         this.status = status;
+        this.ticketNo = new TicketNo();
     }
 
     public OneWayTicket() {
