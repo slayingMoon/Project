@@ -2,7 +2,6 @@ package com.tsh.clientManager.model.entities;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +16,7 @@ public class PointTransaction extends BaseEntity {
 	private Integer awarded;
 	@Column
 	private Integer used;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "card_id")
 	private Card card;
 	public Card getCard() {
@@ -26,10 +25,10 @@ public class PointTransaction extends BaseEntity {
 	public LocalDate getCreatedOn() {
 		return createdOn;
 	}
-	public Integer getCredit() {
+	public Integer getUsed() {
 		return used;
 	}
-	public Integer getDebit() {
+	public Integer getAwarded() {
 		return awarded;
 	}
 	public PointTransaction setCard(Card card) {
@@ -40,11 +39,11 @@ public class PointTransaction extends BaseEntity {
 		this.createdOn = createdOn;
 		return this;
 	}
-	public PointTransaction setCredit(Integer used) {
+	public PointTransaction setUsed(Integer used) {
 		this.used = used;
 		return this;
 	}
-	public PointTransaction setDebit(Integer awarded) {
+	public PointTransaction setAwarded(Integer awarded) {
 		this.awarded = awarded;
 		return this;
 	}

@@ -1,11 +1,12 @@
 package com.tsh.clientManager.model.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import com.tsh.clientManager.model.entities.Card;
 
 public class TransactionDto {
-	@NotNull
+	@Positive
 	private Integer debit;
 	@NotNull
 	private Card card;

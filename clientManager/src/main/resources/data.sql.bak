@@ -9,6 +9,16 @@ insert into client (age, email, first_name, last_name, middle_name, phone_number
 insert into client (age, email, first_name, last_name, middle_name, phone_number, status) values (44, 'cpullar8@ftc.gov', 'Corabella', 'Cluley', 'Pullar', '+86-508-233-1892', 'ACTIVATED');
 insert into client (age, email, first_name, last_name, middle_name, phone_number, status) values (47, 'vtrimbey9@usnews.com', 'Vicky', 'Mill', 'Trimbey', '+30-453-118-7100', 'ACTIVATED');
 
+insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 1));
+insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 2));
+insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 3));
+insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 4));
+insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 5));
+insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 6));
+insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 7));
+insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 8));
+insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 9));
+insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 10));
 
 insert into point_transaction (created_on, used, awarded, card_id) values ('2020-09-05', 0, 13, (select id from card where id = 8));
 insert into point_transaction (created_on, used, awarded, card_id) values ('2020-10-04', 0, 7, (select id from card where id = 6));
@@ -62,13 +72,3 @@ insert into point_transaction (created_on, used, awarded, card_id) values ('2021
 insert into point_transaction (created_on, used, awarded, card_id) values ('2020-09-07', 0, 5, (select id from card where id = 4));
 
 
-insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 1));
-insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 2));
-insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 3));
-insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 4));
-insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 5));
-insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 6));
-insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 7));
-insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 8));
-insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 9));
-insert into card (tier, client_id) values ('BRONZE', (select id from client where id = 10));

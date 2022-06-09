@@ -1,7 +1,6 @@
 package com.tsh.clientManager.services;
+import org.springframework.stereotype.Service;
 
-import com.tsh.clientManager.model.entities.SaleItem;
-
-public interface SaleItemService {
-    void persist(SaleItem saleItem);
+@Service
+public class SaleItemService {
 }

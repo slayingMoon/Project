@@ -1,11 +1,26 @@
 package com.tsh.clientManager.services;
 
-import com.tsh.clientManager.model.dto.SaleDto;
-import com.tsh.clientManager.model.entities.Sale;
+import org.springframework.stereotype.Service;
 
-public interface SaleService {
+import com.tsh.clientManager.repository.SaleRepository;
 
-    Sale createSale(SaleDto saleDto);
+@Service
+public class SaleService {
 
-    Sale findSaleByClient(String phoneNumber);
+    private final SaleRepository saleRepository;
+    private final SaleItemService saleItemService;
+    private final ClientService clientService;
+    private final CardService cardService;
+
+    public SaleService(SaleRepository saleRepository, SaleItemService saleItemService, ClientService clientService, CardService cardService) {
+        this.saleRepository = saleRepository;
+        this.saleItemService = saleItemService;
+        this.clientService = clientService;
+        this.cardService = cardService;
+    }
+
+
+    public void createSale() {
+
+    }
 }

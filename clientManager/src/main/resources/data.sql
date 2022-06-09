@@ -71,4 +71,9 @@ insert into point_transaction (created_on, used, awarded, card_id) values ('2021
 insert into point_transaction (created_on, used, awarded, card_id) values ('2021-05-15', 0, 8, (select id from card where id = 9));
 insert into point_transaction (created_on, used, awarded, card_id) values ('2020-09-07', 0, 5, (select id from card where id = 4));
 
+insert into client (age, email, first_name, last_name, middle_name, phone_number, status) values (69, 'testEmail@test.com', 'John', 'Frank', 'Doe', '+359888888888', 'ACTIVATED');
+insert into card (tier, client_id) values ('BRONZE', (select id from client where phone_number = '+359888888888'));
+insert into point_transaction (created_on, used, awarded, card_id) values ((SELECT DATE(NOW())), 0, 10, (select id from card where client_id = (select id from client where phone_number = '+359888888888')));
+insert into point_transaction (created_on, used, awarded, card_id) values ((SELECT DATE(NOW())), 0, 7, (select id from card where client_id = (select id from client where phone_number = '+359888888888')));
+insert into point_transaction (created_on, used, awarded, card_id) values ((SELECT DATE(NOW())), 0, 8, (select id from card where client_id = (select id from client where phone_number = '+359888888888')));
 
