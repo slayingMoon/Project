@@ -20,6 +20,9 @@ public class OpenFolder extends BaseEntity{
     @Column(nullable = false)
     private LocalDateTime reservationCreationDate;
 
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private TicketNo ticketNo;
     public LocalDateTime getReservationCreationDate() {
         return reservationCreationDate;
     }
@@ -54,6 +57,14 @@ public class OpenFolder extends BaseEntity{
 
     public LocalDateTime getExpirationDate() {
         return expirationDate;
+    }
+
+    public TicketNo getTicketNo() {
+        return ticketNo;
+    }
+
+    public void setTicketNo(TicketNo ticketNo) {
+        this.ticketNo = ticketNo;
     }
 
     public void setExpirationDate(LocalDateTime expirationDate) {

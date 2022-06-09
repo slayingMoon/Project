@@ -8,14 +8,14 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 
 public class OneWayTicket extends BaseEntity {
-   @OneToOne
+   @OneToOne(cascade = { CascadeType.MERGE})
    @JoinColumn(nullable = false,unique = true)
    private TicketNo ticketNo;
     @OneToOne
     @JoinColumn(nullable = false)
     private Reservation goToReservation;
 
-    @Column(nullable = false)
+
     @Enumerated(EnumType.STRING)
     private TicketStatus status;
 
@@ -31,6 +31,14 @@ public class OneWayTicket extends BaseEntity {
         return status;
     }
 
+    public TicketNo getTicketNo() {
+        return ticketNo;
+    }
+
+    public void setTicketNo(TicketNo ticketNo) {
+        this.ticketNo = ticketNo;
+    }
+
     public void setStatus(TicketStatus status) {
         this.status = status;
     }
@@ -41,5 +49,13 @@ public class OneWayTicket extends BaseEntity {
                 "goToReservation=" + goToReservation +
                 ", status=" + status +
                 "} " + super.toString();
+    }
+
+    public OneWayTicket(Reservation goToReservation, TicketStatus status) {
+        this.goToReservation = goToReservation;
+        this.status = status;
+    }
+
+    public OneWayTicket() {
     }
 }
