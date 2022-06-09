@@ -10,7 +10,6 @@ public interface ReservationService {
 
     OneWayTicket payOneWayReservation(Reservation reservation);
 
-    OpenFolder deactivateReservation(Reservation reservation);
 
     Reservation activateReservation(OpenFolder openFolder, ScheduledTrip scheduledTrip, Seat seat);
 

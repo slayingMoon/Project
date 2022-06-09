@@ -57,30 +57,8 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
     }
 
-     private Reservation reverseReservationTransitions(Reservation reservation){
-        ScheduledTransition fromTransition = reservation.getTo();
-        ScheduledTransition toTransition = reservation.getFrom();
 
-        reservation.setFrom(fromTransition);
-        reservation.setTo(toTransition);
 
-        return reservation;
-
-    }
-    @Override
-    @Transactional
-    public OpenFolder deactivateReservation(Reservation reservation) {
-       OpenFolder openFolder=new OpenFolder();
-       openFolder.setFirstName(reservation.getFirstName());
-        openFolder.setLastName(reservation.getLastName());
-        openFolder.setExpirationDate(LocalDateTime.now().plusYears(1));
-        openFolder.setDirection(new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
-        openFolder.setReservationCreationDate(reservation.getReservationDate());
-
-        delete(reservation);
-        return openFolderService.createOrUpdateEntity(openFolder);
-
-    }
 
     @Override
     @Transactional
@@ -103,7 +81,17 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
     }
 
 
+    private OpenFolder reverseReservationTransitions(Reservation reservation){
+       OpenFolder openFolder = new OpenFolder();
+        ScheduledTransition fromTransition = reservation.getTo();
+        ScheduledTransition toTransition = reservation.getFrom();
 
+        reservation.setFrom(fromTransition);
+        reservation.setTo(toTransition);
+
+        return openFolder;
+
+    }
 
     private ScheduledTransition findTransitionByTrip(ScheduledTrip trip, City transition) {
         return trip.getScheduledTransitions()

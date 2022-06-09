@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(indexes = @Index(columnList = "ticket_no_id"))
 public class OpenFolder extends BaseEntity{
     @OneToOne(cascade = { CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(nullable = false)

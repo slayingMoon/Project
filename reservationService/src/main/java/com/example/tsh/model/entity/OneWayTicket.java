@@ -6,13 +6,12 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-
 public class OneWayTicket extends BaseEntity {
    @OneToOne(cascade = CascadeType.PERSIST)
    @JoinColumn(nullable = false,unique = true)
    private TicketNo ticketNo;
     @OneToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false,unique = true)
     private Reservation goToReservation;
 
 

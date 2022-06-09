@@ -80,7 +80,7 @@ public class ReservationTests {
     @Test
     public void deleteReservationPutIntoOpenFolderTest() {
         Reservation deleteReservation = reservationService.findEntityById(2L);
-        reservationService.deactivateReservation(deleteReservation);
+     //   reservationService.deactivateReservation(deleteReservation,);
     }
 
     @Test
