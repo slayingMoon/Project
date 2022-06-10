@@ -55,8 +55,11 @@
       <recent name="com.tsh.clientManager.services" />
       <recent name="com.tsh.clientManager.repository" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.tsh.clientManager.util" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.ClientManagerSaleServiceTest">
+  <component name="RunManager" selected="Application.ClientManagerApplication">
     <configuration name="ClientManagerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tsh.clientManager.ClientManagerApplication" />
       <module name="clientManager" />
@@ -118,9 +121,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ClientManagerApplication" />
         <item itemvalue="JUnit.ClientManagerSaleServiceTest" />
         <item itemvalue="JUnit.ClientRepositoryIntegrationTest" />
-        <item itemvalue="Application.ClientManagerApplication" />
         <item itemvalue="JUnit.ClientRepositoryIntegrationTest.whenFindByPhoneNumberThenReturnClient" />
       </list>
     </recent_temporary>
@@ -139,6 +142,40 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="clientManager-joro" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/tsh/clientManager/SaleDemo.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

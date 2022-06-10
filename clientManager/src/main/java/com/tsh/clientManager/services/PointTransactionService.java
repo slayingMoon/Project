@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.tsh.clientManager.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,6 @@ import com.tsh.clientManager.model.entities.Card;
 import com.tsh.clientManager.model.entities.PointTransaction;
 import com.tsh.clientManager.repository.CardRepository;
 import com.tsh.clientManager.repository.PointTransactionRepository;
-import com.tsh.clientManager.util.ValidationUtil;
-import com.tsh.clientManager.util.impl.ValidationUtilImpl;
 
 @Service
 public class PointTransactionService {
@@ -24,7 +23,7 @@ public class PointTransactionService {
 	private PointTransactionRepository pointTransactionRepository;
 	@Autowired
 	private CardRepository cardRepository;
-	private final ValidationUtil validationUtil = new ValidationUtilImpl();
+	private final ValidationUtil validationUtil = new ValidationUtil();
 
 	public PointTransaction createTransaction(TransactionDto transaction) {
 		if (isTransactionValid(transaction)) {

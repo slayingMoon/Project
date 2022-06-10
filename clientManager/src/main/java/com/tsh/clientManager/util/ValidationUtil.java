@@ -1,7 +1,18 @@
 package com.tsh.clientManager.util;
 
-public interface ValidationUtil {
+import javax.validation.Validation;
+import javax.validation.Validator;
 
-    <E> boolean isValid(E entity);
+public class ValidationUtil {
 
+    private final Validator validator;
+
+    public ValidationUtil() {
+        this.validator = Validation
+                .buildDefaultValidatorFactory().getValidator();
+    }
+
+    public <E> boolean isValid(E entity) {
+        return validator.validate(entity).isEmpty();
+    }
 }

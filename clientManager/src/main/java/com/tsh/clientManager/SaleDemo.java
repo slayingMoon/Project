@@ -24,7 +24,7 @@ public class SaleDemo implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        SaleClientDto clientDto = new SaleClientDto().setPhoneNumber("+359888777155");
+        SaleClientDto clientDto = new SaleClientDto().setPhoneNumber("+359888888888");
         SaleCardDto saleCardDto = new SaleCardDto().setId(1L);
         SaleSaleItemDto firstItem = new SaleSaleItemDto().setSaleType(SaleType.RESERVATION);
         SaleSaleItemDto secondItem = new SaleSaleItemDto().setSaleType(SaleType.RESERVATION);

@@ -1,12 +1,12 @@
 package com.tsh.clientManager.services;
 
+import com.tsh.clientManager.util.ValidationUtil;
 import org.springframework.stereotype.Service;
 
 import com.tsh.clientManager.model.dto.CardDto;
 import com.tsh.clientManager.model.entities.Card;
 import com.tsh.clientManager.model.enums.CardTiers;
 import com.tsh.clientManager.repository.CardRepository;
-import com.tsh.clientManager.util.ValidationUtil;
 
 @Service
 public class CardService {

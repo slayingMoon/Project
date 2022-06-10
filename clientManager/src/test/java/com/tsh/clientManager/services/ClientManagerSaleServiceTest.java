@@ -5,6 +5,7 @@ import com.tsh.clientManager.model.dto.SaleClientDto;
 import com.tsh.clientManager.model.dto.SaleDto;
 import com.tsh.clientManager.model.dto.SaleSaleItemDto;
 import com.tsh.clientManager.model.entities.Sale;
+import com.tsh.clientManager.model.enums.CardTiers;
 import com.tsh.clientManager.model.enums.SaleType;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,7 +24,6 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@TestPropertySource(locations = "classpath:application.properties")
 public class ClientManagerSaleServiceTest {
 
     @Autowired
@@ -37,7 +37,7 @@ public class ClientManagerSaleServiceTest {
     @Before
     public void setUp() {
         SaleClientDto clientDto = new SaleClientDto().setPhoneNumber("+359888777155");
-        SaleCardDto saleCardDto = new SaleCardDto().setId(1L);
+        SaleCardDto saleCardDto = new SaleCardDto().setId(1L).setTier(CardTiers.BRONZE);
         SaleSaleItemDto firstItem = new SaleSaleItemDto().setSaleType(SaleType.RESERVATION);
         SaleSaleItemDto secondItem = new SaleSaleItemDto().setSaleType(SaleType.RESERVATION);
         SaleSaleItemDto thirdItem = new SaleSaleItemDto().setSaleType(SaleType.DELIVERY);
