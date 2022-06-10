@@ -26,6 +26,8 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private ScheduledTripServiceImpl scheduledTripService;
 
     @Autowired
     private OpenFolderServiceImpl openFolderService;
@@ -34,7 +36,7 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
     public void reserve(Reservation reservation) {
 
 
-        reserveSeat(filteredFromTo(reservation.getScheduledTrip(), reservation.getFrom(), reservation.getTo()), reservation.getSeat());
+        reserveSeat(filteredFromTo(scheduledTripService.findTripByTransition(reservation.getFrom()),reservation.getFrom(), reservation.getTo()), reservation.getSeat());
         System.out.println(reservation);
         createOrUpdateEntity(reservation);
     }
@@ -61,12 +63,10 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
     @Transactional
     public Reservation activateReservation(OpenFolder openFolder, ScheduledTrip scheduledTrip, Seat seat) {
         Reservation reservation= new Reservation();
-        reservation.setFirstName(openFolder.getFirstName());
-        reservation.setLastName(openFolder.getLastName());
+       reservation.setPassenger(openFolder.getPassenger());
         reservation.setSeat(seat);
         reservation.setReservationStatus(CONFIRMED);
         reservation.setReservationDate(LocalDateTime.now());
-        reservation.setScheduledTrip(scheduledTrip);
         reservation.setFrom(findTransitionByTrip(scheduledTrip,openFolder.getDirection().getFrom()));
         reservation.setTo(findTransitionByTrip(scheduledTrip, openFolder.getDirection().getTo()));
         reservation.setReservationDate(openFolder.getReservationCreationDate());
@@ -119,9 +119,11 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
 
     private boolean hasRightDirection(Reservation reservation) {
-        ScheduledTrip scheduledTrip = reservation.getScheduledTrip();
+
+
         ScheduledTransition from = reservation.getFrom();
         ScheduledTransition to = reservation.getTo();
+        ScheduledTrip scheduledTrip = scheduledTripService.findTripByTransition(from);
         boolean right = true;
         List<ScheduledTransition> transitionList = new ArrayList<>(scheduledTrip.getScheduledTransitions());
         int fromIndex = transitionList.indexOf(from);

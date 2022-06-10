@@ -20,8 +20,7 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
 
     public OpenFolder deactivateReservation(Reservation reservation, TicketNo num) {
         OpenFolder openFolder=new OpenFolder();
-        openFolder.setFirstName(reservation.getFirstName());
-        openFolder.setLastName(reservation.getLastName());
+        openFolder.setPassenger(reservation.getPassenger());
         openFolder.setExpirationDate(LocalDateTime.now().plusYears(1));
         openFolder.setDirection(new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
         openFolder.setReservationCreationDate(reservation.getReservationDate());
@@ -34,6 +33,7 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
     {
         return openFolderRepository.findAll().stream()
                 .filter(e->e.getTicketNo().equals(ticketNo))
-                .findFirst().orElse(null);
+                .findFirst()
+                .orElse(null);
     }
 }

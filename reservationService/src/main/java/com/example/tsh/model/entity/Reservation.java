@@ -15,20 +15,13 @@ public class Reservation extends BaseEntity {
     @JoinColumn(nullable = false)
     private ScheduledTransition to;
 
-    @OneToOne(cascade = { CascadeType.MERGE})
-    private ScheduledTrip scheduledTrip;
+
 
     @OneToOne(cascade = { CascadeType.MERGE})
     private Seat seat;
 
-    @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
-
-
-
+   @OneToOne
+   private Passenger passenger;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -46,28 +39,9 @@ public class Reservation extends BaseEntity {
 
     }
 
-    public Reservation(ScheduledTransition from, ScheduledTransition to, ScheduledTrip scheduledTrip, Seat seat, String firstName,
-                       String lastName, ReservationStatus isConfirmed, LocalDateTime reservationDate) {
-        this.from = from;
-        this.to = to;
-        this.scheduledTrip = scheduledTrip;
-        this.seat = seat;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.reservationStatus = isConfirmed;
-        this.reservationDate = reservationDate;
-
-    }
 
 
 
-    public ScheduledTrip getScheduledTrip() {
-        return scheduledTrip;
-    }
-
-    public void setScheduledTrip(ScheduledTrip scheduledTrip) {
-        this.scheduledTrip = scheduledTrip;
-    }
 
     public Seat getSeat() {
         return seat;
@@ -111,32 +85,32 @@ public class Reservation extends BaseEntity {
         this.to = to;
     }
 
-
-    public String getFirstName() {
-        return firstName;
+    public Passenger getPassenger() {
+        return passenger;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
     }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
 
     @Override
     public String toString() {
         return "Reservation{" +
                 "from=" + from +
                 ", to=" + to +
-                ", seatNum=" + seat +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", seat=" + seat +
+                ", passenger=" + passenger +
+                ", reservationStatus=" + reservationStatus +
+                ", reservationDate=" + reservationDate +
                 '}';
+    }
+
+    public Reservation(ScheduledTransition from, ScheduledTransition to, Seat seat, Passenger passenger, ReservationStatus reservationStatus, LocalDateTime reservationDate) {
+        this.from = from;
+        this.to = to;
+        this.seat = seat;
+        this.passenger = passenger;
+        this.reservationStatus = reservationStatus;
+        this.reservationDate = reservationDate;
     }
 }
