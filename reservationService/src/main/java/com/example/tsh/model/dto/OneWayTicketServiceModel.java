@@ -1,7 +1,5 @@
 package com.example.tsh.model.dto;
 
-import com.example.tsh.model.enums.TicketStatus;
-
 public class OneWayTicketServiceModel extends BaseDto {
 
     private ReservationServiceModel goToReservation;

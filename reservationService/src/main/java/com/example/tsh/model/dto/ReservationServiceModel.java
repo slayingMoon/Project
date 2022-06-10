@@ -1,7 +1,6 @@
 package com.example.tsh.model.dto;
 
-import com.example.tsh.model.enums.ReservationConfirmed;
-import com.example.tsh.model.enums.ReservationPaid;
+import com.example.tsh.model.enums.ReservationStatus;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +21,7 @@ public class ReservationServiceModel extends BaseDto {
 
     private ReservationPaid isPaid;
 
-    private ReservationConfirmed isConfirmed;
+    private ReservationStatus isConfirmed;
 
     private LocalDateTime reservationDate;
 
@@ -35,7 +34,7 @@ public class ReservationServiceModel extends BaseDto {
 
 
 
-    public ReservationServiceModel(ScheduledTransitionServiceModel from, ScheduledTransitionServiceModel to, ScheduledTripServiceModel scheduledTrip, SeatServiceModel seat, String firstName, String lastName, ReservationPaid isPaid, ReservationConfirmed isConfirmed, LocalDateTime reservationDate) {
+    public ReservationServiceModel(ScheduledTransitionServiceModel from, ScheduledTransitionServiceModel to, ScheduledTripServiceModel scheduledTrip, SeatServiceModel seat, String firstName, String lastName, ReservationPaid isPaid, ReservationStatus isConfirmed, LocalDateTime reservationDate) {
         this.from = from;
         this.to = to;
         this.scheduledTrip = scheduledTrip;
@@ -103,11 +102,11 @@ public class ReservationServiceModel extends BaseDto {
         this.isPaid = isPaid;
     }
 
-    public ReservationConfirmed getIsConfirmed() {
+    public ReservationStatus getIsConfirmed() {
         return isConfirmed;
     }
 
-    public void setIsConfirmed(ReservationConfirmed isConfirmed) {
+    public void setIsConfirmed(ReservationStatus isConfirmed) {
         this.isConfirmed = isConfirmed;
     }
 
