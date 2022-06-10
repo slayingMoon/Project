@@ -10,5 +10,5 @@ public class PriceApplication {
 		SpringApplication.run(PriceApplication.class, args);
 	}
 
-	//nov komentar
+	//komentar 123
 }
