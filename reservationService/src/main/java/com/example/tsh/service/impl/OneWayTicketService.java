@@ -4,7 +4,6 @@ import com.example.tsh.dao.OneWayTicketRepository;
 
 import com.example.tsh.model.entity.*;
 
-import com.example.tsh.model.enums.TicketStatus;
 import com.example.tsh.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,16 +25,22 @@ public class OneWayTicketService extends GenericServiceImpl<OneWayTicket> {
     @Transactional
     public void moveReservationToOpenFolder(Reservation reservation, OneWayTicket oneWayTicket){
         oneWayTicket.setGoToReservation(null);
-        oneWayTicket.setStatus(TicketStatus.OPEN_TICKET);
         oneWayTicketRepository.save(oneWayTicket);
         openFolderService.deactivateReservation(reservation, oneWayTicket.getTicketNo());
     }
+
+    @Transactional
     public void removeReservationFromOpenFolder(OneWayTicket oneWayTicket, ScheduledTrip scheduledTrip, Seat seat){
        OpenFolder openFolder = openFolderService.findOpenFolderByTicketNo(oneWayTicket.getTicketNo());
         Reservation reservation = reservationService.activateReservation(openFolder, scheduledTrip, seat);
-        oneWayTicket.setStatus(TicketStatus.CONFIRMED);
+
         oneWayTicket.setGoToReservation(reservation);
         oneWayTicketRepository.save(oneWayTicket);
+    }
+    @Transactional
+    public void deleteTicket(OneWayTicket ticket){
+
+        oneWayTicketRepository.save(ticket);
     }
 
 }

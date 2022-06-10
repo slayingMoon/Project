@@ -2,7 +2,6 @@ package com.example.tsh.service.impl;
 
 import com.example.tsh.dao.ReservationRepository;
 import com.example.tsh.model.entity.*;
-import com.example.tsh.model.enums.TicketStatus;
 import com.example.tsh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,9 +14,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.IntStream;
 
-import static com.example.tsh.model.enums.ReservationConfirmed.CONFIRMED;
-import static com.example.tsh.model.enums.ReservationConfirmed.NOT_CONFIRMED;
-import static com.example.tsh.model.enums.ReservationPaid.PAID;
+import static com.example.tsh.model.enums.ReservationStatus.CONFIRMED;
+
 
 @Component
 public class ReservationServiceImpl extends GenericServiceImpl< Reservation> implements ReservationService {
@@ -44,11 +42,10 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
     @Override
     public OneWayTicket payOneWayReservation(Reservation reservation) {
 
-        reservation.setIsPaid(PAID);
-        reservation.setIsConfirmed(CONFIRMED);
+
+        reservation.setReservationStatus(CONFIRMED);
         OneWayTicket oneWayTicket = new OneWayTicket();
         oneWayTicket.setGoToReservation(reservation);
-        oneWayTicket.setStatus(TicketStatus.CONFIRMED);
 
         return oneWayTicket;
 
@@ -67,8 +64,7 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
         reservation.setFirstName(openFolder.getFirstName());
         reservation.setLastName(openFolder.getLastName());
         reservation.setSeat(seat);
-        reservation.setIsPaid(PAID);
-        reservation.setIsConfirmed(CONFIRMED);
+        reservation.setReservationStatus(CONFIRMED);
         reservation.setReservationDate(LocalDateTime.now());
         reservation.setScheduledTrip(scheduledTrip);
         reservation.setFrom(findTransitionByTrip(scheduledTrip,openFolder.getDirection().getFrom()));

@@ -1,7 +1,6 @@
 package com.example.tsh;
 
 import com.example.tsh.model.entity.*;
-import com.example.tsh.model.enums.TicketStatus;
 import com.example.tsh.service.impl.OneWayTicketService;
 import com.example.tsh.service.impl.ReservationServiceImpl;
 import com.example.tsh.service.impl.ScheduledTripServiceImpl;
@@ -31,7 +30,7 @@ public class TicketTest {
     @Test
     public void ticketCreation() {
         Reservation reservation = reservationService.findEntityById(1L);
-        oneWayTicketService.createOrUpdateEntity(new OneWayTicket(reservation, TicketStatus.CONFIRMED));
+        oneWayTicketService.createOrUpdateEntity(new OneWayTicket(reservation));
     }
     @Test
     public void deleteReservationPutIntoOpenFolderTest() {
@@ -46,5 +45,11 @@ public class TicketTest {
         Seat seat = seatService.findEntityById(6L);
        oneWayTicketService.removeReservationFromOpenFolder(oneWayTicket,scheduledTrip, seat);
 
+    }
+
+    @Test
+    public void testingTicketDeleting(){
+        OneWayTicket oneWayTicket = oneWayTicketService.findEntityById(1L);
+        oneWayTicketService.deleteTicket(oneWayTicket);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.tsh.model.entity;
 
-import com.example.tsh.model.enums.ReservationConfirmed;
-import com.example.tsh.model.enums.ReservationPaid;
+import com.example.tsh.model.enums.ReservationStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -29,13 +28,11 @@ public class Reservation extends BaseEntity {
     private String lastName;
 
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private ReservationPaid isPaid;
+
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private ReservationConfirmed isConfirmed;
+    private ReservationStatus reservationStatus;
 
 
 
@@ -50,15 +47,14 @@ public class Reservation extends BaseEntity {
     }
 
     public Reservation(ScheduledTransition from, ScheduledTransition to, ScheduledTrip scheduledTrip, Seat seat, String firstName,
-                       String lastName, ReservationPaid isPaid, ReservationConfirmed isConfirmed, LocalDateTime reservationDate) {
+                       String lastName, ReservationStatus isConfirmed, LocalDateTime reservationDate) {
         this.from = from;
         this.to = to;
         this.scheduledTrip = scheduledTrip;
         this.seat = seat;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.isPaid = isPaid;
-        this.isConfirmed = isConfirmed;
+        this.reservationStatus = isConfirmed;
         this.reservationDate = reservationDate;
 
     }
@@ -81,20 +77,14 @@ public class Reservation extends BaseEntity {
         this.seat = seat;
     }
 
-    public ReservationPaid getIsPaid() {
-        return isPaid;
+
+
+    public ReservationStatus getReservationStatus() {
+        return reservationStatus;
     }
 
-    public void setIsPaid(ReservationPaid isPaid) {
-        this.isPaid = isPaid;
-    }
-
-    public ReservationConfirmed getIsConfirmed() {
-        return isConfirmed;
-    }
-
-    public void setIsConfirmed(ReservationConfirmed isConfirmed) {
-        this.isConfirmed = isConfirmed;
+    public void setReservationStatus(ReservationStatus reservationStatus) {
+        this.reservationStatus = reservationStatus;
     }
 
     public LocalDateTime getReservationDate() {

@@ -1,6 +1,7 @@
 package com.example.tsh.model.enums;
 
-public enum ReservationConfirmed {
+public enum ReservationStatus {
     CONFIRMED,
-    NOT_CONFIRMED
+    NEW,
+    DELETED
 }

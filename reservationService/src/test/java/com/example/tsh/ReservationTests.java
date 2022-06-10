@@ -1,10 +1,10 @@
 package com.example.tsh;
 
-import static com.example.tsh.model.enums.ReservationPaid.PAID;
+
 
 import com.example.tsh.model.entity.*;
 import com.example.tsh.model.enums.Country;
-import com.example.tsh.model.enums.ReservationConfirmed;
+import com.example.tsh.model.enums.ReservationStatus;
 
 
 import com.example.tsh.service.impl.OpenFolderServiceImpl;
@@ -71,7 +71,7 @@ public class ReservationTests {
     public void reservationCreationTest() {
         ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
         for (int i = 0; i < 4; i++ ) {
-            reservationService.createOrUpdateEntity(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), scheduledTrip, seatService.findEntityById(5L), "Has", "Mokarov", PAID, ReservationConfirmed.NOT_CONFIRMED, LocalDateTime.now()));
+            reservationService.createOrUpdateEntity(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), scheduledTrip, seatService.findEntityById(5L), "Has", "Mokarov", ReservationStatus.NEW, LocalDateTime.now()));
         }
         }
 
