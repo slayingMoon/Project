@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6ecf5ff-ce01-4700-88a5-2f7216ea84da" name="Default Changelist" comment="" />
+    <list default="true" id="e6ecf5ff-ce01-4700-88a5-2f7216ea84da" name="Default Changelist" comment="test commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,8 +119,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ClientManagerSaleServiceTest" />
-        <item itemvalue="Application.ClientManagerApplication" />
         <item itemvalue="JUnit.ClientRepositoryIntegrationTest" />
+        <item itemvalue="Application.ClientManagerApplication" />
         <item itemvalue="JUnit.ClientRepositoryIntegrationTest.whenFindByPhoneNumberThenReturnClient" />
       </list>
     </recent_temporary>
