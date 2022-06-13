@@ -29,7 +29,7 @@ public class TicketTest {
     private ScheduledTripServiceImpl scheduledTripService;
     @Test
     public void ticketCreation() {
-        Reservation reservation = reservationService.findEntityById(1L);
+        Reservation reservation = reservationService.findEntityById(2L);
         oneWayTicketService.createOrUpdateEntity(new OneWayTicket(reservation));
     }
     @Test
@@ -47,9 +47,5 @@ public class TicketTest {
 
     }
 
-    @Test
-    public void testingTicketDeleting(){
-        OneWayTicket oneWayTicket = oneWayTicketService.findEntityById(1L);
-        oneWayTicketService.deleteTicket(oneWayTicket);
-    }
+
 }

@@ -19,7 +19,6 @@ public class ReservationServiceModel extends BaseDto {
 
     private String lastName;
 
-    private ReservationPaid isPaid;
 
     private ReservationStatus isConfirmed;
 
@@ -34,14 +33,14 @@ public class ReservationServiceModel extends BaseDto {
 
 
 
-    public ReservationServiceModel(ScheduledTransitionServiceModel from, ScheduledTransitionServiceModel to, ScheduledTripServiceModel scheduledTrip, SeatServiceModel seat, String firstName, String lastName, ReservationPaid isPaid, ReservationStatus isConfirmed, LocalDateTime reservationDate) {
+    public ReservationServiceModel(ScheduledTransitionServiceModel from, ScheduledTransitionServiceModel to, ScheduledTripServiceModel scheduledTrip, SeatServiceModel seat, String firstName, String lastName, ReservationStatus isConfirmed, LocalDateTime reservationDate) {
         this.from = from;
         this.to = to;
         this.scheduledTrip = scheduledTrip;
         this.seat = seat;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.isPaid = isPaid;
+
         this.isConfirmed = isConfirmed;
         this.reservationDate = reservationDate;
     }
@@ -94,13 +93,7 @@ public class ReservationServiceModel extends BaseDto {
         this.lastName = lastName;
     }
 
-    public ReservationPaid getIsPaid() {
-        return isPaid;
-    }
 
-    public void setIsPaid(ReservationPaid isPaid) {
-        this.isPaid = isPaid;
-    }
 
     public ReservationStatus getIsConfirmed() {
         return isConfirmed;

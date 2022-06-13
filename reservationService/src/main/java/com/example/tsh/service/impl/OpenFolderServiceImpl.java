@@ -16,24 +16,35 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
       @Autowired
       private ReservationServiceImpl reservationService;
       @Autowired
+      private ScheduledTransitionServiceImpl scheduledTransitionService;
+      @Autowired
       private OpenFolderRepository openFolderRepository;
 
-    public OpenFolder deactivateReservation(Reservation reservation, TicketNo num) {
+    private OpenFolder getOpenFolder(Reservation reservation, TicketNo num, Direction direction) {
+
         OpenFolder openFolder=new OpenFolder();
-        openFolder.setFirstName(reservation.getFirstName());
-        openFolder.setLastName(reservation.getLastName());
+        openFolder.setPassenger(reservation.getPassenger());
         openFolder.setExpirationDate(LocalDateTime.now().plusYears(1));
-        openFolder.setDirection(new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
+        openFolder.setDirection(direction);
         openFolder.setReservationCreationDate(reservation.getReservationDate());
         openFolder.setTicketNo(num);
+        return openFolder;
+
+
+    }
+    public OpenFolder deactivateReservation(Reservation reservation, TicketNo num){
+        OpenFolder openFolder = getOpenFolder(reservation, num,new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
+        scheduledTransitionService.returnSeat(scheduledTransitionService.filteredFromTo(reservation.getFrom(),reservation.getTo()),reservation.getSeat());
         reservationService.delete(reservation);
         return createOrUpdateEntity(openFolder);
-
     }
     public OpenFolder findOpenFolderByTicketNo(TicketNo ticketNo)
     {
         return openFolderRepository.findAll().stream()
                 .filter(e->e.getTicketNo().equals(ticketNo))
-                .findFirst().orElse(null);
+                .findFirst()
+                .orElse(null);
     }
+
+
 }

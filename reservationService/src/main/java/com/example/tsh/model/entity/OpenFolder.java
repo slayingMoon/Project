@@ -10,12 +10,9 @@ public class OpenFolder extends BaseEntity{
     @JoinColumn(nullable = false)
     private Direction direction;
 
-    @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
-
+    @OneToOne(cascade = { CascadeType.MERGE})
+    @JoinColumn(nullable = false)
+    private Passenger passenger;
     @Column(nullable = false)
     private LocalDateTime expirationDate;
     @Column(nullable = false)
@@ -40,20 +37,12 @@ public class OpenFolder extends BaseEntity{
         this.direction = direction;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Passenger getPassenger() {
+        return passenger;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
     }
 
     public LocalDateTime getExpirationDate() {
@@ -71,5 +60,6 @@ public class OpenFolder extends BaseEntity{
     public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
+
 
 }

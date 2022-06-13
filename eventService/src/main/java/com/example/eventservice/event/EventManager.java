@@ -1,6 +1,5 @@
 package com.example.eventservice.event;
 
-import com.example.eventservice.InvokeService;
 import com.example.eventservice.event.annotation.EventClass;
 import com.example.eventservice.event.annotation.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.context.annotation.ClassPathScanningCandidateComponen
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
-
 import javax.annotation.PostConstruct;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -65,11 +63,9 @@ public class EventManager {
                     Class<?> declaringClass = eventHandler.getDeclaringClass();
                     eventHandler.setAccessible(true);
                     eventHandler.invoke(declaringClass.newInstance(), event);
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                } catch (InvocationTargetException e) {
-                    throw new RuntimeException(e);
-                } catch (InstantiationException e) {
+                } catch (IllegalAccessException |
+                         InvocationTargetException |
+                         InstantiationException e) {
                     throw new RuntimeException(e);
                 }
             });

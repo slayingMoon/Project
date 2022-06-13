@@ -8,7 +8,7 @@ public class OneWayTicket extends BaseEntity {
    @OneToOne(cascade = CascadeType.PERSIST)
    @JoinColumn(nullable = false,unique = true)
    private TicketNo ticketNo;
-    @OneToOne( cascade = CascadeType.ALL)
+    @OneToOne( cascade = CascadeType.MERGE)
     @JoinColumn(unique = true)
     private Reservation goToReservation;
 

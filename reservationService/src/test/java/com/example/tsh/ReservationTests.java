@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -65,13 +66,14 @@ public class ReservationTests {
         ScheduledTrip trip = new ScheduledTrip(new Bus(60, drivers), scheduledTransitionList);
         scheduledTripService.createOrUpdateEntity(trip);
 
+
     }
 
     @Test
     public void reservationCreationTest() {
         ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
-        for (int i = 0; i < 4; i++ ) {
-            reservationService.createOrUpdateEntity(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), scheduledTrip, seatService.findEntityById(5L), "Has", "Mokarov", ReservationStatus.NEW, LocalDateTime.now()));
+        for (int i = 0; i < 1; i++ ) {
+            reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(5L), new Passenger("Aanasrika","Petrova","Kartselska", 19+1, "08946734fs237", "an2ikas19311@abv.bfg"), ReservationStatus.NEW, LocalDateTime.now()));
         }
         }
 
