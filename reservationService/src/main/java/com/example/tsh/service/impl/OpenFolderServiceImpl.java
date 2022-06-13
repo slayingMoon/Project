@@ -16,15 +16,19 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
       @Autowired
       private ReservationServiceImpl reservationService;
       @Autowired
+      private ScheduledTransitionServiceImpl scheduledTransitionService;
+      @Autowired
       private OpenFolderRepository openFolderRepository;
 
     public OpenFolder deactivateReservation(Reservation reservation, TicketNo num) {
+
         OpenFolder openFolder=new OpenFolder();
         openFolder.setPassenger(reservation.getPassenger());
         openFolder.setExpirationDate(LocalDateTime.now().plusYears(1));
         openFolder.setDirection(new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
         openFolder.setReservationCreationDate(reservation.getReservationDate());
         openFolder.setTicketNo(num);
+        scheduledTransitionService.returnSeat(scheduledTransitionService.filteredFromTo(reservation.getFrom(),reservation.getTo()),reservation.getSeat());
         reservationService.delete(reservation);
         return createOrUpdateEntity(openFolder);
 
@@ -36,4 +40,14 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
                 .findFirst()
                 .orElse(null);
     }
+    private OpenFolder reverseReservationTransitions(Reservation reservation){
+        OpenFolder openFolder = new OpenFolder();
+
+        openFolder.setPassenger(reservation.getPassenger());
+        //openFol
+
+        return openFolder;
+
+    }
+
 }
