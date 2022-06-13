@@ -20,6 +20,7 @@ public class ReservationServiceModel extends BaseDto {
     private String lastName;
 
 
+
     private ReservationStatus isConfirmed;
 
     private LocalDateTime reservationDate;
@@ -40,7 +41,6 @@ public class ReservationServiceModel extends BaseDto {
         this.seat = seat;
         this.firstName = firstName;
         this.lastName = lastName;
-
         this.isConfirmed = isConfirmed;
         this.reservationDate = reservationDate;
     }

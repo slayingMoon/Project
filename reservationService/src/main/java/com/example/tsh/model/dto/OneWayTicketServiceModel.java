@@ -4,6 +4,7 @@ public class OneWayTicketServiceModel extends BaseDto {
 
     private ReservationServiceModel goToReservation;
 
+
     public ReservationServiceModel getGoToReservation() {
         return goToReservation;
     }
