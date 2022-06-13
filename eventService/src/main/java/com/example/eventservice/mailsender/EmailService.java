@@ -1,8 +1,8 @@
 package com.example.eventservice.mailsender;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
+import javax.mail.MessagingException;
 
 public interface EmailService {
-    void sendSimpleEmail(String to, String subject, String text);
+    void sendSimpleMessage(String to, String subject, String text);
+    void sendMessageWithAttachment(String to, String body, String subject, String attachment) throws MessagingException;
 }
