@@ -67,7 +67,7 @@ public class ScheduledTransitionServiceImpl extends GenericServiceImpl<Scheduled
     private List<Integer> getFreeSeats(List<ScheduledTransition> filteredFromTo, Integer busCapacity) {
 
         List<Integer> freeSeats = IntStream.rangeClosed(1, busCapacity).boxed().collect(Collectors.toList());
-        System.out.println();
+
         //  List<Integer> freeSeats = new LinkedList<>();
         // for (int i = 1; i <= busCapacity; i++) {
         //    freeSeats.add(i);

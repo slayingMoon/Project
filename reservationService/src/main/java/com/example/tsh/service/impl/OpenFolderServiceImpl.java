@@ -25,7 +25,6 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
         OpenFolder openFolder=new OpenFolder();
         openFolder.setPassenger(reservation.getPassenger());
         openFolder.setExpirationDate(LocalDateTime.now().plusYears(1));
-        //openFolder.setDirection(new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
         openFolder.setDirection(direction);
         openFolder.setReservationCreationDate(reservation.getReservationDate());
         openFolder.setTicketNo(num);
@@ -46,14 +45,6 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
                 .findFirst()
                 .orElse(null);
     }
-    private OpenFolder reverseReservationTransitions(Reservation reservation){
-        OpenFolder openFolder = new OpenFolder();
 
-        openFolder.setPassenger(reservation.getPassenger());
-        //openFol
-
-        return openFolder;
-
-    }
 
 }
