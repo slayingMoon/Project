@@ -4,6 +4,7 @@ import com.example.tsh.dao.GenericRepository;
 import com.example.tsh.model.entity.BaseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
 
 
 public  class GenericServiceImpl< E extends BaseEntity>  {
@@ -20,6 +21,7 @@ public  class GenericServiceImpl< E extends BaseEntity>  {
     }
 
 
+    @Transactional
     public E createOrUpdateEntity(E entity) {
        return repository.save(entity);
     }

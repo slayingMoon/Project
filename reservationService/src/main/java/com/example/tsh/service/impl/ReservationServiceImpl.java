@@ -38,6 +38,7 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
 
     @Override
+    @Transactional
     public void reserve(Reservation reservation) {
 
 
