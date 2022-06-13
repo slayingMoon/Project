@@ -1,11 +1,12 @@
 package com.example.eventservice;
 
-import com.example.eventservice.emailsender.EmailSenderService;
+import com.example.eventservice.mailsender.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import javax.mail.MessagingException;
 
@@ -13,17 +14,17 @@ import javax.mail.MessagingException;
 public class EventServiceApplication {
 
     @Autowired
-    private EmailSenderService service;
+    private EmailServiceImpl service;
 
     public static void main(String[] args) {
         SpringApplication.run(EventServiceApplication.class, args);
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    public void triggerMail() throws MessagingException {
-        service.sendSimpleEmail("ourkurisrock@gmail.com",
-                "This is Email Body with Attachment...",
-                "This email has attachment");
+    public void triggerMail() {
+        service.sendSimpleEmail(
+                "ourkurisrock@gmail.com",
+                "test",
+                "test");
     }
-
 }
