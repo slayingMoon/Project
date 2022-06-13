@@ -1,6 +1,6 @@
 package com.example.tsh.domain.entity;
 
-import com.example.tsh.enumeration.TransitionProperties;
+import com.example.tsh.enumeration.TransitionProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,9 +10,9 @@ import javax.persistence.Enumerated;
 public class TransitionOptions extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
-    private TransitionProperties transitionProperties;
+    private TransitionProperty transitionProperty;
 
-    public TransitionProperties getTransitionProperties() {
-        return transitionProperties;
+    public TransitionProperty getTransitionProperty() {
+        return transitionProperty;
     }
 }

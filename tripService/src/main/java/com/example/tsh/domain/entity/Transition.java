@@ -24,10 +24,10 @@ public class Transition extends BaseEntity {
                     referencedColumnName = "id"
             )
     )
-    List<TransitionOptions> transitionDetails;
+    List<TransitionOptions> transitionOptions;
 
-    public List<TransitionOptions> getTransitionDetails() {
-        return transitionDetails;
+    public List<TransitionOptions> getTransitionOptions() {
+        return transitionOptions;
     }
 
     public City getCity() {

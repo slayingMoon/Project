@@ -1,43 +1,57 @@
 package com.example.tsh.service;
 
+import com.example.tsh.TshApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 public class TripServiceTest {
+    private final Logger logger = Logger.getLogger(TshApplication.class.getName());
 
     @Autowired
     private TripService tripService;
 
     @Test
-    void findAllStartingCitiesTest() {
-        List<String> filteredTrips = tripService.findAllStartingCities();
-        filteredTrips.forEach(System.out::println);
+    void citiesFromTest() {
+        List<String> filteredTrips = tripService.citiesFrom();
+        List<String> expectedTrips = Arrays.asList("Sofia");
+        filteredTrips.forEach(logger::info);
+        assertThat(filteredTrips).isEqualTo(expectedTrips);
+
     }
 
     @Test
-    void findAllPossibleDestinationsTest() {
-        List<String> filteredTrips = tripService.findAllPossibleDestinations("Sofia");
-        filteredTrips.forEach(System.out::println);
+    void citiesTo() {
+        List<String> filteredTrips = tripService.citiesTo("Sofia");
+        List<String> expectedTrips = Arrays.asList("Ihtiman", "Kostenetz");
+        filteredTrips.forEach(logger::info);
+        assertThat(filteredTrips).isEqualTo(expectedTrips);
     }
 
     @Test
     void findAllBuyOnlineCitiesTest() {
         List<String> filteredTrips = tripService.findAllBuyOnlineCities();
-        filteredTrips.forEach(System.out::println);
+        filteredTrips.forEach(logger::info);
     }
 
     @Test
     void findTripsByStartAndDestinationCitiesTest() {
         List<String> filteredTrips = tripService.findTripsByStartAndDestinationCities("Sofia", "Ihtiman");
-        filteredTrips.forEach(System.out::println);
+        List<String> expectedTrips = Arrays.asList("Sofia-Plovdiv");
+        filteredTrips.forEach(logger::info);
+        assertThat(filteredTrips).isEqualTo(expectedTrips);
     }
     
     @Test
     void generateTripDatesForNextYear() {
         List<String> dates = tripService.generateTripDates(2l);
-        dates.forEach(System.out::println);
+        dates.forEach(logger::info);
     }
 }
