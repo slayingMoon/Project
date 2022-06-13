@@ -52,6 +52,17 @@ public class Price extends BaseEntity{
         return amount;
     }
 
+    @Override
+    public String toString() {
+        return "Price: " +
+                "amount=" + amount +
+                ", startCity=" + startCity +
+                ", endCity=" + endCity +
+                ", isOnline=" + isOnline +
+                ", isDoubleWay=" + isDoubleWay +
+                '}';
+    }
+
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
