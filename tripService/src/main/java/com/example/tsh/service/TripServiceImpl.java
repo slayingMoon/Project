@@ -1,8 +1,9 @@
 package com.example.tsh.service;
 
 import com.example.tsh.domain.entity.Trip;
-import com.example.tsh.enumeration.DaysOfWeek;
-import com.example.tsh.enumeration.TransitionProperties;
+import com.example.tsh.enumeration.DayOfWeek;
+import com.example.tsh.enumeration.TransitionProperty;
+import com.example.tsh.filter.CitiesFromInterceptor;
 import com.example.tsh.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,52 +14,54 @@ import java.util.stream.Collectors;
 
 @Service
 public class TripServiceImpl implements TripService {
-	private static final int DAYS_IN_WEEK = DaysOfWeek.values().length;
+	private static final int DAYS_IN_WEEK = DayOfWeek.values().length;
 
     @Autowired
     private TripRepository tripRepository;
 
 
-    @Override
-    public List<Trip> findAll() {
+
+    private List<Trip> findAll() {
         return this.tripRepository.findAll();
     }
 
     @Override
-    public List<String> findAllStartingCities() {
+    public List<String> citiesFrom() {
         List<Trip> allTrips = this.findAll();
-        return allTrips.stream()
-                .flatMap(t -> t.getTransitions().stream())
-                .filter(transition -> transition.getTransitionDetails().stream()
-                        .anyMatch(detail -> detail.getTransitionProperties() ==
-                                            TransitionProperties.GET_ON))
+
+        List<String> processed = allTrips.stream()
+                .map(CitiesFromInterceptor.getInstance()::process)
+
+                .flatMap(trip -> trip.getTransitions().stream())
                 .map(transition -> transition.getCity().getName())
                 .distinct()
                 .collect(Collectors.toList());
-    }
 
+        return processed;
+    }
     @Override
-    public List<String> findAllPossibleDestinations(String startCity) {
+    public List<String> citiesTo(String startCity) {
         List<Trip> allTrips = this.findAll();
+        CitiesFromInterceptor filter = new CitiesFromInterceptor();
         Set<String> allPossibleDestinationCities = new LinkedHashSet<>();
         allTrips.forEach(trip -> {
             AtomicBoolean isStartCityPassed = new AtomicBoolean(false);
             trip.getTransitions()
-                    .forEach(transition -> {
-                        if (transition.getCity().getName().equals(startCity) &&
-                                transition.getTransitionDetails().stream()
-                                .anyMatch(detail -> detail.getTransitionProperties() ==
-                                TransitionProperties.GET_ON)) {
-                            isStartCityPassed.set(true);
-                        }
+                .forEach(transition -> {
+                    if (transition.getCity().getName().equals(startCity) &&
+                            transition.getTransitionOptions().stream()
+                            .anyMatch(detail -> detail.getTransitionProperty() ==
+                            TransitionProperty.GET_ON)) {
+                        isStartCityPassed.set(true);
+                    }
 
-                        if (transition.getTransitionDetails().stream()
-                                .anyMatch(detail -> detail.getTransitionProperties() ==
-                                        TransitionProperties.GET_OFF) && isStartCityPassed.get()) {
-                            allPossibleDestinationCities.add(transition.getCity().getName());
-                        }
+                    if (transition.getTransitionOptions().stream()
+                            .anyMatch(detail -> detail.getTransitionProperty() ==
+                                    TransitionProperty.GET_OFF) && isStartCityPassed.get()) {
+                        allPossibleDestinationCities.add(transition.getCity().getName());
+                    }
 
-                    });
+                });
         });
 
         return new ArrayList<>(allPossibleDestinationCities);
@@ -69,9 +72,9 @@ public class TripServiceImpl implements TripService {
         List<Trip> allTrips = this.findAll();
         return allTrips.stream()
                 .flatMap(t -> t.getTransitions().stream())
-                .filter(transition -> transition.getTransitionDetails().stream()
-                        .anyMatch(detail -> detail.getTransitionProperties() ==
-                                TransitionProperties.ONLINE))
+                .filter(transition -> transition.getTransitionOptions().stream()
+                        .anyMatch(detail -> detail.getTransitionProperty() ==
+                                TransitionProperty.ONLINE))
                 .map(transition -> transition.getCity().getName())
                 .distinct()
                 .collect(Collectors.toList());
@@ -84,20 +87,20 @@ public class TripServiceImpl implements TripService {
         allTrips.forEach(trip -> {
             AtomicBoolean isStartCityPassed = new AtomicBoolean(false);
             trip.getTransitions()
-                    .forEach(transition -> {
-                        if (transition.getCity().getName().equals(startCity) && transition.getTransitionDetails().stream()
-                                .anyMatch(detail -> detail.getTransitionProperties() ==
-                                        TransitionProperties.GET_ON)) {
+                .forEach(transition -> {
+                    if (transition.getCity().getName().equals(startCity) && transition.getTransitionOptions().stream()
+                            .anyMatch(detail -> detail.getTransitionProperty() ==
+                                    TransitionProperty.GET_ON)) {
                             isStartCityPassed.set(true);
-                        }
+                    }
 
-                        if (transition.getTransitionDetails().stream()
-                                .anyMatch(detail -> detail.getTransitionProperties() ==
-                                        TransitionProperties.GET_OFF && transition.getCity().getName().equals(endCity)) && isStartCityPassed.get()) {
-                            allPossibleTrips.add(trip.getDescription());
-                        }
+                    if (transition.getTransitionOptions().stream()
+                            .anyMatch(detail -> detail.getTransitionProperty() ==
+                                    TransitionProperty.GET_OFF && transition.getCity().getName().equals(endCity)) && isStartCityPassed.get()) {
+                        allPossibleTrips.add(trip.getDescription());
+                    }
 
-                    });
+                });
         });
         return allPossibleTrips;
     }
@@ -106,9 +109,9 @@ public class TripServiceImpl implements TripService {
 	public List<String> generateTripDates(Long tripID) {
 		Trip trip = tripRepository.findById(tripID).get();
 		LocalDate startDate = LocalDate.now();
-		int tripDayAsNum = trip.getDaysOfWeek().ordinal();
+		int tripDayAsNum = trip.getDayOfWeek().ordinal();
 		int currentDayAsNum = startDate.getDayOfWeek().ordinal();
-		int difference = tripDayAsNum - currentDayAsNum >= 0 ? 
+		int difference = tripDayAsNum - currentDayAsNum >= 0 ?
 				tripDayAsNum - currentDayAsNum :
 					tripDayAsNum - currentDayAsNum + DAYS_IN_WEEK;
 		startDate = startDate.plusDays(difference);

@@ -1,6 +1,6 @@
 package com.example.tsh.enumeration;
 
-public enum DaysOfWeek {
+public enum DayOfWeek {
     MONDAY,
     TUESDAY,
     WEDNESDAY,

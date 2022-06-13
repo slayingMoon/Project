@@ -37,11 +37,7 @@ public class OneWayTicketService extends GenericServiceImpl<OneWayTicket> {
         oneWayTicket.setGoToReservation(reservation);
         oneWayTicketRepository.save(oneWayTicket);
     }
-    @Transactional
-    public void deleteTicket(OneWayTicket ticket){
 
-        oneWayTicketRepository.save(ticket);
-    }
 
 
 }

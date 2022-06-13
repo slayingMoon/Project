@@ -1,21 +1,31 @@
 package com.example.tsh.domain.entity;
 
-import com.example.tsh.enumeration.DaysOfWeek;
-
+import com.example.tsh.enumeration.DayOfWeek;
 import javax.persistence.*;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "base_trip_id")
-public class Trip extends BaseTrip {
+public class Trip extends BaseTrip implements Cloneable {
 
     @Enumerated(EnumType.STRING)
-    private DaysOfWeek daysOfWeek;
+    private DayOfWeek dayOfWeek;
 
-    public DaysOfWeek getDaysOfWeek() {
-        return daysOfWeek;
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
     }
 
-    public void setDaysOfWeek(DaysOfWeek daysOfWeek) {
-        this.daysOfWeek = daysOfWeek;
+    public void setDaysOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    @Override
+    public Trip clone() {
+        try {
+            Trip clone = (Trip) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

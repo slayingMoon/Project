@@ -72,9 +72,8 @@ public class ReservationTests {
     @Test
     public void reservationCreationTest() {
         ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
-        Passenger passenger=new Passenger("Anika","Petrova","Kartselska", 19+1, "0894673436", "anika1931@abv.bg");
-        for (int i = 0; i < 4; i++ ) {
-            reservationService.createOrUpdateEntity(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(5L), passenger, ReservationStatus.NEW, LocalDateTime.now()));
+        for (int i = 0; i < 1; i++ ) {
+            reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(5L), new Passenger("Aanasrika","Petrova","Kartselska", 19+1, "08946734fs237", "an2ikas19311@abv.bfg"), ReservationStatus.NEW, LocalDateTime.now()));
         }
         }
 

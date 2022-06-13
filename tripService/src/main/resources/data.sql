@@ -10,11 +10,11 @@ insert into city (name) values ('Yambol');
 insert into city (name) values ('Sliven');
 insert into city (name) values ('Burgas');
 
-insert into base_trip (departure_time, description) values ('09:00:00', 'Sofia-PLovdiv');
+insert into base_trip (departure_time, description) values ('09:00:00', 'Sofia-Plovdiv');
 insert into base_trip (departure_time, description) values ('08:00:00', 'Plovdiv-Burgas');
 
-insert into trip (days_of_week, base_trip_id) values ('WEDNESDAY', 1);
-insert into trip (days_of_week, base_trip_id) values ('FRIDAY', 2);
+insert into trip (day_of_week, base_trip_id) values ('WEDNESDAY', 1);
+insert into trip (day_of_week, base_trip_id) values ('FRIDAY', 2);
 
 insert into transition (travel_duration, city_id, trip_id) values (0,1,1);
 insert into transition (travel_duration, city_id, trip_id) values (1,2,1);
@@ -31,9 +31,9 @@ insert into transition (travel_duration, city_id, trip_id) values (3,8,2);
 insert into transition (travel_duration, city_id, trip_id) values (5,9,2);
 insert into transition (travel_duration, city_id, trip_id) values (6,10,2);
 
-insert into transition_options (transition_properties) values ('GET_ON');
-insert into transition_options (transition_properties) values ('GET_OFF');
-insert into transition_options (transition_properties) values ('ONLINE');
+insert into transition_options (transition_property) values ('GET_ON');
+insert into transition_options (transition_property) values ('GET_OFF');
+insert into transition_options (transition_property) values ('ONLINE');
 
 insert into transition_options_mapping (transition_id, options_id) values (1,1);
 insert into transition_options_mapping (transition_id, options_id) values (2,2);

@@ -10,7 +10,8 @@ public class OpenFolder extends BaseEntity{
     @JoinColumn(nullable = false)
     private Direction direction;
 
-    @OneToOne
+    @OneToOne(cascade = { CascadeType.MERGE})
+    @JoinColumn(nullable = false)
     private Passenger passenger;
     @Column(nullable = false)
     private LocalDateTime expirationDate;

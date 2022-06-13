@@ -18,7 +18,8 @@ public class Reservation extends BaseEntity {
     @OneToOne(cascade = { CascadeType.MERGE})
     private Seat seat;
 
-   @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(nullable = false)
    private Passenger passenger;
 
     @Column(nullable = false)
