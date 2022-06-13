@@ -13,7 +13,8 @@ import javax.mail.MessagingException;
 @Component
 public class TestHandler {
 
-
+    @Autowired
+    private EmailServiceImpl service;
 
     @EventHandler
     public void TestEvent(TestEvent testEvent) {
@@ -23,13 +24,14 @@ public class TestHandler {
     @EventHandler
     public void TestEvent2(TestEvent testEvent) {
         System.out.println(testEvent.getTest() + " chushkopek");
-
     }
 
-
-
-
-
-
+    @EventListener(ApplicationReadyEvent.class)
+    public void testEvent3() {
+        service.sendSimpleEmail(
+                "ourkurisrock@gmail.com",
+                "test",
+                "test");
+    }
 
 }

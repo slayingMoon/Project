@@ -13,18 +13,11 @@ import javax.mail.MessagingException;
 @SpringBootApplication
 public class EventServiceApplication {
 
-    @Autowired
-    private EmailServiceImpl service;
+
 
     public static void main(String[] args) {
         SpringApplication.run(EventServiceApplication.class, args);
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void triggerMail() {
-        service.sendSimpleEmail(
-                "ourkurisrock@gmail.com",
-                "test",
-                "test");
-    }
+
 }
