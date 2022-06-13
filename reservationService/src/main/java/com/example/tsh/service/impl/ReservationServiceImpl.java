@@ -26,7 +26,7 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
     @Autowired
     private ScheduledTransitionServiceImpl scheduledTransitionService;
-
+ //
     @Autowired
     private ReservationRepository reservationRepository;
     @Autowired
@@ -55,7 +55,7 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
         OneWayTicket oneWayTicket = new OneWayTicket();
         oneWayTicket.setGoToReservation(reservation);
 
-        return oneWayTicket;
+        return oneWayTicket; //
 
     }
 

@@ -47,9 +47,5 @@ public class TicketTest {
 
     }
 
-    @Test
-    public void testingTicketDeleting(){
-        OneWayTicket oneWayTicket = oneWayTicketService.findEntityById(1L);
-        oneWayTicketService.deleteTicket(oneWayTicket);
-    }
+
 }
