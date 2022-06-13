@@ -7,7 +7,9 @@ public interface TripInterceptor {
     /*
     TODO: write doc
      */
-    Trip process(Trip trip);
+    Trip process(Trip trip, String... args);
+
+
 
 
 }

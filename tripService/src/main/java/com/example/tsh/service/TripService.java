@@ -1,12 +1,13 @@
 package com.example.tsh.service;
 
 import java.util.List;
+import java.util.Set;
 
 public interface TripService {
 
-    List<String> citiesFrom();
+    Set<String> citiesFrom();
 
-    List<String> citiesTo(String startCity);
+    Set<String> citiesTo(String startCity);
 
     List<String> findAllBuyOnlineCities();
 

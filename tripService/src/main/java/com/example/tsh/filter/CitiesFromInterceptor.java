@@ -20,7 +20,7 @@ public class CitiesFromInterceptor implements TripInterceptor {
 
 
     @Override
-    public Trip process(Trip trip) {
+    public Trip process(Trip trip, String... args) {
 
         List<Transition> filteredTransitions = trip.getTransitions().stream()
                 .filter(canGetOn)

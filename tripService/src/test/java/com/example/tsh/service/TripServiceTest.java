@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 import static org.assertj.core.api.Assertions.*;
 
@@ -20,17 +18,17 @@ public class TripServiceTest {
 
     @Test
     void citiesFromTest() {
-        List<String> filteredTrips = tripService.citiesFrom();
-        List<String> expectedTrips = Arrays.asList("Sofia");
+        Set<String> filteredTrips = tripService.citiesFrom();
+        Set<String> expectedTrips = new HashSet<>(Arrays.asList("Sofia"));
         filteredTrips.forEach(logger::info);
         assertThat(filteredTrips).isEqualTo(expectedTrips);
 
     }
 
     @Test
-    void citiesTo() {
-        List<String> filteredTrips = tripService.citiesTo("Sofia");
-        List<String> expectedTrips = Arrays.asList("Ihtiman", "Kostenetz");
+    void citiesToTest() {
+        Set<String> filteredTrips = tripService.citiesTo("Sofia");
+        Set<String> expectedTrips = new HashSet<>(Arrays.asList("Ihtiman", "Kostenetz"));
         filteredTrips.forEach(logger::info);
         assertThat(filteredTrips).isEqualTo(expectedTrips);
     }
