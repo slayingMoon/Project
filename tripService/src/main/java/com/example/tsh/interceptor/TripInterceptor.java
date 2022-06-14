@@ -1,4 +1,4 @@
-package com.example.tsh.filter;
+package com.example.tsh.interceptor;
 
 import com.example.tsh.domain.entity.Trip;
 

@@ -1,11 +1,12 @@
 package com.example.tsh.service;
 
-import com.example.tsh.domain.entity.BaseTrip;
 import com.example.tsh.domain.entity.Trip;
 import com.example.tsh.enumeration.DayOfWeek;
 import com.example.tsh.enumeration.TransitionProperty;
-import com.example.tsh.filter.CitiesFromInterceptor;
-import com.example.tsh.filter.FilterTripByCityInterceptor;
+import com.example.tsh.interceptor.CitiesFromInterceptor;
+import com.example.tsh.interceptor.CitiesToInterceptor;
+import com.example.tsh.interceptor.RemoveTransitionsBeforeInterceptor;
+import com.example.tsh.interceptor.FilterTripByCityInterceptor;
 import com.example.tsh.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +48,11 @@ public class TripServiceImpl implements TripService {
         Set<String> processed = allTrips.stream()
                 .map(trip -> FilterTripByCityInterceptor.getInstance().process(trip, startCity))
                 .filter(Objects::nonNull)
+                .map(trip -> RemoveTransitionsBeforeInterceptor.getInstance().process(trip, startCity))
+                .map(CitiesToInterceptor.getInstance()::process)
 
-                .map(BaseTrip::getDescription)
+                .flatMap(trip -> trip.getTransitions().stream())
+                .map(transition -> transition.getCity().getName())
                 .collect(Collectors.toSet());
 
 

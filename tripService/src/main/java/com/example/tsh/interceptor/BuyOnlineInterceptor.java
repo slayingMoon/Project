@@ -1,4 +1,4 @@
-package com.example.tsh.filter;
+package com.example.tsh.interceptor;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -8,15 +8,15 @@ import com.example.tsh.domain.entity.Transition;
 import com.example.tsh.domain.entity.Trip;
 import com.example.tsh.enumeration.TransitionProperty;
 
-public class CanBuyOnlineInterceptor implements TripInterceptor{
+public class BuyOnlineInterceptor implements TripInterceptor{
 
 	private final Predicate<Transition> canBuyOnline = (transition) ->
     transition.getTransitionOptions().stream()
                 .filter(x -> x.getTransitionProperty() == TransitionProperty.ONLINE)
     .count() == 1;
 	
-    public static CanBuyOnlineInterceptor getInstance() {
-        return new CanBuyOnlineInterceptor();
+    public static BuyOnlineInterceptor getInstance() {
+        return new BuyOnlineInterceptor();
     }
 
 	

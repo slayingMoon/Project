@@ -1,4 +1,4 @@
-package com.example.tsh.filter;
+package com.example.tsh.interceptor;
 
 import com.example.tsh.domain.entity.Trip;
 import java.util.function.BiPredicate;
@@ -16,6 +16,7 @@ public class FilterTripByCityInterceptor implements TripInterceptor {
 
     @Override
     public Trip process(Trip trip, String... args) {
-        return this.hasCity.test(trip, args[0]) ? trip : null;
+        String startCity = args[0];
+        return this.hasCity.test(trip, startCity) ? trip : null;
     }
 }

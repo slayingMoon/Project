@@ -33,4 +33,6 @@ public class Transition extends BaseEntity {
     public City getCity() {
         return city;
     }
+
+
 }
