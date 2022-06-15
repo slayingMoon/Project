@@ -1,10 +1,7 @@
 package com.example.tsh;
 
 import com.example.tsh.model.entity.*;
-import com.example.tsh.service.impl.OneWayTicketService;
-import com.example.tsh.service.impl.ReservationServiceImpl;
-import com.example.tsh.service.impl.ScheduledTripServiceImpl;
-import com.example.tsh.service.impl.SeatServiceImpl;
+import com.example.tsh.service.impl.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +24,17 @@ public class TicketTest {
 
     @Autowired
     private ScheduledTripServiceImpl scheduledTripService;
+    @Autowired
+    private DoubleWayTicketServiceImpl doubleWayTicketService;
     @Test
     public void ticketCreation() {
-        Reservation reservation = reservationService.findEntityById(2L);
+        Reservation reservation = reservationService.findEntityById(6L);
         oneWayTicketService.createOrUpdateEntity(new OneWayTicket(reservation));
+    }
+    @Test
+    public void payOneWayTicket(){
+        Reservation reservation = reservationService.findEntityById(8L);
+        reservationService.payOneWayReservation(reservation);
     }
     @Test
     public void deleteReservationPutIntoOpenFolderTest() {
@@ -45,6 +49,11 @@ public class TicketTest {
         Seat seat = seatService.findEntityById(6L);
        oneWayTicketService.removeReservationFromOpenFolder(oneWayTicket,scheduledTrip, seat);
 
+    }
+    @Test
+    public void payDoubleWayTicket(){
+        Reservation reservation = reservationService.findEntityById(5L);
+        reservationService.payDoubleWayReservation(reservation);
     }
 
 

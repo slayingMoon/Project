@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class OneWayTicket extends BaseEntity {
    @OneToOne(cascade = CascadeType.PERSIST)
    @JoinColumn(nullable = false,unique = true)
-   private TicketNo ticketNo;
+   private TicketNo ticketNo=new TicketNo();
     @OneToOne( cascade = CascadeType.MERGE)
     @JoinColumn(unique = true)
     private Reservation goToReservation;
@@ -44,7 +44,6 @@ public class OneWayTicket extends BaseEntity {
 
     public OneWayTicket(Reservation goToReservation) {
         this.goToReservation = goToReservation;
-        this.ticketNo = new TicketNo();
     }
 
     public OneWayTicket() {

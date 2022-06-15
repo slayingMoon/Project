@@ -6,6 +6,7 @@ import com.example.tsh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -20,13 +21,13 @@ import java.util.stream.IntStream;
 import static com.example.tsh.model.enums.ReservationStatus.CONFIRMED;
 
 
-@Component
-public class ReservationServiceImpl extends GenericServiceImpl< Reservation> implements ReservationService {
+@Service
+public class ReservationServiceImpl extends GenericServiceImpl<Reservation> implements ReservationService {
 
 
     @Autowired
     private ScheduledTransitionServiceImpl scheduledTransitionService;
- //
+    //
     @Autowired
     private ReservationRepository reservationRepository;
     @Autowired
@@ -34,7 +35,10 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
     @Autowired
     private OpenFolderServiceImpl openFolderService;
-
+    @Autowired
+    private OneWayTicketService oneWayTicketService;
+    @Autowired
+    private DoubleWayTicketServiceImpl doubleWayTicketService;
 
 
     @Override
@@ -43,31 +47,41 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
 
 
         scheduledTransitionService.reserveSeat(scheduledTransitionService.filteredFromTo(reservation.getFrom(), reservation.getTo()), reservation.getSeat());
-        System.out.println(reservation);
         createOrUpdateEntity(reservation);
     }
 
     @Override
+    @Transactional
     public OneWayTicket payOneWayReservation(Reservation reservation) {
-
 
         reservation.setReservationStatus(CONFIRMED);
         OneWayTicket oneWayTicket = new OneWayTicket();
         oneWayTicket.setGoToReservation(reservation);
+        oneWayTicketService.createOrUpdateEntity(oneWayTicket);
+        return oneWayTicket;
 
-        return oneWayTicket; //
+    }
 
+    @Transactional
+    public DoubleWayTicket payDoubleWayReservation(Reservation reservation) {
+        reservation.setReservationStatus(CONFIRMED);
+        DoubleWayTicket doubleWayTicket = new DoubleWayTicket();
+        doubleWayTicket.setGoToReservation(reservation);
+        doubleWayTicket.setReturnReservation(null);
+        DoubleWayTicket newTick = doubleWayTicketService.createOrUpdateEntity(doubleWayTicket);
+        openFolderService.getOpenFolderWithReversedDirections(reservation,newTick.getTicketNo());
+        return doubleWayTicket;
     }
 
     @Override
     @Transactional
     public Reservation activateReservation(OpenFolder openFolder, ScheduledTrip scheduledTrip, Seat seat) {
-        Reservation reservation= new Reservation();
-       reservation.setPassenger(openFolder.getPassenger());
+        Reservation reservation = new Reservation();
+        reservation.setPassenger(openFolder.getPassenger());
         reservation.setSeat(seat);
         reservation.setReservationStatus(CONFIRMED);
         reservation.setReservationDate(LocalDateTime.now());
-        reservation.setFrom(scheduledTransitionService.findTransitionByTrip(scheduledTrip,openFolder.getDirection().getFrom()));
+        reservation.setFrom(scheduledTransitionService.findTransitionByTrip(scheduledTrip, openFolder.getDirection().getFrom()));
         reservation.setTo(scheduledTransitionService.findTransitionByTrip(scheduledTrip, openFolder.getDirection().getTo()));
         reservation.setReservationDate(openFolder.getReservationCreationDate());
         //TODO validation
@@ -93,12 +107,6 @@ public class ReservationServiceImpl extends GenericServiceImpl< Reservation> imp
         }
         return right;
     }
-
-
-
-
-
-
 
 
 }

@@ -7,12 +7,13 @@ import javax.persistence.*;
 public class DoubleWayTicket extends OneWayTicket{
 
     @OneToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Reservation returnReservation;
 
     public Reservation getReturnReservation() {
         return returnReservation;
     }
+
 
     public void setReturnReservation(Reservation returnReservation) {
         this.returnReservation = returnReservation;
