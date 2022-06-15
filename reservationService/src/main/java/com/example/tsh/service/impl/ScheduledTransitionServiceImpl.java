@@ -17,27 +17,32 @@ import java.util.stream.IntStream;
 
 @Service
 @Transactional
-public class ScheduledTransitionServiceImpl extends GenericServiceImpl<ScheduledTransition>  {
+public class ScheduledTransitionServiceImpl extends GenericServiceImpl<ScheduledTransition> {
     @Autowired
     private ScheduledTripServiceImpl scheduledTripService;
-    public void returnSeat(List<ScheduledTransition> filteredFromTo, Seat seat) {
+
+    public void returnSeat(ScheduledTransition from, ScheduledTransition to, Seat seat) {
+        List<ScheduledTransition> filteredFromTo = filteredFromTo(from, to);
         filteredFromTo
                 .forEach(e -> {
                             e.getSeats().remove(seat);
-                           createOrUpdateEntity(e);
+                            createOrUpdateEntity(e);
                         }
                 );
 
     }
-    public void reserveSeat(List<ScheduledTransition> filteredFromTo, Seat seat) {
+
+    public void reserveSeat(ScheduledTransition from, ScheduledTransition to, Seat seat) {
+        List<ScheduledTransition> filteredFromTo = filteredFromTo(from, to);
         filteredFromTo
                 .forEach(e -> {
                             e.getSeats().add(seat);
-                           createOrUpdateEntity(e);
+                            createOrUpdateEntity(e);
                         }
                 );
 
     }
+
     public ScheduledTransition findTransitionByTrip(ScheduledTrip trip, City transition) {
         return trip.getScheduledTransitions()
                 .stream()
@@ -46,8 +51,8 @@ public class ScheduledTransitionServiceImpl extends GenericServiceImpl<Scheduled
                 .orElse(null);
     }
 
-    public List<ScheduledTransition> filteredFromTo(ScheduledTransition from, ScheduledTransition to) {
-        ScheduledTrip trip=scheduledTripService.findTripByTransition(from);
+    private List<ScheduledTransition> filteredFromTo(ScheduledTransition from, ScheduledTransition to) {
+        ScheduledTrip trip = scheduledTripService.findTripByTransition(from);
         AtomicBoolean isBetween = new AtomicBoolean(false);
         List<ScheduledTransition> filteredTransitions = new ArrayList<>();
         trip.getScheduledTransitions()
@@ -64,6 +69,7 @@ public class ScheduledTransitionServiceImpl extends GenericServiceImpl<Scheduled
                 });
         return filteredTransitions;
     }
+
     private List<Integer> getFreeSeats(List<ScheduledTransition> filteredFromTo, Integer busCapacity) {
 
         List<Integer> freeSeats = IntStream.rangeClosed(1, busCapacity).boxed().collect(Collectors.toList());

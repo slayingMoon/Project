@@ -38,13 +38,13 @@ public class TicketTest {
     }
     @Test
     public void deleteReservationPutIntoOpenFolderTest() {
-        OneWayTicket oneWayTicket = oneWayTicketService.findEntityById(1L);
+        OneWayTicket oneWayTicket = oneWayTicketService.findEntityById(2L);
           oneWayTicketService.moveReservationToOpenFolder(oneWayTicket.getGoToReservation(), oneWayTicket);
     }
 
     @Test
     public void activateReservationRemoveFromOpenFolderTest() {
-        OneWayTicket oneWayTicket = oneWayTicketService.findEntityById(1L);
+        OneWayTicket oneWayTicket = oneWayTicketService.findEntityById(2L);
         ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
         Seat seat = seatService.findEntityById(6L);
        oneWayTicketService.removeReservationFromOpenFolder(oneWayTicket,scheduledTrip, seat);

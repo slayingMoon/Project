@@ -38,7 +38,7 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
     }
     public OpenFolder deactivateReservation(Reservation reservation, TicketNo num){
         OpenFolder openFolder = getOpenFolder(reservation, num,new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
-        scheduledTransitionService.returnSeat(scheduledTransitionService.filteredFromTo(reservation.getFrom(),reservation.getTo()),reservation.getSeat());
+        scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
         reservationService.delete(reservation);
         return createOrUpdateEntity(openFolder);
     }

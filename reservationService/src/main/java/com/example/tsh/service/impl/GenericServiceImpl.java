@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 public  class GenericServiceImpl< E extends BaseEntity>  {
 
 @Autowired
-  private GenericRepository<E> repository;
+  protected GenericRepository<E> repository;
 
 
 
