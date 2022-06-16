@@ -1,6 +1,6 @@
 package com.example.tsh.service.impl;
 
-import com.example.tsh.dao.ReservationRepository;
+
 import com.example.tsh.model.entity.*;
 import com.example.tsh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,7 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
 
     @Autowired
     private ScheduledTransitionServiceImpl scheduledTransitionService;
-    //
-    @Autowired
-    private ReservationRepository reservationRepository;
+
     @Autowired
     private ScheduledTripServiceImpl scheduledTripService;
 

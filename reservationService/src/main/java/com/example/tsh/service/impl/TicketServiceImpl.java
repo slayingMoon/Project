@@ -1,6 +1,5 @@
 package com.example.tsh.service.impl;
 
-import com.example.tsh.dao.GenericRepository;
 import com.example.tsh.model.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class TicketServiceImpl<T extends OneWayTicket > extends GenericServiceIm
 
 
     @Transactional
-    public void moveReservationToOpenFolder(Reservation reservation, T ticket){
+    public void moveGoToReservationToOpenFolder(Reservation reservation, T ticket){
         scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
         ticket.setGoToReservation(null);
         repository.save(ticket);
@@ -29,7 +28,7 @@ public class TicketServiceImpl<T extends OneWayTicket > extends GenericServiceIm
     }
 
     @Transactional
-    public void removeReservationFromOpenFolder(T ticket, ScheduledTrip scheduledTrip, Seat seat){
+    public void removeGoToReservationFromOpenFolder(T ticket, ScheduledTrip scheduledTrip, Seat seat){
         OpenFolder openFolder = openFolderService.findOpenFolderByTicketNo(ticket.getTicketNo());
         Reservation reservation = reservationService.activateReservation(openFolder, scheduledTrip, seat);
         ticket.setGoToReservation(reservation);
