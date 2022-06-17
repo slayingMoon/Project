@@ -3,8 +3,10 @@ package com.example.tsh.service;
 import com.example.tsh.domain.entity.Trip;
 import com.example.tsh.enumeration.DayOfWeek;
 import com.example.tsh.enumeration.TransitionProperty;
+import com.example.tsh.interceptor.BuyOnlineInterceptor;
 import com.example.tsh.interceptor.CitiesFromInterceptor;
 import com.example.tsh.interceptor.CitiesToInterceptor;
+import com.example.tsh.interceptor.CloneInterceptor;
 import com.example.tsh.interceptor.RemoveTransitionsBeforeInterceptor;
 import com.example.tsh.interceptor.FilterTripByCityInterceptor;
 import com.example.tsh.repository.TripRepository;
@@ -15,6 +17,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class TripServiceImpl implements TripService {
@@ -31,70 +34,54 @@ public class TripServiceImpl implements TripService {
     public Set<String> citiesFrom() {
         List<Trip> allTrips = this.findAll();
 
-        Set<String> processed = allTrips.stream()
-                .map(CitiesFromInterceptor.getInstance()::process)
+        Stream<Trip> processed = allTrips.stream()
+        		.map(trip -> CloneInterceptor.getInstance().process(trip))
+                .map(CitiesFromInterceptor.getInstance()::process);
 
-                .flatMap(trip -> trip.getTransitions().stream())
-                .map(transition -> transition.getCity().getName())
-                .collect(Collectors.toSet());
-
-        return processed;
+        return collectAllCitiesToSet(processed);
     }
 
     @Override
     public Set<String> citiesTo(String startCity) {
         List<Trip> allTrips = this.findAll();
 
-        Set<String> processed = allTrips.stream()
+        Stream<Trip> processed = allTrips.stream()
+        		.map(trip -> CloneInterceptor.getInstance().process(trip))
                 .map(trip -> FilterTripByCityInterceptor.getInstance().process(trip, startCity))
                 .filter(Objects::nonNull)
                 .map(trip -> RemoveTransitionsBeforeInterceptor.getInstance().process(trip, startCity))
-                .map(CitiesToInterceptor.getInstance()::process)
-
-                .flatMap(trip -> trip.getTransitions().stream())
-                .map(transition -> transition.getCity().getName())
-                .collect(Collectors.toSet());
-
-
-        return processed;
+                .map(CitiesToInterceptor.getInstance()::process);
+        return collectAllCitiesToSet(processed);
     }
 
-    @Override
-    public List<String> findAllBuyOnlineCities() {
-        List<Trip> allTrips = this.findAll();
-        return allTrips.stream()
-                .flatMap(t -> t.getTransitions().stream())
-                .filter(transition -> transition.getTransitionOptions().stream()
-                        .anyMatch(detail -> detail.getTransitionProperty() ==
-                                TransitionProperty.ONLINE))
+	private Set<String> collectAllCitiesToSet(Stream<Trip> processed) {
+		return processed.flatMap(trip -> trip.getTransitions().stream())
                 .map(transition -> transition.getCity().getName())
-                .distinct()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
+	}
+
+    @Override
+    public Set<String> findAllBuyOnlineCities() {
+        List<Trip> allTrips = this.findAll();
+        Stream<Trip> processed =  allTrips.stream()
+                .map(CloneInterceptor.getInstance()::process)
+                .map(CitiesFromInterceptor.getInstance()::process)
+                .map(BuyOnlineInterceptor.getInstance()::process);
+        return collectAllCitiesToSet(processed);
     }
 
     @Override
     public List<String> findTripsByStartAndDestinationCities(String startCity, String endCity) {
         List<Trip> allTrips = this.findAll();
-        List<String> allPossibleTrips = new ArrayList<>();
-        allTrips.forEach(trip -> {
-            AtomicBoolean isStartCityPassed = new AtomicBoolean(false);
-            trip.getTransitions()
-                    .forEach(transition -> {
-                        if (transition.getCity().getName().equals(startCity) && transition.getTransitionOptions().stream()
-                                .anyMatch(detail -> detail.getTransitionProperty() ==
-                                        TransitionProperty.GET_ON)) {
-                            isStartCityPassed.set(true);
-                        }
-
-                        if (transition.getTransitionOptions().stream()
-                                .anyMatch(detail -> detail.getTransitionProperty() ==
-                                        TransitionProperty.GET_OFF && transition.getCity().getName().equals(endCity)) && isStartCityPassed.get()) {
-                            allPossibleTrips.add(trip.getDescription());
-                        }
-
-                    });
-        });
-        return allPossibleTrips;
+        return allTrips.stream()
+        		.map(CloneInterceptor.getInstance()::process)
+                .map(trip -> FilterTripByCityInterceptor.getInstance().process(trip, startCity))
+                .filter(Objects::nonNull)
+                .map(trip -> RemoveTransitionsBeforeInterceptor.getInstance().process(trip, startCity))
+                .map(trip -> FilterTripByCityInterceptor.getInstance().process(trip, endCity))
+                .filter(Objects::nonNull)
+                .map(trip -> trip.getDescription())
+                .collect(Collectors.toList());
     }
 
     @Override

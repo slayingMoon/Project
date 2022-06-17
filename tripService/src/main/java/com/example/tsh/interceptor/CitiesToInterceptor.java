@@ -25,10 +25,10 @@ public class CitiesToInterceptor implements TripInterceptor{
                 .filter(canGetOff)
                 .collect(Collectors.toList());
 
-        Trip clonedTrip = trip.clone();
-        clonedTrip.setTransitions(filteredTransitions);
-
-        return clonedTrip;
+//        Trip clonedTrip = trip.clone();
+//        clonedTrip.setTransitions(filteredTransitions);
+		trip.setTransitions(filteredTransitions);
+        return trip;
 	}
 
 }

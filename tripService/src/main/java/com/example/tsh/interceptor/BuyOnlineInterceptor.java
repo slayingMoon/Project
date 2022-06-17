@@ -25,11 +25,8 @@ public class BuyOnlineInterceptor implements TripInterceptor{
 		List<Transition> filteredTransitions = trip.getTransitions().stream()
                 .filter(canBuyOnline)
                 .collect(Collectors.toList());
-
-        Trip clonedTrip = trip.clone();
-        clonedTrip.setTransitions(filteredTransitions);
-
-        return clonedTrip;
+		trip.setTransitions(filteredTransitions);
+        return trip;
 	}
 
 }

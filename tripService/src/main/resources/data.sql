@@ -39,5 +39,6 @@ insert into transition_options_mapping (transition_id, options_id) values (1,1);
 insert into transition_options_mapping (transition_id, options_id) values (2,2);
 insert into transition_options_mapping (transition_id, options_id) values (3,2);
 insert into transition_options_mapping (transition_id, options_id) values (4,3);
+insert into transition_options_mapping (transition_id, options_id) values (4,1);
 
 insert into emergency_trip (date, base_trip_id) values ('2022-08-08', 1);

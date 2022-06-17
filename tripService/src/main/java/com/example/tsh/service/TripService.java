@@ -9,7 +9,7 @@ public interface TripService {
 
     Set<String> citiesTo(String startCity);
 
-    List<String> findAllBuyOnlineCities();
+    Set<String> findAllBuyOnlineCities();
 
     List<String> findTripsByStartAndDestinationCities(String startCity, String endCity);
     

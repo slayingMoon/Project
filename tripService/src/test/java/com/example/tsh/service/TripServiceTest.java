@@ -19,7 +19,7 @@ public class TripServiceTest {
     @Test
     void citiesFromTest() {
         Set<String> filteredTrips = tripService.citiesFrom();
-        Set<String> expectedTrips = new HashSet<>(Arrays.asList("Sofia"));
+        Set<String> expectedTrips = new HashSet<>(Arrays.asList("Sofia", "Belovo"));
         filteredTrips.forEach(logger::info);
         assertThat(filteredTrips).isEqualTo(expectedTrips);
 
@@ -35,8 +35,11 @@ public class TripServiceTest {
 
     @Test
     void findAllBuyOnlineCitiesTest() {
-        List<String> filteredTrips = tripService.findAllBuyOnlineCities();
+        Set<String> filteredTrips = tripService.findAllBuyOnlineCities();
+        Set<String> expectedTrips = new HashSet<>(Arrays.asList("Belovo"));
         filteredTrips.forEach(logger::info);
+        assertThat(filteredTrips).isEqualTo(expectedTrips);
+
     }
 
     @Test
