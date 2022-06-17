@@ -1,4 +1,4 @@
-package com.example.tsh;
+package com.example.tsh.service;
 
 
 import com.example.tsh.model.entity.*;

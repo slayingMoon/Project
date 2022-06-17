@@ -20,7 +20,7 @@ public class DoubleWayTicketServiceImpl extends TicketServiceImpl<DoubleWayTicke
         scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
         ticket.setReturnReservation(null);
         repository.save(ticket);
-        openFolderService.deactivateReservation(reservation, ticket.getTicketNo());
+        openFolderService.moveToOpenFolder(reservation, ticket.getTicketNo());
 
     }
 

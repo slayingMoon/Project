@@ -36,12 +36,13 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
         OpenFolder openFolder = getOpenFolder(reservation, ticketNo, new Direction(reservation.getTo().getCity(), reservation.getFrom().getCity()));
         return createOrUpdateEntity(openFolder);
     }
-    public OpenFolder deactivateReservation(Reservation reservation, TicketNo num){
+    public OpenFolder moveToOpenFolder(Reservation reservation, TicketNo num){
         OpenFolder openFolder = getOpenFolder(reservation, num,new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
         scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
         reservationService.delete(reservation);
         return createOrUpdateEntity(openFolder);
     }
+
     public OpenFolder findOpenFolderByTicketNo(TicketNo ticketNo)
     {
         return openFolderRepository.findAll().stream()

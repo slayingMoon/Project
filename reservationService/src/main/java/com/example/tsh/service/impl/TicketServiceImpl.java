@@ -23,7 +23,7 @@ public class TicketServiceImpl<T extends OneWayTicket > extends GenericServiceIm
         scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
         ticket.setGoToReservation(null);
         repository.save(ticket);
-        openFolderService.deactivateReservation(reservation, ticket.getTicketNo());
+        openFolderService.moveToOpenFolder(reservation, ticket.getTicketNo());
 
     }
 
