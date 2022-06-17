@@ -72,12 +72,12 @@ public class ReservationTests {
     public void reservationCreationTest() {
         ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
         for (int i = 0; i < 1; i++) {
-            reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(5L), new Passenger("Aanasrika", "Petrova", "Kartselska", 19 + 1, "089461734fs237", "an2111ikas19311@abv.bfg"), ReservationStatus.NEW, LocalDateTime.now()));
+            reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(6L), new Passenger("Aanasrika", "Petrova", "Kartselska", 19 + 1, "10891734fzs237", "1an2d111ikas194311abv.bfg"), ReservationStatus.NEW, LocalDateTime.now()));
         }
     }
     @Test
     public void setStatusDeletedTest(){
-        Reservation reservation = reservationService.findEntityById(8L);
+        Reservation reservation = reservationService.findEntityById(1L);
         reservationService.setStatusDeleted(reservation);
     }
 

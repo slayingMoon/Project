@@ -28,12 +28,12 @@ public class TicketTest {
     private DoubleWayTicketServiceImpl doubleWayTicketService;
     @Test
     public void ticketCreation() {
-        Reservation reservation = reservationService.findEntityById(6L);
+        Reservation reservation = reservationService.findEntityById(2L);
         oneWayTicketService.createOrUpdateEntity(new OneWayTicket(reservation));
     }
     @Test
     public void payOneWayTicket(){
-        Reservation reservation = reservationService.findEntityById(8L);
+        Reservation reservation = reservationService.findEntityById(3L);
         reservationService.payOneWayReservation(reservation);
     }
     @Test
@@ -58,24 +58,26 @@ public class TicketTest {
 
     @Test
     public void deleteGoToReservationDoubleWayTicketTicketServiceTest(){
-        DoubleWayTicket doubleWayTicket = doubleWayTicketService.findEntityById(6L);
+        DoubleWayTicket doubleWayTicket = doubleWayTicketService.findEntityById(3L);
         doubleWayTicketService.moveGoToReservationToOpenFolder(doubleWayTicket.getGoToReservation(), doubleWayTicket );
+
+    }
+
+    @Test
+    public void activateReturnReservationDoubleWayTicketTicketServiceTest(){
+        doubleWayTicketService.removeReturnReservationFromOpenFolder(doubleWayTicketService.findEntityById(3L),scheduledTripService.findEntityById(1L),seatService.findEntityById(1L));
 
     }
     @Test
     public void deleteReturnReservationDoubleWayTicketTicketServiceTest(){
-        DoubleWayTicket doubleWayTicket = doubleWayTicketService.findEntityById(6L);
+        DoubleWayTicket doubleWayTicket = doubleWayTicketService.findEntityById(3L);
         doubleWayTicketService.moveReturnReservationToOpenFolder(doubleWayTicket.getReturnReservation(), doubleWayTicket );
 
     }
     @Test
     public void activateGoToReservationDoubleWayTicketTicketServiceTest(){
-         doubleWayTicketService.removeGoToReservationFromOpenFolder(doubleWayTicketService.findEntityById(6L),scheduledTripService.findEntityById(1L),seatService.findEntityById(1L));
+         doubleWayTicketService.removeGoToReservationFromOpenFolder(doubleWayTicketService.findEntityById(3L),scheduledTripService.findEntityById(1L),seatService.findEntityById(1L));
 
     }
-    @Test
-    public void activateReturnReservationDoubleWayTicketTicketServiceTest(){
-        doubleWayTicketService.removeReturnReservationFromOpenFolder(doubleWayTicketService.findEntityById(6L),scheduledTripService.findEntityById(1L),seatService.findEntityById(1L));
 
-    }
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@ValidReservation
+//@ValidReservation
 public class Reservation extends BaseEntity {
     @OneToOne(cascade = { CascadeType.MERGE})
     @JoinColumn(nullable = false)

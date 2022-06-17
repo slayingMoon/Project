@@ -27,7 +27,7 @@ public class DoubleWayTicketServiceImpl extends TicketServiceImpl<DoubleWayTicke
     public void removeReturnReservationFromOpenFolder(DoubleWayTicket ticket, ScheduledTrip scheduledTrip, Seat seat){
         OpenFolder openFolder = openFolderService.findOpenFolderByTicketNo(ticket.getTicketNumber());
         Reservation reservation = reservationService.activateReservation(openFolder, scheduledTrip, seat);
-        ticket.setGoToReservation(reservation);
+        ticket.setReturnReservation(reservation);
         repository.save(ticket);
     }
 }
