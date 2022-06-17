@@ -17,8 +17,7 @@ public class ScheduledTransitionTests {
     private ScheduledTransitionServiceImpl scheduledTransitionService;
 
     @Test
-    public void testFreeSeats() {
-        List<ScheduledTransition> scheduledTransitions = scheduledTransitionService.filteredFromTo(scheduledTransitionService.findEntityById(3L), scheduledTransitionService.findEntityById(5L));
-        System.out.println(scheduledTransitionService.getFreeSeats(scheduledTransitions, 40));
+    public void testFreeSeats(){
+        System.out.println(scheduledTransitionService.getFreeSeats(scheduledTransitionService.findEntityById(3L), scheduledTransitionService.findEntityById(4L)));
     }
 }

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class TicketNo  {
+public class TicketNumber {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_seq")
     @GenericGenerator(
@@ -35,7 +35,7 @@ public class TicketNo  {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TicketNo ticketNo = (TicketNo) o;
+        TicketNumber ticketNo = (TicketNumber) o;
         return Objects.equals(id, ticketNo.id);
     }
 

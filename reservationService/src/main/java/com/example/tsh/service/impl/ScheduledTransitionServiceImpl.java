@@ -7,7 +7,6 @@ import com.example.tsh.model.entity.Seat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Entity;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,20 +69,18 @@ public class ScheduledTransitionServiceImpl extends GenericServiceImpl<Scheduled
         return filteredTransitions;
     }
 
-    public List<Integer> getFreeSeats(List<ScheduledTransition> filteredFromTo, Integer busCapacity) {
-
+    public List<Integer> getFreeSeats(ScheduledTransition from, ScheduledTransition to) {
+        ScheduledTrip scheduledTrip= scheduledTripService.findTripByTransition(from);
+        Integer busCapacity = scheduledTrip.getBus().getSeatCapacity();
+       List<ScheduledTransition> filteredFromTo=filteredFromTo(from, to);
         List<Integer> freeSeats = IntStream.rangeClosed(1, busCapacity).boxed().collect(Collectors.toList());
 
-        //  List<Integer> freeSeats = new LinkedList<>();
-        // for (int i = 1; i <= busCapacity; i++) {
-        //    freeSeats.add(i);
-        //}
 
         filteredFromTo.stream()
                 .flatMap(s -> s.getSeats().stream())
                 .forEach(seat -> {
-                    if (freeSeats.contains(seat.getSeat())) {
-                        freeSeats.remove(seat.getSeat());
+                    if (freeSeats.contains(seat.getSeatNumber())) {
+                        freeSeats.remove(seat.getSeatNumber());
                     }
                 });
 

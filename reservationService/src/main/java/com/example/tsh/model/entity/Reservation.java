@@ -1,11 +1,13 @@
 package com.example.tsh.model.entity;
 
 import com.example.tsh.model.enums.ReservationStatus;
+import com.example.tsh.util.validation.ValidReservation;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@ValidReservation
 public class Reservation extends BaseEntity {
     @OneToOne(cascade = { CascadeType.MERGE})
     @JoinColumn(nullable = false)
@@ -14,7 +16,6 @@ public class Reservation extends BaseEntity {
     @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(nullable = false)
     private ScheduledTransition to;
-
     @OneToOne(cascade = { CascadeType.MERGE})
     private Seat seat;
 

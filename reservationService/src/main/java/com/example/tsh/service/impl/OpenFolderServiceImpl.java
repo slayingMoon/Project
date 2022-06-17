@@ -4,7 +4,7 @@ import com.example.tsh.dao.OpenFolderRepository;
 import com.example.tsh.model.entity.Direction;
 import com.example.tsh.model.entity.OpenFolder;
 import com.example.tsh.model.entity.Reservation;
-import com.example.tsh.model.entity.TicketNo;
+import com.example.tsh.model.entity.TicketNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
       @Autowired
       private OpenFolderRepository openFolderRepository;
 
-    private OpenFolder getOpenFolder(Reservation reservation, TicketNo num, Direction direction) {
+    private OpenFolder getOpenFolder(Reservation reservation, TicketNumber num, Direction direction) {
 
         OpenFolder openFolder=new OpenFolder();
         openFolder.setPassenger(reservation.getPassenger());
@@ -32,18 +32,18 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
 
 
     }
-    public OpenFolder getOpenFolderWithReversedDirections(Reservation reservation, TicketNo ticketNo){
+    public OpenFolder getOpenFolderWithReversedDirections(Reservation reservation, TicketNumber ticketNo){
         OpenFolder openFolder = getOpenFolder(reservation, ticketNo, new Direction(reservation.getTo().getCity(), reservation.getFrom().getCity()));
         return createOrUpdateEntity(openFolder);
     }
-    public OpenFolder moveToOpenFolder(Reservation reservation, TicketNo num){
+    public OpenFolder moveToOpenFolder(Reservation reservation, TicketNumber num){
         OpenFolder openFolder = getOpenFolder(reservation, num,new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
         scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
         reservationService.delete(reservation);
         return createOrUpdateEntity(openFolder);
     }
 
-    public OpenFolder findOpenFolderByTicketNo(TicketNo ticketNo)
+    public OpenFolder findOpenFolderByTicketNo(TicketNumber ticketNo)
     {
         return openFolderRepository.findAll().stream()
                 .filter(e->e.getTicketNo().equals(ticketNo))

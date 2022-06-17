@@ -61,7 +61,7 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
         doubleWayTicket.setGoToReservation(reservation);
         doubleWayTicket.setReturnReservation(null);
         DoubleWayTicket newTick = doubleWayTicketService.createOrUpdateEntity(doubleWayTicket);
-        openFolderService.getOpenFolderWithReversedDirections(reservation,newTick.getTicketNo());
+        openFolderService.getOpenFolderWithReversedDirections(reservation,newTick.getTicketNumber());
         return doubleWayTicket;
     }
 

@@ -20,7 +20,7 @@ public class OpenFolder extends BaseEntity{
 
     @OneToOne
     @JoinColumn(nullable = false)
-    private TicketNo ticketNo;
+    private TicketNumber ticketNo;
     public LocalDateTime getReservationCreationDate() {
         return reservationCreationDate;
     }
@@ -49,11 +49,11 @@ public class OpenFolder extends BaseEntity{
         return expirationDate;
     }
 
-    public TicketNo getTicketNo() {
+    public TicketNumber getTicketNo() {
         return ticketNo;
     }
 
-    public void setTicketNo(TicketNo ticketNo) {
+    public void setTicketNo(TicketNumber ticketNo) {
         this.ticketNo = ticketNo;
     }
 

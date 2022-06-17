@@ -1,6 +1,5 @@
 package com.example.tsh.service.impl;
 
-import com.example.tsh.dao.DoubleWayTicketRepository;
 import com.example.tsh.model.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +19,13 @@ public class DoubleWayTicketServiceImpl extends TicketServiceImpl<DoubleWayTicke
         scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
         ticket.setReturnReservation(null);
         repository.save(ticket);
-        openFolderService.moveToOpenFolder(reservation, ticket.getTicketNo());
+        openFolderService.moveToOpenFolder(reservation, ticket.getTicketNumber());
 
     }
 
     @Transactional
     public void removeReturnReservationFromOpenFolder(DoubleWayTicket ticket, ScheduledTrip scheduledTrip, Seat seat){
-        OpenFolder openFolder = openFolderService.findOpenFolderByTicketNo(ticket.getTicketNo());
+        OpenFolder openFolder = openFolderService.findOpenFolderByTicketNo(ticket.getTicketNumber());
         Reservation reservation = reservationService.activateReservation(openFolder, scheduledTrip, seat);
         ticket.setGoToReservation(reservation);
         repository.save(ticket);
