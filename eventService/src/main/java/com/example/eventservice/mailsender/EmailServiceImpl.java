@@ -18,11 +18,11 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendSimpleMessage(String toEmail,
-                                String body,
-                                String subject) {
+                                  String body,
+                                  String subject) {
         SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setFrom("spring.email.from@gmail.com");
+        message.setFrom("erikul1994@gmail.com");
         message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);
@@ -33,16 +33,16 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendMessageWithAttachment(String toEmail,
-                                        String body,
-                                        String subject,
-                                        String attachment) throws MessagingException {
+                                          String body,
+                                          String subject,
+                                          String attachment) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
         MimeMessageHelper mimeMessageHelper
                 = new MimeMessageHelper(mimeMessage, true);
 
-        mimeMessageHelper.setFrom("spring.email.from@gmail.com");
+        mimeMessageHelper.setFrom("erikul1994@gmail.com");
         mimeMessageHelper.setTo(toEmail);
         mimeMessageHelper.setText(body);
         mimeMessageHelper.setSubject(subject);
