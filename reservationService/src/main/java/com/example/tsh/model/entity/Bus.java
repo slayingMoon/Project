@@ -18,6 +18,7 @@ public class Bus extends BaseEntity {
     List<Driver> drivers;
 
     public Bus() {
+        ///
     }
 
     public Bus(Integer seatsNumber, List<Driver> drivers) {
