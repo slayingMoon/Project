@@ -13,7 +13,7 @@ public class ReservationValidator implements ConstraintValidator<ValidReservatio
 
     @Override
     public void initialize(ValidReservation constraintAnnotation) {
-        ConstraintValidator.super.initialize(constraintAnnotation);
+     //   ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override

@@ -79,9 +79,7 @@ public class ScheduledTransitionServiceImpl extends GenericServiceImpl<Scheduled
         filteredFromTo.stream()
                 .flatMap(s -> s.getSeats().stream())
                 .forEach(seat -> {
-                    if (freeSeats.contains(seat.getSeatNumber())) {
-                        freeSeats.remove(seat.getSeatNumber());
-                    }
+                    freeSeats.remove(seat.getSeatNumber());
                 });
 
         return freeSeats;

@@ -3,10 +3,12 @@ package com.example.tsh.service.impl;
 
 import com.example.tsh.model.entity.*;
 import com.example.tsh.service.*;
+import com.example.tsh.util.validation.ValidReservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
