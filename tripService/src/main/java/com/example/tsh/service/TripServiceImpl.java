@@ -1,5 +1,6 @@
 package com.example.tsh.service;
 
+import com.example.tsh.domain.entity.BaseTrip;
 import com.example.tsh.domain.entity.Trip;
 import com.example.tsh.enumeration.DayOfWeek;
 import com.example.tsh.enumeration.TransitionProperty;
@@ -35,7 +36,7 @@ public class TripServiceImpl implements TripService {
         List<Trip> allTrips = this.findAll();
 
         Stream<Trip> processed = allTrips.stream()
-        		.map(trip -> CloneInterceptor.getInstance().process(trip))
+        		.map(CloneInterceptor.getInstance()::process)
                 .map(CitiesFromInterceptor.getInstance()::process);
 
         return collectAllCitiesToSet(processed);
@@ -46,7 +47,7 @@ public class TripServiceImpl implements TripService {
         List<Trip> allTrips = this.findAll();
 
         Stream<Trip> processed = allTrips.stream()
-        		.map(trip -> CloneInterceptor.getInstance().process(trip))
+        		.map(CloneInterceptor.getInstance()::process)
                 .map(trip -> FilterTripByCityInterceptor.getInstance().process(trip, startCity))
                 .filter(Objects::nonNull)
                 .map(trip -> RemoveTransitionsBeforeInterceptor.getInstance().process(trip, startCity))
@@ -54,11 +55,6 @@ public class TripServiceImpl implements TripService {
         return collectAllCitiesToSet(processed);
     }
 
-	private Set<String> collectAllCitiesToSet(Stream<Trip> processed) {
-		return processed.flatMap(trip -> trip.getTransitions().stream())
-                .map(transition -> transition.getCity().getName())
-                .collect(Collectors.toSet());
-	}
 
     @Override
     public Set<String> findAllBuyOnlineCities() {
@@ -80,7 +76,7 @@ public class TripServiceImpl implements TripService {
                 .map(trip -> RemoveTransitionsBeforeInterceptor.getInstance().process(trip, startCity))
                 .map(trip -> FilterTripByCityInterceptor.getInstance().process(trip, endCity))
                 .filter(Objects::nonNull)
-                .map(trip -> trip.getDescription())
+                .map(BaseTrip::getDescription)
                 .collect(Collectors.toList());
     }
 
@@ -103,5 +99,10 @@ public class TripServiceImpl implements TripService {
         return dates;
     }
 
+	private Set<String> collectAllCitiesToSet(Stream<Trip> processed) {
+		return processed.flatMap(trip -> trip.getTransitions().stream())
+                .map(transition -> transition.getCity().getName())
+                .collect(Collectors.toSet());
+	}
 
 }
