@@ -51,7 +51,7 @@ public class ScheduledTransitionServiceImpl extends GenericServiceImpl<Scheduled
                 .orElse(null);
     }
 
-    private List<ScheduledTransition> filteredFromTo(ScheduledTransition from, ScheduledTransition to) {
+    public List<ScheduledTransition> filteredFromTo(ScheduledTransition from, ScheduledTransition to) {
         ScheduledTrip trip = scheduledTripService.findTripByTransition(from);
         AtomicBoolean isBetween = new AtomicBoolean(false);
         List<ScheduledTransition> filteredTransitions = new ArrayList<>();
@@ -70,7 +70,7 @@ public class ScheduledTransitionServiceImpl extends GenericServiceImpl<Scheduled
         return filteredTransitions;
     }
 
-    private List<Integer> getFreeSeats(List<ScheduledTransition> filteredFromTo, Integer busCapacity) {
+    public List<Integer> getFreeSeats(List<ScheduledTransition> filteredFromTo, Integer busCapacity) {
 
         List<Integer> freeSeats = IntStream.rangeClosed(1, busCapacity).boxed().collect(Collectors.toList());
 
