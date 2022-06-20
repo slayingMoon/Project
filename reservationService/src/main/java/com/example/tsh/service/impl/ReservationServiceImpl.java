@@ -3,12 +3,13 @@ package com.example.tsh.service.impl;
 
 import com.example.tsh.model.entity.*;
 import com.example.tsh.service.*;
-import com.example.tsh.util.validation.ValidReservation;
+import com.example.tsh.util.validator.ReservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import javax.transaction.Transactional;
-import javax.validation.Valid;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +38,9 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
 
     @Override
     @Transactional
-    public void reserve(Reservation reservation) {
+    public void reserve( Reservation reservation) {
 
-
+        ReservationValidator.validateReservation(reservation, scheduledTransitionService);
         scheduledTransitionService.reserveSeat(reservation.getFrom(), reservation.getTo(), reservation.getSeat());
         createOrUpdateEntity(reservation);
     }

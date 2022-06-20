@@ -20,6 +20,8 @@ public class ScheduledTransitionServiceImpl extends GenericServiceImpl<Scheduled
     @Autowired
     private ScheduledTripServiceImpl scheduledTripService;
 
+
+
     public void returnSeat(ScheduledTransition from, ScheduledTransition to, Seat seat) {
         List<ScheduledTransition> filteredFromTo = filteredFromTo(from, to);
         filteredFromTo

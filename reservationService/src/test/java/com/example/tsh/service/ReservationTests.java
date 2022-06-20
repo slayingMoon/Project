@@ -10,6 +10,7 @@ import com.example.tsh.service.impl.OpenFolderServiceImpl;
 import com.example.tsh.service.impl.ReservationServiceImpl;
 import com.example.tsh.service.impl.ScheduledTripServiceImpl;
 import com.example.tsh.service.impl.SeatServiceImpl;
+import org.junit.Before;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
@@ -20,6 +21,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -40,7 +44,13 @@ public class ReservationTests {
 
     @Autowired
     private OpenFolderServiceImpl openFolderService;
+    private Validator validator;
 
+    @Before
+    public void setUp() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
     @Test
     public void testTripCreationTest() {
         Seat[] s = new Seat[40];
@@ -71,13 +81,13 @@ public class ReservationTests {
     @Test
     public void reservationCreationTest() {
         ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
-        for (int i = 0; i < 1; i++) {
-            reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(5L), new Passenger("Aanasrika", "Petrova", "Kartselska", 19 + 1, "089461734fs237", "an2111ikas19311@abv.bfg"), ReservationStatus.NEW, LocalDateTime.now()));
-        }
+        Reservation reservation = new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(2L),
+                new Passenger("Aanasrika", "Petrova", "Kartselska", 19 + 1, "1082231226822922173", "ab222281632222v.bfg"), ReservationStatus.NEW, LocalDateTime.now());
+      reservationService.reserve(reservation);
     }
     @Test
     public void setStatusDeletedTest(){
-        Reservation reservation = reservationService.findEntityById(8L);
+        Reservation reservation = reservationService.findEntityById(1L);
         reservationService.setStatusDeleted(reservation);
     }
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.transaction.Transactional;
 
 
+
 public  class GenericServiceImpl< E extends BaseEntity>  {
 
 @Autowired
@@ -22,7 +23,7 @@ public  class GenericServiceImpl< E extends BaseEntity>  {
 
 
     @Transactional
-    public E createOrUpdateEntity(E entity) {
+    public E createOrUpdateEntity( E entity) {
        return repository.save(entity);
     }
 

@@ -1,6 +1,6 @@
 package com.example.tsh.service;
 
-import com.example.tsh.model.entity.ScheduledTransition;
+
 import com.example.tsh.service.impl.ScheduledTransitionServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,6 +18,6 @@ public class ScheduledTransitionTests {
 
     @Test
     public void testFreeSeats(){
-        System.out.println(scheduledTransitionService.getFreeSeats(scheduledTransitionService.findEntityById(3L), scheduledTransitionService.findEntityById(4L)));
+        System.out.println(scheduledTransitionService.getFreeSeats(scheduledTransitionService.findEntityById(2L), scheduledTransitionService.findEntityById(4L)));
     }
 }

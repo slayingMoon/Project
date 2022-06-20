@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 public class ScheduledTripServiceImpl extends GenericServiceImpl<ScheduledTrip> {
     @Autowired
     private ScheduledTripRepository scheduledTripRepository;
-
     public ScheduledTrip findTripByTransition(ScheduledTransition scheduledTransition) {
       return scheduledTripRepository.findAll()
                 .stream()
