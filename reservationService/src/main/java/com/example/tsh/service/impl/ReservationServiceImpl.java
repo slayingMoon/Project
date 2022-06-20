@@ -39,7 +39,7 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     @Override
     @Transactional
     public void reserve( Reservation reservation) {
-
+        //konde e tuk
         ReservationValidator.validateReservation(reservation, scheduledTransitionService);
         scheduledTransitionService.reserveSeat(reservation.getFrom(), reservation.getTo(), reservation.getSeat());
         createOrUpdateEntity(reservation);
