@@ -4,7 +4,6 @@ import com.example.tsh.TshApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.*;
 import java.util.logging.Logger;
 import static org.assertj.core.api.Assertions.*;
@@ -14,7 +13,7 @@ public class TripServiceTest {
     private final Logger logger = Logger.getLogger(TshApplication.class.getName());
 
     @Autowired
-    private TripService tripService;
+    private TripServiceImpl tripService;
 
     @Test
     void citiesFromTest() {

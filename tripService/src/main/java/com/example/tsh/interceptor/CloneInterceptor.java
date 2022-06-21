@@ -12,8 +12,7 @@ public class CloneInterceptor implements TripInterceptor{
 	
 	@Override
 	public Trip process(Trip trip, String... args) {
-		Trip clonedTrip = trip.clone();
-		return clonedTrip;
+		return trip.clone();
 	}
 
 }

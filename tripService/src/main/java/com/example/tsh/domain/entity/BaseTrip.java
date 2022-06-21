@@ -10,17 +10,6 @@ public abstract class BaseTrip extends BaseEntity {
 
     private String description;
 
-    public LocalTime getDepartureTime() {
-		return departureTime;
-	}
-
-	public void setDepartureTime(LocalTime departureTime) {
-		this.departureTime = departureTime;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	private LocalTime departureTime;
 

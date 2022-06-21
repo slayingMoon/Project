@@ -4,24 +4,20 @@ import com.example.tsh.domain.entity.BaseTrip;
 import com.example.tsh.domain.entity.Trip;
 import com.example.tsh.enumeration.DayOfWeek;
 import com.example.tsh.enumeration.TransitionProperty;
-import com.example.tsh.interceptor.BuyOnlineInterceptor;
-import com.example.tsh.interceptor.CitiesFromInterceptor;
-import com.example.tsh.interceptor.CitiesToInterceptor;
+import com.example.tsh.interceptor.TransitionPropertyInterceptor;
 import com.example.tsh.interceptor.CloneInterceptor;
 import com.example.tsh.interceptor.RemoveTransitionsBeforeInterceptor;
 import com.example.tsh.interceptor.FilterTripByCityInterceptor;
 import com.example.tsh.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class TripServiceImpl implements TripService {
+public class TripServiceImpl {
     private static final int DAYS_IN_WEEK = DayOfWeek.values().length;
 
     @Autowired
@@ -31,18 +27,18 @@ public class TripServiceImpl implements TripService {
         return this.tripRepository.findAll();
     }
 
-    @Override
+
     public Set<String> citiesFrom() {
         List<Trip> allTrips = this.findAll();
 
         Stream<Trip> processed = allTrips.stream()
         		.map(CloneInterceptor.getInstance()::process)
-                .map(CitiesFromInterceptor.getInstance()::process);
+                .map(TransitionPropertyInterceptor.getInstance(TransitionProperty.GET_ON)::process);
 
         return collectAllCitiesToSet(processed);
     }
 
-    @Override
+
     public Set<String> citiesTo(String startCity) {
         List<Trip> allTrips = this.findAll();
 
@@ -51,22 +47,22 @@ public class TripServiceImpl implements TripService {
                 .map(trip -> FilterTripByCityInterceptor.getInstance().process(trip, startCity))
                 .filter(Objects::nonNull)
                 .map(trip -> RemoveTransitionsBeforeInterceptor.getInstance().process(trip, startCity))
-                .map(CitiesToInterceptor.getInstance()::process);
+                .map(TransitionPropertyInterceptor.getInstance(TransitionProperty.GET_OFF)::process);
         return collectAllCitiesToSet(processed);
     }
 
 
-    @Override
+
     public Set<String> findAllBuyOnlineCities() {
         List<Trip> allTrips = this.findAll();
         Stream<Trip> processed =  allTrips.stream()
                 .map(CloneInterceptor.getInstance()::process)
-                .map(CitiesFromInterceptor.getInstance()::process)
-                .map(BuyOnlineInterceptor.getInstance()::process);
+                .map(TransitionPropertyInterceptor.getInstance(TransitionProperty.GET_ON)::process)
+                .map(TransitionPropertyInterceptor.getInstance(TransitionProperty.ONLINE)::process);
         return collectAllCitiesToSet(processed);
     }
 
-    @Override
+
     public List<String> findTripsByStartAndDestinationCities(String startCity, String endCity) {
         List<Trip> allTrips = this.findAll();
         return allTrips.stream()
@@ -80,7 +76,7 @@ public class TripServiceImpl implements TripService {
                 .collect(Collectors.toList());
     }
 
-    @Override
+
     public List<String> generateTripDates(Long tripID) {
         Trip trip = tripRepository.findById(tripID).get();
         LocalDate startDate = LocalDate.now();
