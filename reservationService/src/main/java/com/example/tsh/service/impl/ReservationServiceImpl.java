@@ -39,9 +39,8 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     @Override
     @Transactional
     public void reserve( Reservation reservation) {
-        if(!scheduledTransitionService.getFreeSeats(reservation.getFrom(), reservation.getTo()).contains(reservation.getSeat().getSeatNumber())){
-            throw new RuntimeException("Seat is not empty.");
-        }
+        //konde e tuk
+        ReservationValidator.validateReservation(reservation, scheduledTransitionService);
         scheduledTransitionService.reserveSeat(reservation.getFrom(), reservation.getTo(), reservation.getSeat());
         createOrUpdateEntity(reservation);
     }

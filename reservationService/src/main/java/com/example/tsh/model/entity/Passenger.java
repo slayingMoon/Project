@@ -11,6 +11,7 @@ public class Passenger extends BaseEntity{
     private String middleName;
     @Column( nullable = false)
     private String lastName;
+
     @Column(nullable = false)
     private Integer age;
     @Column( nullable = false, unique = true)
