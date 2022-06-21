@@ -1,0 +1,24 @@
+package com.example.tsh.util.validator;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class NameValidator implements ConstraintValidator<Name,String> {
+
+
+	@Override
+	public void initialize(Name constraintAnnotation) {
+		ConstraintValidator.super.initialize(constraintAnnotation);
+	}
+
+	@Override
+	public boolean isValid(String value, ConstraintValidatorContext context) {
+		String match="[A-Z][a-z]+";
+
+		Pattern p = Pattern.compile(match);
+		Matcher m = p.matcher(value);
+		return m.matches();
+	}
+}

@@ -2,6 +2,7 @@ package com.example.tsh.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.Positive;
 
 @Entity
 public class Passenger extends BaseEntity{
@@ -11,7 +12,7 @@ public class Passenger extends BaseEntity{
     private String middleName;
     @Column( nullable = false)
     private String lastName;
-
+    @Positive
     @Column(nullable = false)
     private Integer age;
     @Column( nullable = false, unique = true)

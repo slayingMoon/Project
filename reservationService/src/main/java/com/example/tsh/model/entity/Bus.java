@@ -4,10 +4,12 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.util.*;
 
 @Entity
 public class Bus extends BaseEntity {
+    @Positive
     @Column(nullable = false)
     private Integer seatCapacity;
 
@@ -18,7 +20,6 @@ public class Bus extends BaseEntity {
     List<Driver> drivers;
 
     public Bus() {
-        /// stana le ?
     }
 
     public Bus(Integer seatsNumber, List<Driver> drivers) {

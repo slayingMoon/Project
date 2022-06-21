@@ -10,11 +10,8 @@ import com.example.tsh.service.impl.OpenFolderServiceImpl;
 import com.example.tsh.service.impl.ReservationServiceImpl;
 import com.example.tsh.service.impl.ScheduledTripServiceImpl;
 import com.example.tsh.service.impl.SeatServiceImpl;
-import org.junit.Rule;
 import org.junit.Test;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,13 +31,15 @@ import java.util.List;
 public class ReservationTests {
     @Autowired
     private ScheduledTripServiceImpl scheduledTripService;
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
+
     @Autowired
     private ReservationServiceImpl reservationService;
 
     @Autowired
     private SeatServiceImpl seatService;
+
+    @Autowired
+    private OpenFolderServiceImpl openFolderService;
 
     @Test
     public void testTripCreationTest() {
@@ -70,22 +70,15 @@ public class ReservationTests {
 
     @Test
     public void reservationCreationTest() {
-            ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
-            reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(7L), new Passenger("Aanasrika", "Petrova", "Kartselska", 19 + 1, "0894jsdjf61734fs237", "an2111ikas1sje9311@abv.bfg"), ReservationStatus.NEW, LocalDateTime.now()));
+        ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
+        for (int i = 0; i < 1; i++) {
+            reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(5L), new Passenger("Aanasrika", "Petrova", "Kartselska", 19 + 1, "0894jsdjf61734fs237", "an2111ikas1sje9311@abv.bfg"), ReservationStatus.NEW, LocalDateTime.now()));
+        }
     }
     @Test
     public void setStatusDeletedTest(){
         Reservation reservation = reservationService.findEntityById(8L);
         reservationService.setStatusDeleted(reservation);
-    }
-    @Test
-    public void testReservationSeatValidation(){
-        //selecting seat that already exists
-        ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
-        exception.expect(RuntimeException.class);
-        exception.expectMessage("Seat is not empty.");
-        reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(22L), new Passenger("Aanasrika", "Petrova", "Kartselska", 19 + 1, "0894jsdjf61734fs237", "an2111ikas1sje9311@abv.bfg"), ReservationStatus.NEW, LocalDateTime.now()));
-       // Assertions.assertThrowsExactly(RuntimeException.class,         reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(22L), new Passenger("Aanasrika", "Petrova", "Kartselska", 19 + 1, "0894jsdjf61734fs237", "an2111ikas1sje9311@abv.bfg"), ReservationStatus.NEW, LocalDateTime.now())))
     }
 
 }
