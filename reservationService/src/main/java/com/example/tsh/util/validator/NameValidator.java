@@ -15,10 +15,12 @@ public class NameValidator implements ConstraintValidator<Name,String> {
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		String match="[A-Z][a-z]+";
-
+		String match="\\b([A-Z][-,a-z. ']*[ ]*)+";
+		if(value==null)return true;
 		Pattern p = Pattern.compile(match);
 		Matcher m = p.matcher(value);
+
 		return m.matches();
+
 	}
 }

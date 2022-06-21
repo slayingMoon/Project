@@ -1,15 +1,20 @@
 package com.example.tsh.model.entity;
 
+import com.example.tsh.util.validator.Name;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.Positive;
 
 @Entity
 public class Passenger extends BaseEntity{
+    @Name
     @Column(nullable = false)
     private String firstName;
+    @Name
     @Column
     private String middleName;
+    @Name
     @Column( nullable = false)
     private String lastName;
     @Positive

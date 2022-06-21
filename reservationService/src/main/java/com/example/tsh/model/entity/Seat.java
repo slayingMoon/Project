@@ -2,10 +2,12 @@ package com.example.tsh.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.Positive;
 
 @Entity
 public class Seat extends BaseEntity {
 
+    @Positive
     @Column(nullable = false)
     private Integer seatNumber;
 
