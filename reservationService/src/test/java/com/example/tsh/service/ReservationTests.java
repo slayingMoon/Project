@@ -77,6 +77,7 @@ public class ReservationTests {
     }
     @Test
     public void setStatusDeletedTest(){
+        //kjk
         Reservation reservation = reservationService.findEntityById(8L);
         reservationService.setStatusDeleted(reservation);
     }
