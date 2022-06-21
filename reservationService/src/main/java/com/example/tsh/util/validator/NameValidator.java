@@ -19,7 +19,6 @@ public class NameValidator implements ConstraintValidator<Name,String> {
 		if(value==null)return true;
 		Pattern p = Pattern.compile(match);
 		Matcher m = p.matcher(value);
-
 		return m.matches();
 
 	}

@@ -13,10 +13,9 @@ public class Bus extends BaseEntity {
     @Column(nullable = false)
     private Integer seatCapacity;
 
-
-
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Column(nullable = false)
     List<Driver> drivers;
 
     public Bus() {

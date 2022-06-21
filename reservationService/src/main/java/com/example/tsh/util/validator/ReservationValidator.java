@@ -15,37 +15,49 @@ import java.util.List;
 @Component
 public class ReservationValidator {
     //valid
-   @Autowired
-   private ScheduledTransitionServiceImpl scheduledTransitionService;
-   @Autowired
-   private ScheduledTripServiceImpl scheduledTripService;
-    public void validateReservation(Reservation reservation){
-        if(!hasRightDirection(reservation)){
-            throw new RuntimeException("Direction is not right.");
-        }
-        if(!transitionsFromTheSameTrip(reservation)){
-            throw new RuntimeException("Transitions are not from the same trip.");
-        }
-        if(!scheduledTransitionService.getFreeSeats(reservation.getFrom(), reservation.getTo()).contains(reservation.getSeat().getSeatNumber())){
-            throw new RuntimeException("Seat is not empty.");
-        }
+    @Autowired
+    private ScheduledTransitionServiceImpl scheduledTransitionService;
+    @Autowired
+    private ScheduledTripServiceImpl scheduledTripService;
+
+    public void validateReservation(Reservation reservation) {
+
     }
+
     private boolean hasRightDirection(Reservation reservation) {
 
 
         ScheduledTransition from = reservation.getFrom();
         ScheduledTransition to = reservation.getTo();
         ScheduledTrip scheduledTrip = scheduledTripService.findTripByTransition(from);
-        boolean right = true;
         List<ScheduledTransition> transitionList = new ArrayList<>(scheduledTrip.getScheduledTransitions());
         int fromIndex = transitionList.indexOf(from);
         int toIndex = transitionList.indexOf(to) + 1;
         if (fromIndex > toIndex) {
-            right = false;
+            throw new RuntimeException("Direction is not right.");
         }
-        return right;
+        return true;
     }
-    private boolean transitionsFromTheSameTrip(Reservation reservation){
-        return scheduledTripService.findTripByTransition(reservation.getFrom()).equals(scheduledTripService.findTripByTransition(reservation.getTo()));
+
+    private boolean transitionsFromTheSameTrip(Reservation reservation) {
+        if (scheduledTripService.findTripByTransition(reservation.getFrom()).equals(scheduledTripService.findTripByTransition(reservation.getTo()))) {
+            return true;
+        }
+        throw new RuntimeException("Transitions are not from the same trip.");
+    }
+
+    private boolean freeSeat(Reservation reservation) {
+        if (scheduledTransitionService.getFreeSeats(reservation.getFrom(), reservation.getTo()).contains(reservation.getSeat().getSeatNumber())) {
+            return true;
+        }
+        throw new RuntimeException("Seat is not empty.");
+    }
+
+    private boolean seatCapacity(Reservation reservation) {
+        if (scheduledTripService.findTripByTransition(reservation.getFrom()).getBus().getSeatCapacity().compareTo(reservation.getSeat().getSeatNumber()) > 0) {
+            return true;
+        }
+        throw new RuntimeException("Seat number can not be bigger than bus seat capacity.");
+
     }
 }

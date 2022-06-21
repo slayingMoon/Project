@@ -39,10 +39,6 @@ public class Reservation extends BaseEntity {
 
     }
 
-
-
-
-
     public Seat getSeat() {
         return seat;
     }

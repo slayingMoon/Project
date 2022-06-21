@@ -18,6 +18,7 @@ public class ScheduledTransition extends BaseEntity{
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Column(nullable = false)
     private List<Seat> seats ;
 
     public ScheduledTransition() {

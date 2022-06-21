@@ -1,15 +1,18 @@
 package com.example.tsh.model.entity;
 
+import com.example.tsh.util.validator.Name;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class Driver extends BaseEntity{
+    @Name
     @Column(nullable = false)
     private String name;
     @Column(nullable = false,unique = true)
     private String phone1;
-    @Column(nullable = false,unique = true)
+    @Column(unique = true)
     private String phone2;
 
     public Driver(String name, String phone1, String phone2) {

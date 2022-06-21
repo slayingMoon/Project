@@ -9,10 +9,12 @@ import java.util.*;
 @Entity
 public class ScheduledTrip extends BaseEntity{
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(nullable = false)
     private Bus bus;
 
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @LazyCollection(LazyCollectionOption.FALSE)
+    @Column(nullable = false)
     private List<ScheduledTransition> scheduledTransitions  ;
 
 
