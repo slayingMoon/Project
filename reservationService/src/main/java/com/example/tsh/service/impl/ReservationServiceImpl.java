@@ -40,7 +40,7 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     @Override
     @Transactional
     public void reserve( Reservation reservation) {
-        //konde e tuk
+
         reservationValidator.validateReservation(reservation);
         scheduledTransitionService.reserveSeat(reservation.getFrom(), reservation.getTo(), reservation.getSeat());
         createOrUpdateEntity(reservation);
@@ -95,21 +95,7 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     }
 
 
-    public boolean hasRightDirection(Reservation reservation) {
 
-
-        ScheduledTransition from = reservation.getFrom();
-        ScheduledTransition to = reservation.getTo();
-        ScheduledTrip scheduledTrip = scheduledTripService.findTripByTransition(from);
-        boolean right = true;
-        List<ScheduledTransition> transitionList = new ArrayList<>(scheduledTrip.getScheduledTransitions());
-        int fromIndex = transitionList.indexOf(from);
-        int toIndex = transitionList.indexOf(to) + 1;
-        if (fromIndex > toIndex) {
-            right = false;
-        }
-        return right;
-    }
 
 
 }
