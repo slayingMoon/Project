@@ -1,5 +1,6 @@
 package com.example.tsh.model.entity;
 
+import com.example.tsh.util.validator.Email;
 import com.example.tsh.util.validator.Name;
 
 import javax.persistence.Column;
@@ -23,6 +24,7 @@ public class Passenger extends BaseEntity{
     @Column( nullable = false, unique = true)
     private String phoneNumber;
     @Column(unique = true)
+    @Email
     private String email;
 
 
