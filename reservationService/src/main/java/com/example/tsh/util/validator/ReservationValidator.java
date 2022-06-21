@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ReservationValidator {
+    //valid
    @Autowired
    private ScheduledTransitionServiceImpl scheduledTransitionService;
    @Autowired
