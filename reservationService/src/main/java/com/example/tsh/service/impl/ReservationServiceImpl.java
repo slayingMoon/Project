@@ -35,12 +35,13 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     @Autowired
     private DoubleWayTicketServiceImpl doubleWayTicketService;
 
-
+    @Autowired
+   private ReservationValidator reservationValidator;
     @Override
     @Transactional
     public void reserve( Reservation reservation) {
         //konde e tuk
-        ReservationValidator.validateReservation(reservation, scheduledTransitionService);
+        reservationValidator.validateReservation(reservation);
         scheduledTransitionService.reserveSeat(reservation.getFrom(), reservation.getTo(), reservation.getSeat());
         createOrUpdateEntity(reservation);
     }
@@ -94,7 +95,7 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     }
 
 
-    private boolean hasRightDirection(Reservation reservation) {
+    public boolean hasRightDirection(Reservation reservation) {
 
 
         ScheduledTransition from = reservation.getFrom();
