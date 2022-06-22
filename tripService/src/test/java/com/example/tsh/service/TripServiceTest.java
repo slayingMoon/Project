@@ -43,15 +43,10 @@ public class TripServiceTest {
 
     @Test
     void findTripsByStartAndDestinationCitiesTest() {
-        List<String> filteredTrips = tripService.findTripsByStartAndDestinationCities("Sofia", "Ihtiman");
+        List<String> filteredTrips = tripService.findTripsByStartAndDestinationCitiesAndDate("Sofia", "Ihtiman", "2022-06-22");
         List<String> expectedTrips = Arrays.asList("Sofia-Plovdiv");
         filteredTrips.forEach(logger::info);
         assertThat(filteredTrips).isEqualTo(expectedTrips);
     }
-    
-    @Test
-    void generateTripDatesForNextYear() {
-        List<String> dates = tripService.generateTripDates(2l);
-        dates.forEach(logger::info);
-    }
+
 }
