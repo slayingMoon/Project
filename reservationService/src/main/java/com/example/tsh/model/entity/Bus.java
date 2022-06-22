@@ -30,17 +30,6 @@ public class Bus extends BaseEntity {
         return seatCapacity;
     }
 
-    public void setSeatCapacity(Integer seatCapacity) {
-        this.seatCapacity = seatCapacity;
-    }
-
-    public List<Driver> getDrivers() {
-        return drivers;
-    }
-
-    public void setDrivers(List<Driver> drivers) {
-        this.drivers = drivers;
-    }
 
     @Override
     public String toString() {

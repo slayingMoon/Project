@@ -22,17 +22,12 @@ public class Direction extends BaseEntity{
         return from;
     }
 
-    public void setFrom(City from) {
-        this.from = from;
-    }
 
     public City getTo() {
         return to;
     }
 
-    public void setTo(City to) {
-        this.to = to;
-    }
+
 
     public Direction(City from, City to) {
         this.from = from;

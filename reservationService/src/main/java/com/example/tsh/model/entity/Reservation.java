@@ -5,7 +5,7 @@ import com.example.tsh.model.enums.ReservationStatus;
 
 import javax.persistence.*;
 
-import javax.validation.constraints.Positive;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -48,9 +48,7 @@ public class Reservation extends BaseEntity {
 
 
 
-    public ReservationStatus getReservationStatus() {
-        return reservationStatus;
-    }
+
 
     public void setReservationStatus(ReservationStatus reservationStatus) {
         this.reservationStatus = reservationStatus;

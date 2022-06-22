@@ -23,13 +23,7 @@ public class TicketNumber {
                     @Parameter(name = StringPrefixedSequenceNumGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
     private String id;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     @Override
     public boolean equals(Object o) {

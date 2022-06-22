@@ -1,7 +1,6 @@
 package com.example.tsh.service.impl;
 
 
-import com.example.tsh.dao.ReservationRepository;
 import com.example.tsh.model.entity.*;
 import com.example.tsh.service.*;
 import com.example.tsh.util.validator.ReservationValidator;
@@ -16,13 +15,11 @@ import static com.example.tsh.model.enums.ReservationStatus.DELETED;
 @Service
 public class ReservationServiceImpl extends GenericServiceImpl<Reservation> implements ReservationService {
 
-    @Autowired
-    private ReservationRepository reservationRepository;
+
     @Autowired
     private ScheduledTransitionServiceImpl scheduledTransitionService;
 
-    @Autowired
-    private ScheduledTripServiceImpl scheduledTripService;
+
 
     @Autowired
     private OpenFolderServiceImpl openFolderService;

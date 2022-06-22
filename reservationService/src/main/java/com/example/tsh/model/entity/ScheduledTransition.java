@@ -35,25 +35,12 @@ public class ScheduledTransition extends BaseEntity{
         return seats;
     }
 
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
-    }
 
-    public LocalDateTime getTripDate() {
-        return tripDate;
-    }
-
-    public void setTripDate(LocalDateTime tripDate) {
-        this.tripDate = tripDate;
-    }
 
     public City getCity() {
         return city;
     }
 
-    public void setCity(City city) {
-        this.city = city;
-    }
 
     @Override
     public String toString() {

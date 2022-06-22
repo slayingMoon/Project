@@ -2,9 +2,7 @@ package com.example.tsh.model.entity;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -34,17 +32,12 @@ public class ScheduledTrip extends BaseEntity{
         return bus;
     }
 
-    public void setBus(Bus bus) {
-        this.bus = bus;
-    }
 
     public List<ScheduledTransition> getScheduledTransitions() {
       return scheduledTransitions;
     }
 
-    public void setScheduledTransitions(List<ScheduledTransition> scheduledTransitions) {
-        this.scheduledTransitions = scheduledTransitions;
-    }
+
 
     @Override
     public String toString() {

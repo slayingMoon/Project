@@ -1,7 +1,6 @@
 package com.example.tsh.model.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -11,9 +10,6 @@ public abstract class BaseEntity  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getId() {
         return id;

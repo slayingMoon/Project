@@ -29,11 +29,6 @@ public class OneWayTicket extends BaseEntity {
         return ticketNumber;
     }
 
-    public void setTicketNumber(TicketNumber ticketNumber) {
-        this.ticketNumber = ticketNumber;
-    }
-
-
 
     @Override
     public String toString() {
