@@ -3,7 +3,6 @@ package com.example.tsh.util.validator;
 import com.example.tsh.model.entity.Reservation;
 import com.example.tsh.model.entity.ScheduledTransition;
 import com.example.tsh.model.entity.ScheduledTrip;
-import com.example.tsh.service.impl.ReservationServiceImpl;
 import com.example.tsh.service.impl.ScheduledTransitionServiceImpl;
 import com.example.tsh.service.impl.ScheduledTripServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

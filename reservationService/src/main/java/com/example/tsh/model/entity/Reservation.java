@@ -17,7 +17,7 @@ public class Reservation extends BaseEntity {
     @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(nullable = false)
     private ScheduledTransition to;
-    @Positive
+
     @OneToOne(cascade = { CascadeType.MERGE})
     private Seat seat;
 

@@ -45,26 +45,24 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     @Override
     @Transactional
     public OneWayTicket payOneWayReservation(Reservation reservation) {
-        if(reservation.getReservationStatus().equals(CONFIRMED))
-            throw new RuntimeException("Reservation is already paid");
         reservation.setReservationStatus(CONFIRMED);
         OneWayTicket oneWayTicket = new OneWayTicket();
         oneWayTicket.setGoToReservation(reservation);
         oneWayTicketService.createOrUpdateEntity(oneWayTicket);
+        createOrUpdateEntity(reservation);
         return oneWayTicket;
 
     }
 
     @Transactional
     public DoubleWayTicket payDoubleWayReservation(Reservation reservation) {
-        if(reservation.getReservationStatus().equals(CONFIRMED))
-            throw new RuntimeException("Reservation is already paid");
         reservation.setReservationStatus(CONFIRMED);
         DoubleWayTicket doubleWayTicket = new DoubleWayTicket();
         doubleWayTicket.setGoToReservation(reservation);
         doubleWayTicket.setReturnReservation(null);
         DoubleWayTicket newTick = doubleWayTicketService.createOrUpdateEntity(doubleWayTicket);
         openFolderService.getOpenFolderWithReversedDirections(reservation,newTick.getTicketNumber());
+        createOrUpdateEntity(reservation);
         return doubleWayTicket;
     }
 

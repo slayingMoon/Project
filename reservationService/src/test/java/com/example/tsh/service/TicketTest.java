@@ -52,7 +52,7 @@ public class TicketTest {
     }
     @Test
     public void payDoubleWayTicket(){
-        Reservation reservation = reservationService.findEntityById(5L);
+        Reservation reservation = reservationService.findEntityById(30L);
         reservationService.payDoubleWayReservation(reservation);
     }
 
@@ -65,7 +65,7 @@ public class TicketTest {
 
     @Test
     public void activateReturnReservationDoubleWayTicketTicketServiceTest(){
-        doubleWayTicketService.removeReturnReservationFromOpenFolder(doubleWayTicketService.findEntityById(3L),scheduledTripService.findEntityById(1L),seatService.findEntityById(1L));
+        doubleWayTicketService.removeReturnReservationFromOpenFolder(doubleWayTicketService.findEntityById(3L),scheduledTripService.findEntityById(1L),seatService.findEntityById(8L));
 
     }
     @Test
