@@ -6,7 +6,7 @@ import com.example.tsh.model.enums.Country;
 import com.example.tsh.model.enums.ReservationStatus;
 
 
-import com.example.tsh.service.impl.OpenFolderServiceImpl;
+
 import com.example.tsh.service.impl.ReservationServiceImpl;
 import com.example.tsh.service.impl.ScheduledTripServiceImpl;
 import com.example.tsh.service.impl.SeatServiceImpl;
@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,8 +38,6 @@ public class ReservationTests {
     @Autowired
     private SeatServiceImpl seatService;
 
-    @Autowired
-    private OpenFolderServiceImpl openFolderService;
 
     @Test
     public void testTripCreationTest() {
@@ -71,7 +69,7 @@ public class ReservationTests {
     @Test
     public void reservationCreationTest() {
         ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
-            reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(2L), new Passenger("Anna-maria", "Petrova", "Kartselska", 19 + 1, "08944fs237", "an211311@abv.bfg"), ReservationStatus.NEW, LocalDateTime.now()));
+            reservationService.reserve(new Reservation(scheduledTrip.getScheduledTransitions().get(2), scheduledTrip.getScheduledTransitions().get(4), seatService.findEntityById(15L), new Passenger("Anna-maria", "Petrova", "Kartselska", 19 + 1, "08944fs237", "an211311@abv.bfg"), ReservationStatus.NEW, LocalDateTime.now()));
     }
     @Test
     public void setStatusDeletedTest(){

@@ -1,9 +1,11 @@
 package com.example.tsh.model.entity;
 
 import com.example.tsh.util.validator.Name;
+import com.example.tsh.util.validator.PhoneNumber;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Driver extends BaseEntity{
@@ -11,8 +13,10 @@ public class Driver extends BaseEntity{
     @Column(nullable = false)
     private String name;
     @Column(nullable = false,unique = true)
+    @PhoneNumber
     private String phone1;
     @Column(unique = true)
+    @PhoneNumber
     private String phone2;
 
     public Driver(String name, String phone1, String phone2) {

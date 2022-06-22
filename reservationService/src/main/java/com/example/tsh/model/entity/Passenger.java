@@ -2,9 +2,11 @@ package com.example.tsh.model.entity;
 
 import com.example.tsh.util.validator.Email;
 import com.example.tsh.util.validator.Name;
+import com.example.tsh.util.validator.PhoneNumber;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
 @Entity
@@ -22,6 +24,7 @@ public class Passenger extends BaseEntity{
     @Column(nullable = false)
     private Integer age;
     @Column( nullable = false, unique = true)
+    @PhoneNumber
     private String phoneNumber;
     @Column(unique = true)
     @Email

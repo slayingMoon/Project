@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Documented
 @Constraint(validatedBy = PhoneNumberValidator.class)
 public @interface PhoneNumber {
-    String message() default "{Name is not valid}";
+    String message() default "{Phone is not valid}";
 
     Class<?>[] groups() default {};
 
