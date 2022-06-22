@@ -1,5 +1,7 @@
 package com.example.tsh.model.entity;
 
+import com.example.tsh.model.enums.OpenFolderStatus;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -21,6 +23,18 @@ public class OpenFolder extends BaseEntity{
     @OneToOne
     @JoinColumn(nullable = false)
     private TicketNumber ticketNo;
+    @Column()
+    @Enumerated(EnumType.STRING)
+    private OpenFolderStatus status = OpenFolderStatus.ACTIVE;
+
+    public OpenFolderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OpenFolderStatus status) {
+        this.status = status;
+    }
+
     public LocalDateTime getReservationCreationDate() {
         return reservationCreationDate;
     }

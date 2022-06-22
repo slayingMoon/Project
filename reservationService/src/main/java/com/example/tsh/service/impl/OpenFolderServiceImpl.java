@@ -5,11 +5,15 @@ import com.example.tsh.model.entity.Direction;
 import com.example.tsh.model.entity.OpenFolder;
 import com.example.tsh.model.entity.Reservation;
 import com.example.tsh.model.entity.TicketNumber;
+import com.example.tsh.model.enums.OpenFolderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder> {
@@ -50,6 +54,17 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder> {
                 .filter(e -> e.getTicketNo().equals(ticketNo))
                 .findFirst()
                 .orElse(null);
+    }
+    @Scheduled(cron = "0 0 0 * * *")
+    public void deleteExpired(){
+        List<OpenFolder> list = repository.findAll();
+        list.stream()
+                .filter(e -> e.getExpirationDate().isBefore(LocalDateTime.now()))
+                .collect(Collectors.toList())
+                .forEach(s -> {
+                    s.setStatus(OpenFolderStatus.DELETED);
+                    repository.save(s);
+                });
     }
 
 

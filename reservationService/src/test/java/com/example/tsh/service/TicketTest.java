@@ -76,7 +76,7 @@ public class TicketTest {
     }
     @Test
     public void activateGoToReservationDoubleWayTicketTicketServiceTest(){
-         doubleWayTicketService.removeGoToReservationFromOpenFolder(doubleWayTicketService.findEntityById(3L),scheduledTripService.findEntityById(1L),seatService.findEntityById(1L));
+         doubleWayTicketService.removeGoToReservationFromOpenFolder(doubleWayTicketService.findEntityById(3L),scheduledTripService.findEntityById(1L),seatService.findEntityById(33L));
 
     }
 

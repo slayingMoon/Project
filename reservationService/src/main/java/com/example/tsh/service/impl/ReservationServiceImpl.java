@@ -6,8 +6,10 @@ import com.example.tsh.service.*;
 import com.example.tsh.util.validator.ReservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+
 import static com.example.tsh.model.enums.ReservationStatus.CONFIRMED;
 import static com.example.tsh.model.enums.ReservationStatus.DELETED;
 
@@ -20,7 +22,6 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     private ScheduledTransitionServiceImpl scheduledTransitionService;
 
 
-
     @Autowired
     private OpenFolderServiceImpl openFolderService;
     @Autowired
@@ -29,7 +30,8 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     private DoubleWayTicketServiceImpl doubleWayTicketService;
 
     @Autowired
-   private ReservationValidator reservationValidator;
+    private ReservationValidator reservationValidator;
+
     @Override
     @Transactional
     public void reserve(Reservation reservation) {
@@ -58,7 +60,7 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
         doubleWayTicket.setGoToReservation(reservation);
         doubleWayTicket.setReturnReservation(null);
         DoubleWayTicket newTick = doubleWayTicketService.createOrUpdateEntity(doubleWayTicket);
-        openFolderService.getOpenFolderWithReversedDirections(reservation,newTick.getTicketNumber());
+        openFolderService.getOpenFolderWithReversedDirections(reservation, newTick.getTicketNumber());
         createOrUpdateEntity(reservation);
         return doubleWayTicket;
     }
@@ -66,9 +68,6 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     @Override
     @Transactional
     public Reservation activateReservation(OpenFolder openFolder, ScheduledTrip scheduledTrip, Seat seat) {
-       if(openFolder.getExpirationDate().isAfter(scheduledTransitionService.findTransitionByTrip(scheduledTrip, openFolder.getDirection().getFrom()).getTripDate())){
-
-       }
         Reservation reservation = new Reservation();
         reservation.setPassenger(openFolder.getPassenger());
         reservation.setSeat(seat);
@@ -84,14 +83,11 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
 
     @Override
     @Transactional
-    public Reservation setStatusDeleted(Reservation reservation){
+    public Reservation setStatusDeleted(Reservation reservation) {
         reservation.setReservationStatus(DELETED);
-        scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
+        scheduledTransitionService.returnSeat(reservation.getFrom(), reservation.getTo(), reservation.getSeat());
         return createOrUpdateEntity(reservation);
     }
-
-
-
 
 
 }
