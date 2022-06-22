@@ -12,17 +12,17 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
-public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
-      @Autowired
-      private ReservationServiceImpl reservationService;
-      @Autowired
-      private ScheduledTransitionServiceImpl scheduledTransitionService;
-      @Autowired
-      private OpenFolderRepository openFolderRepository;
+public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder> {
+    @Autowired
+    private ReservationServiceImpl reservationService;
+    @Autowired
+    private ScheduledTransitionServiceImpl scheduledTransitionService;
+    @Autowired
+    private OpenFolderRepository openFolderRepository;
 
     private OpenFolder getOpenFolder(Reservation reservation, TicketNumber num, Direction direction) {
 
-        OpenFolder openFolder=new OpenFolder();
+        OpenFolder openFolder = new OpenFolder();
         openFolder.setPassenger(reservation.getPassenger());
         openFolder.setExpirationDate(LocalDateTime.now().plusYears(1));
         openFolder.setDirection(direction);
@@ -32,21 +32,22 @@ public class OpenFolderServiceImpl extends GenericServiceImpl<OpenFolder>  {
 
 
     }
-    public OpenFolder getOpenFolderWithReversedDirections(Reservation reservation, TicketNumber ticketNo){
+
+    public OpenFolder getOpenFolderWithReversedDirections(Reservation reservation, TicketNumber ticketNo) {
         OpenFolder openFolder = getOpenFolder(reservation, ticketNo, new Direction(reservation.getTo().getCity(), reservation.getFrom().getCity()));
         return createOrUpdateEntity(openFolder);
     }
-    public OpenFolder moveToOpenFolder(Reservation reservation, TicketNumber num){
-        OpenFolder openFolder = getOpenFolder(reservation, num,new Direction(reservation.getFrom().getCity(),reservation.getTo().getCity()));
-        scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
+
+    public OpenFolder moveToOpenFolder(Reservation reservation, TicketNumber num) {
+        OpenFolder openFolder = getOpenFolder(reservation, num, new Direction(reservation.getFrom().getCity(), reservation.getTo().getCity()));
+        scheduledTransitionService.returnSeat(reservation.getFrom(), reservation.getTo(), reservation.getSeat());
         reservationService.delete(reservation);
         return createOrUpdateEntity(openFolder);
     }
 
-    public OpenFolder findOpenFolderByTicketNo(TicketNumber ticketNo)
-    {
+    public OpenFolder findOpenFolderByTicketNo(TicketNumber ticketNo) {
         return openFolderRepository.findAll().stream()
-                .filter(e->e.getTicketNo().equals(ticketNo))
+                .filter(e -> e.getTicketNo().equals(ticketNo))
                 .findFirst()
                 .orElse(null);
     }

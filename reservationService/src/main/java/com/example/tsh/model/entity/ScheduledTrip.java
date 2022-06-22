@@ -4,6 +4,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -15,7 +16,9 @@ public class ScheduledTrip extends BaseEntity{
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @LazyCollection(LazyCollectionOption.FALSE)
     @Column(nullable = false)
-    private List<ScheduledTransition> scheduledTransitions  ;
+    private List<ScheduledTransition> scheduledTransitions;
+
+
 
 
     public ScheduledTrip(Bus bus, List<ScheduledTransition> scheduledTransitions) {

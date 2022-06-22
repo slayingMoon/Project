@@ -7,14 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.transaction.Transactional;
 
 
+public class GenericServiceImpl<E extends BaseEntity> {
 
-public  class GenericServiceImpl< E extends BaseEntity>  {
-
-@Autowired
-  protected GenericRepository<E> repository;
-
-
-
+    @Autowired
+    protected GenericRepository<E> repository;
 
     public E findEntityById(Long id) {
 
@@ -23,11 +19,11 @@ public  class GenericServiceImpl< E extends BaseEntity>  {
 
 
     @Transactional
-    public E createOrUpdateEntity( E entity) {
-       return repository.save(entity);
+    public E createOrUpdateEntity(E entity) {
+        return repository.save(entity);
     }
 
-
+    @Transactional
     public void delete(E entity) {
         repository.deleteById(entity.getId());
     }

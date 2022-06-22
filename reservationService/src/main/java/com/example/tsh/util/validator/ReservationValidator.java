@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class ReservationValidator {
-    //valid
+
     @Autowired
     private ScheduledTransitionServiceImpl scheduledTransitionService;
     @Autowired

@@ -2,6 +2,7 @@ package com.example.tsh.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
 @Entity

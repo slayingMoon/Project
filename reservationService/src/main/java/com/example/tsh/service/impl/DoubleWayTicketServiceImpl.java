@@ -15,7 +15,8 @@ public class DoubleWayTicketServiceImpl extends TicketServiceImpl<DoubleWayTicke
     @Autowired
     private OpenFolderServiceImpl openFolderService;
     @Transactional
-    public void moveReturnReservationToOpenFolder(Reservation reservation, DoubleWayTicket ticket){
+    public void moveReturnReservationToOpenFolder(DoubleWayTicket ticket){
+        Reservation reservation= ticket.getReturnReservation();
         scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
         ticket.setReturnReservation(null);
         repository.save(ticket);
@@ -26,6 +27,7 @@ public class DoubleWayTicketServiceImpl extends TicketServiceImpl<DoubleWayTicke
     @Transactional
     public void removeReturnReservationFromOpenFolder(DoubleWayTicket ticket, ScheduledTrip scheduledTrip, Seat seat){
         OpenFolder openFolder = openFolderService.findOpenFolderByTicketNo(ticket.getTicketNumber());
+
         Reservation reservation = reservationService.activateReservation(openFolder, scheduledTrip, seat);
         ticket.setReturnReservation(reservation);
         repository.save(ticket);

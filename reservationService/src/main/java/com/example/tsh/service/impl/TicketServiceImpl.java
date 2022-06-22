@@ -19,7 +19,8 @@ public class TicketServiceImpl<T extends OneWayTicket > extends GenericServiceIm
 
 
     @Transactional
-    public void moveGoToReservationToOpenFolder(Reservation reservation, T ticket){
+    public void moveGoToReservationToOpenFolder(T ticket){
+        Reservation reservation=ticket.getGoToReservation();
         scheduledTransitionService.returnSeat(reservation.getFrom(),reservation.getTo(),reservation.getSeat());
         ticket.setGoToReservation(null);
         repository.save(ticket);

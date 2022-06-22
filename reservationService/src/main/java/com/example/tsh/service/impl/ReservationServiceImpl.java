@@ -1,19 +1,14 @@
 package com.example.tsh.service.impl;
 
 
+import com.example.tsh.dao.ReservationRepository;
 import com.example.tsh.model.entity.*;
 import com.example.tsh.service.*;
 import com.example.tsh.util.validator.ReservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import javax.transaction.Transactional;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.example.tsh.model.enums.ReservationStatus.CONFIRMED;
 import static com.example.tsh.model.enums.ReservationStatus.DELETED;
 
@@ -21,7 +16,8 @@ import static com.example.tsh.model.enums.ReservationStatus.DELETED;
 @Service
 public class ReservationServiceImpl extends GenericServiceImpl<Reservation> implements ReservationService {
 
-
+    @Autowired
+    private ReservationRepository reservationRepository;
     @Autowired
     private ScheduledTransitionServiceImpl scheduledTransitionService;
 
@@ -39,7 +35,7 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
    private ReservationValidator reservationValidator;
     @Override
     @Transactional
-    public void reserve( Reservation reservation) {
+    public void reserve(Reservation reservation) {
 
         reservationValidator.validateReservation(reservation);
         scheduledTransitionService.reserveSeat(reservation.getFrom(), reservation.getTo(), reservation.getSeat());
@@ -49,7 +45,8 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     @Override
     @Transactional
     public OneWayTicket payOneWayReservation(Reservation reservation) {
-
+        if(reservation.getReservationStatus().equals(CONFIRMED))
+            throw new RuntimeException("Reservation is already paid");
         reservation.setReservationStatus(CONFIRMED);
         OneWayTicket oneWayTicket = new OneWayTicket();
         oneWayTicket.setGoToReservation(reservation);
@@ -60,6 +57,8 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
 
     @Transactional
     public DoubleWayTicket payDoubleWayReservation(Reservation reservation) {
+        if(reservation.getReservationStatus().equals(CONFIRMED))
+            throw new RuntimeException("Reservation is already paid");
         reservation.setReservationStatus(CONFIRMED);
         DoubleWayTicket doubleWayTicket = new DoubleWayTicket();
         doubleWayTicket.setGoToReservation(reservation);
@@ -80,7 +79,6 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
         reservation.setFrom(scheduledTransitionService.findTransitionByTrip(scheduledTrip, openFolder.getDirection().getFrom()));
         reservation.setTo(scheduledTransitionService.findTransitionByTrip(scheduledTrip, openFolder.getDirection().getTo()));
         reservation.setReservationDate(openFolder.getReservationCreationDate());
-        //TODO validation
         openFolderService.delete(openFolder);
         reserve(reservation);
         return reservation;

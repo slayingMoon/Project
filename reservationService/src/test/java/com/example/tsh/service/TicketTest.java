@@ -39,7 +39,7 @@ public class TicketTest {
     @Test
     public void deleteReservationPutIntoOpenFolderOneWayTicketTest() {
         OneWayTicket oneWayTicket = oneWayTicketService.findEntityById(2L);
-          oneWayTicketService.moveGoToReservationToOpenFolder(oneWayTicket.getGoToReservation(), oneWayTicket);
+          oneWayTicketService.moveGoToReservationToOpenFolder(oneWayTicket);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class TicketTest {
     @Test
     public void deleteGoToReservationDoubleWayTicketTicketServiceTest(){
         DoubleWayTicket doubleWayTicket = doubleWayTicketService.findEntityById(3L);
-        doubleWayTicketService.moveGoToReservationToOpenFolder(doubleWayTicket.getGoToReservation(), doubleWayTicket );
+        doubleWayTicketService.moveGoToReservationToOpenFolder(doubleWayTicket );
 
     }
 
@@ -71,7 +71,7 @@ public class TicketTest {
     @Test
     public void deleteReturnReservationDoubleWayTicketTicketServiceTest(){
         DoubleWayTicket doubleWayTicket = doubleWayTicketService.findEntityById(3L);
-        doubleWayTicketService.moveReturnReservationToOpenFolder(doubleWayTicket.getReturnReservation(), doubleWayTicket );
+        doubleWayTicketService.moveReturnReservationToOpenFolder( doubleWayTicket );
 
     }
     @Test
