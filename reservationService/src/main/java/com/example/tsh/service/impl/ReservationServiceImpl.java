@@ -66,6 +66,9 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     @Override
     @Transactional
     public Reservation activateReservation(OpenFolder openFolder, ScheduledTrip scheduledTrip, Seat seat) {
+       if(openFolder.getExpirationDate().isAfter(scheduledTransitionService.findTransitionByTrip(scheduledTrip, openFolder.getDirection().getFrom()).getTripDate())){
+
+       }
         Reservation reservation = new Reservation();
         reservation.setPassenger(openFolder.getPassenger());
         reservation.setSeat(seat);

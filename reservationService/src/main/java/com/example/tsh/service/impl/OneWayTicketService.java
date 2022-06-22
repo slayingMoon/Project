@@ -11,7 +11,4 @@ import org.springframework.stereotype.Service;
 public class OneWayTicketService extends TicketServiceImpl<OneWayTicket> {
 
 
-
-
-
 }

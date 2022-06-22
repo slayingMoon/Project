@@ -52,7 +52,7 @@ public class TicketTest {
     }
     @Test
     public void payDoubleWayTicket(){
-        Reservation reservation = reservationService.findEntityById(30L);
+        Reservation reservation = reservationService.findEntityById(14L);
         reservationService.payDoubleWayReservation(reservation);
     }
 

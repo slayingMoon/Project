@@ -35,7 +35,9 @@ public class ScheduledTransition extends BaseEntity{
         return seats;
     }
 
-
+    public LocalDateTime getTripDate() {
+        return tripDate;
+    }
 
     public City getCity() {
         return city;
