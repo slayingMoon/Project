@@ -8,8 +8,6 @@ import javax.transaction.Transactional;
 
 @Service
 public class TicketServiceImpl<T extends OneWayTicket > extends GenericServiceImpl<T>{
-
-
     @Autowired
     private ScheduledTransitionServiceImpl scheduledTransitionService;
     @Autowired
