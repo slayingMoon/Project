@@ -25,13 +25,13 @@ public class TestHandler {
         System.out.println(testEvent.getTest() + " chushkopek");
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void testEvent3() {
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void testEvent3() {
 //        service.sendSimpleMessage(
 //                "ourkurisrock@gmail.com",
 //                "test",
 //                "test");
-    }
+//    }
 
     //Test With Attachments WORKING!
     //Commented to stop throwing "File Not Found" Exceptions
