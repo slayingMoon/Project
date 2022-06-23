@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 
 public interface ReservationService {
-    void reserve(Reservation reservation);
+    Reservation reserve(Reservation reservation);
 
 
     OneWayTicket payOneWayReservation(Reservation reservation);

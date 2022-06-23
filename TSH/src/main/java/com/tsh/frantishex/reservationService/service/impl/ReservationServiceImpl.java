@@ -34,11 +34,11 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
    private ReservationValidator reservationValidator;
     @Override
     @Transactional
-    public void reserve(Reservation reservation) {
+    public Reservation reserve(Reservation reservation) {
 
         reservationValidator.validateReservation(reservation);
         scheduledTransitionService.reserveSeat(reservation.getFrom(), reservation.getTo(), reservation.getSeat());
-        createOrUpdateEntity(reservation);
+        return createOrUpdateEntity(reservation);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class ReservationCity extends BaseEntity{
 
     @Override
     public String toString() {
-        return "PriceCity{" +
+        return "ReservationCity{" +
                 "country=" + country +
                 ", name='" + name + '\'' +
                 "} " + super.toString();

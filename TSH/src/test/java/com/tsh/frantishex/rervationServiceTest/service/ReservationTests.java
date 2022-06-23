@@ -7,9 +7,12 @@ import com.tsh.frantishex.reservationService.service.impl.ReservationServiceImpl
 import com.tsh.frantishex.reservationService.service.impl.ScheduledTripServiceImpl;
 import com.tsh.frantishex.reservationService.service.impl.SeatServiceImpl;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
@@ -19,6 +22,8 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Sql("/reservationServiceProperties/data-reservation.sql")
+@TestPropertySource(locations= "classpath:reservationServiceProperties/applicationReservation.properties")
 public class ReservationTests {
     @Autowired
     private ScheduledTripServiceImpl scheduledTripService;
@@ -60,14 +65,16 @@ public class ReservationTests {
     @Test
     public void reservationCreationTest() {
         ScheduledTrip scheduledTrip = scheduledTripService.findEntityById(1L);
-        reservationService.reserve(new Reservation.ReservationBuilder()
-                            .from(scheduledTrip.getScheduledTransitions().get(2))
+
+       Reservation reservation= reservationService.reserve(new Reservation.ReservationBuilder()
+                            .from(scheduledTrip.getScheduledTransitions().get(3))
                             .to( scheduledTrip.getScheduledTransitions().get(4))
-                            .seat(seatService.findEntityById(1L))
-                            .passenger(new Passenger("Anna-maria", "Petrova", "Kartselska", 19 + 1, "1894443439", "ani3e@abv.bfg"))
+                            .seat(seatService.findEntityById(31L))
+                            .passenger(new Passenger("Anna-maria", "Petrova", "Kartselska", 19 + 1, "1896437439", "an7i53e@abv.bfg"))
                             .reservationStatus(ReservationStatus.NEW)
                             .reservationDate(LocalDateTime.now())
                     .build());
+        Assertions.assertNotNull(reservation.getId());
     }
     @Test
     public void setStatusDeletedTest(){
