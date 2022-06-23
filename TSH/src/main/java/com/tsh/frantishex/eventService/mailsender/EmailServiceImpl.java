@@ -13,9 +13,9 @@ import java.io.File;
 
 @Configuration
 public class EmailServiceImpl  {
-//   // @Autowired
+//    @Autowired
 //    private JavaMailSender mailSender;
-//
+
 //    @Override
 //    public void sendSimpleMessage(String toEmail,
 //                                  String body,
