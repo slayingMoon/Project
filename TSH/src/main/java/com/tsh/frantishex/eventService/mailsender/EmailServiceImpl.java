@@ -22,7 +22,7 @@ public class EmailServiceImpl implements EmailService {
                                   String subject) {
         SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setFrom("erikul1994@gmail.com");
+//        message.setFrom("erikul1994@gmail.com");
         message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);
@@ -42,7 +42,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessageHelper mimeMessageHelper
                 = new MimeMessageHelper(mimeMessage, true);
 
-        mimeMessageHelper.setFrom("erikul1994@gmail.com");
+//        mimeMessageHelper.setFrom("erikul1994@gmail.com");
         mimeMessageHelper.setTo(toEmail);
         mimeMessageHelper.setText(body);
         mimeMessageHelper.setSubject(subject);
