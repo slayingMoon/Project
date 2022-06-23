@@ -28,13 +28,9 @@ INSERT INTO `reservation` (reservation_date,reservation_status,from_id, passenge
 
 INSERT INTO `ticket_number` VALUES ('A_00001'),('A_00002'),('A_00052'),('A_00152'),('A_00202'),('A_00252');
 
+INSERT INTO `one_way_ticket` (go_to_reservation_id,ticket_number_id) VALUES (2,'A_00001'),(4,'A_00002'),(1,'A_00052'),(3,'A_00152'),(5,'A_00202'),(6,'A_00252');
 
-
-
-
-INSERT INTO `one_way_ticket` VALUES (1,2,'A_00001'),(2,4,'A_00002'),(3,34,'A_00052'),(5,11,'A_00152'),(6,31,'A_00202'),(7,30,'A_00252');
-
-INSERT INTO `double_way_ticket` VALUES (3,NULL),(5,NULL),(6,NULL),(7,NULL);
+INSERT INTO `double_way_ticket` (id,return_reservation_id) VALUES (1,1),(2,2),(3,3),(4,4);
 
 --INSERT INTO `ticket_seq` VALUES (351);
 
