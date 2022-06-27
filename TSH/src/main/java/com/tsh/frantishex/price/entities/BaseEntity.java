@@ -1,4 +1,4 @@
-package com.tsh.frantishex.price.repositories.entities;
+package com.tsh.frantishex.price.entities;
 
 import javax.persistence.*;
 

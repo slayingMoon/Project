@@ -1,7 +1,7 @@
 package com.tsh.frantishex.price.services;
 
 import com.tsh.frantishex.price.repositories.CityRepo;
-import com.tsh.frantishex.price.repositories.entities.PriceCity;
+import com.tsh.frantishex.price.entities.PriceCity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
