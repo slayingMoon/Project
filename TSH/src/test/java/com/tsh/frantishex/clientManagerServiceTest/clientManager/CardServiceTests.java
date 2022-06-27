@@ -4,6 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
+import org.springframework.test.context.jdbc.SqlGroup;
+
 import com.tsh.frantishex.clientManagerService.model.dto.CardDto;
 import com.tsh.frantishex.clientManagerService.model.dto.ClientPhoneNumberDto;
 import com.tsh.frantishex.clientManagerService.model.dto.RegisterClientDto;
@@ -11,16 +19,13 @@ import com.tsh.frantishex.clientManagerService.model.entities.Card;
 import com.tsh.frantishex.clientManagerService.model.enums.CardTiers;
 import com.tsh.frantishex.clientManagerService.services.CardService;
 import com.tsh.frantishex.clientManagerService.services.ClientService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
 
 
 @SpringBootTest
-@Sql("/clientManagerProperties/data-client-manager.sql")
+@SqlGroup({
+	@Sql("/clientManagerProperties/data-client-manager.sql"),
+	@Sql(scripts="/clientManagerProperties/truncate_tables.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+})
 @TestPropertySource(locations= "classpath:clientManagerProperties/clientManagerTest.properties")
 public class CardServiceTests {
 	@Autowired
@@ -28,17 +33,11 @@ public class CardServiceTests {
 	@Autowired
 	private ClientService clientService;
 
-	private CardDto cardDto;
-	private ClientPhoneNumberDto clientPhoneNumberDto;
+	private ClientPhoneNumberDto clientPhoneNumberDto = new ClientPhoneNumberDto()
+	.setPhoneNumber("+359886111222");
+	private CardDto cardDto=new CardDto().setTier(CardTiers.BRONZE)
+			.setClient(clientPhoneNumberDto);
 	private final String existingPhone = "+7-312-413-7036";
-
-	@BeforeEach
-	void init() {
-		clientPhoneNumberDto = new ClientPhoneNumberDto()
-				.setPhoneNumber("+359886111222");
-		cardDto = new CardDto().setTier(CardTiers.BRONZE)
-				.setClient(clientPhoneNumberDto);
-	}
 
 	@Test
 	public void cardIsInvalidWithNonExistingClient() {
