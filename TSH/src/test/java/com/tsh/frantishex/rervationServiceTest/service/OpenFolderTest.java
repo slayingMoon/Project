@@ -17,7 +17,7 @@ public class OpenFolderTest {
     @Autowired
     private OpenFolderServiceImpl openFolderService;
 
-    @Test
+    @Test//
     public void testDeletion(){
       openFolderService.deleteExpired();
     }
