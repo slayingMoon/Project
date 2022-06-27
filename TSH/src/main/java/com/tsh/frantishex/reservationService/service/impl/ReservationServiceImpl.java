@@ -1,6 +1,7 @@
 package com.tsh.frantishex.reservationService.service.impl;
 
 
+import com.tsh.frantishex.reservationService.dao.ScheduledTripRepository;
 import com.tsh.frantishex.reservationService.model.entity.*;
 import com.tsh.frantishex.reservationService.model.enums.OpenFolderStatus;
 
@@ -21,8 +22,8 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     @Autowired
     private ScheduledTransitionServiceImpl scheduledTransitionService;
 
-
-
+    @Autowired
+    private ScheduledTripServiceImpl scheduledTripService;
     @Autowired
     private OpenFolderServiceImpl openFolderService;
     @Autowired
@@ -35,7 +36,7 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
     @Override
     @Transactional
     public Reservation reserve(Reservation reservation) {
-
+        //TODO schedualedTrip and trip conflict
         reservationValidator.validateReservation(reservation);
         scheduledTransitionService.reserveSeat(reservation.getFrom(), reservation.getTo(), reservation.getSeat());
         return createOrUpdateEntity(reservation);
@@ -53,6 +54,7 @@ public class ReservationServiceImpl extends GenericServiceImpl<Reservation> impl
 
     }
 
+    @Override
     @Transactional
     public DoubleWayTicket payDoubleWayReservation(Reservation reservation) {
         reservation.setReservationStatus(CONFIRMED);

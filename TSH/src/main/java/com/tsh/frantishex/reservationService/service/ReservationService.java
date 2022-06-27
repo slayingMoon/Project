@@ -14,6 +14,9 @@ public interface ReservationService {
     OneWayTicket payOneWayReservation(Reservation reservation);
 
 
+    @Transactional
+    DoubleWayTicket payDoubleWayReservation(Reservation reservation);
+
     Reservation activateReservation(OpenFolder openFolder, ScheduledTrip scheduledTrip, Seat seat);
 
 

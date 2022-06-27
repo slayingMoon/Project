@@ -17,14 +17,18 @@ public class ReservationCity extends BaseEntity{
     public ReservationCity() {
     }
 
-    public ReservationCity(Country country, String name) {
-        this.country = country;
+    public ReservationCity( String name) {
+        this.country = Country.DEFAULT;
         this.name = name;
     }
 
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

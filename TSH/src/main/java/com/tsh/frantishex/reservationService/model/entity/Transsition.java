@@ -1,16 +1,35 @@
-package com.tsh.frantishex.tripService.domain.entity;
+package com.tsh.frantishex.reservationService.model.entity;
+
+import com.tsh.frantishex.tripService.domain.entity.BaseEntity;
+import com.tsh.frantishex.tripService.domain.entity.TransitionOptions;
+import com.tsh.frantishex.tripService.domain.entity.TripCity;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Transition extends BaseEntity {
+public class Transsition extends BaseEntity {
 
     @ManyToOne(targetEntity = TripCity.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id")
-    private TripCity tripCity;
+    private ReservationCity tripCity;
 
     private Integer travelDuration;
+
+    public Transsition(ReservationCity tripCity, Integer travelDuration) {
+        this.tripCity = tripCity;
+        this.travelDuration = travelDuration;
+    }
+
+    public Transsition() {
+    }
+
+    public ReservationCity getTripCity() {
+        return tripCity;
+    }
+
+
+    
 
     @ManyToMany(targetEntity = TransitionOptions.class, fetch = FetchType.EAGER)
     @JoinTable(
@@ -24,18 +43,18 @@ public class Transition extends BaseEntity {
                     referencedColumnName = "id"
             )
     )
+
     List<TransitionOptions> transitionOptions;
 
-    public List<TransitionOptions> getTransitionOptions() {
-        return transitionOptions;
-    }
 
-    public TripCity getCity() {
-        return tripCity;
-    }
+
+
 
     public Integer getTravelDuration() {
         return travelDuration;
     }
+
+
+
 
 }
