@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Sql("/reservationServiceProperties/data-reservation.sql")
+//@Sql("/reservationServiceProperties/data-reservation.sql")
 @TestPropertySource(locations= "classpath:reservationServiceProperties/applicationReservation.properties")
 public class OpenFolderTest {
     @Autowired

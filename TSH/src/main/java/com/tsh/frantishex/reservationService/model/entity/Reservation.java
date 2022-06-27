@@ -38,6 +38,10 @@ public class Reservation extends BaseEntity {
 
     }
 
+    public ReservationStatus getReservationStatus() {
+        return reservationStatus;
+    }
+
     public Seat getSeat() {
         return seat;
     }
