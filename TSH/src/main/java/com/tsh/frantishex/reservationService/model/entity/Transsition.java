@@ -29,7 +29,7 @@ public class Transsition extends BaseEntity {
     }
 
 
-    
+
 
     @ManyToMany(targetEntity = TransitionOptions.class, fetch = FetchType.EAGER)
     @JoinTable(
