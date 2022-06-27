@@ -1,7 +1,6 @@
 package com.tsh.frantishex.price.services;
 
-import com.tsh.frantishex.price.repositories.entities.Price;
-import org.springframework.stereotype.Service;
+import com.tsh.frantishex.price.entities.Price;
 
 import java.util.List;
 

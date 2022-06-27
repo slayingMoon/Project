@@ -8,6 +8,8 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
+
 
 @Component
 public class TestHandler {
@@ -25,23 +27,24 @@ public class TestHandler {
         System.out.println(testEvent.getTest() + " chushkopek");
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void testEvent3() {
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void testEvent3() {
 //        service.sendSimpleMessage(
-//                "ourkurisrock@gmail.com",
+//                "TEST",
 //                "test",
 //                "test");
-    }
+//        System.out.println();
+//    }
 
     //Test With Attachments WORKING!
     //Commented to stop throwing "File Not Found" Exceptions
 
-    /*@EventListener(ApplicationReadyEvent.class)
-    public void testEvent4() throws MessagingException {
-        service.sendMessageWithAttachment("ourkurisrock@gmail.com",
-                "test attachment",
-                "test attachment",
-                "C:\\Users\\Niki Kaloyanov\\Desktop\\01_block_diagram.gif");
-    }*/
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void testEvent4() throws MessagingException {
+//        service.sendMessageWithAttachment("ourkurisrock@gmail.com",
+//                "test attachment",
+//                "test attachment",
+//                "C:\\Users\\Niki Kaloyanov\\Desktop\\01_block_diagram.gif");
+//    }
 
 }
